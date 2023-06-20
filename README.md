@@ -8,7 +8,7 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 ### Personal Template
 
-This is the starting template for Vue3 + Vite projec, Sass and Axios are included by default.
+This is the starting template for Vue3 + Vite project, Sass and Axios are included by default.
 
 Be careful to run the following command before starting a new project:
 

@@ -19,7 +19,11 @@ export default {
 }
 </script>
 
-<template></template>
+<template>
+  <h1>ciao</h1>
+  <a class="btn btn-primary" href="#" role="button">Link</a>
+
+</template>
 
 <style lang="scss" scoped>
 @use './assets/scss/main.scss' as *;
