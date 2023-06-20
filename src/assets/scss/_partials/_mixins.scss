@@ -1,0 +1,8 @@
+/**********
+Container 
+**********/
+
+@mixin ms_container($maxsize) {
+    max-width: $maxsize;
+    margin: 0 auto;
+}

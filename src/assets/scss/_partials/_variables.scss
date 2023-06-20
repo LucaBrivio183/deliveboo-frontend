@@ -1,0 +1,13 @@
+/******
+color 
+******/
+
+$primary: white;
+$secondary: black;
+$tertiary: gray;
+
+::root {
+    --primary: $primary;
+    --secondary: $secondary;
+    --tertiary: $tertiary;
+}
