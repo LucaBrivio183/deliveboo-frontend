@@ -4,9 +4,14 @@ import axios from 'axios';
 //function
 import { store } from './store';
 //components
+import AppHeader from './components/AppHeader.vue';
+import AppFooter from './components/AppFooter.vue';
+
 export default {
   name: 'App',
   components: {
+    AppHeader,
+    AppFooter,
   },
   data() {
     return {
@@ -20,9 +25,9 @@ export default {
 </script>
 
 <template>
-  <h1>ciao</h1>
-  <a class="btn btn-primary" href="#" role="button">Link</a>
-
+  <AppHeader />
+  <router-view></router-view>
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped>
