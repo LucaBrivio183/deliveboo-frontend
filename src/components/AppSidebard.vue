@@ -1,4 +1,8 @@
 <script>
+//libraries
+import axios from 'axios';
+//function
+import { store } from '../store';
 //components
 export default {
     name: 'AppSidebar',
@@ -6,9 +10,20 @@ export default {
     },
     data() {
         return {
+            store,
+            typologies: [],
+        }
+    },method:{
+        getTypologies() {
+            axios.get(this.store.apiBaseUrl + this.store.apiUrls.homepage)
+                .then((response) => {
+                    this.typologies = typologies.data.results;
+                    console.log(this.typologies);
+                })
         }
     },
     created() {
+        this.getTypologies();
     }
 }
 </script>
@@ -27,7 +42,7 @@ export default {
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    {{ typepologies.name }}
+                                    {{ typology.name }}
                                 </label>
                             </div>
                         </li>
