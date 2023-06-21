@@ -13,11 +13,11 @@ export default {
             store,
             typologies: [],
         }
-    },method:{
+    },methods:{
         getTypologies() {
-            axios.get(this.store.apiBaseUrl + this.store.apiUrls.homepage)
+            axios.get('http://127.0.0.1:8000/api/homepage/typologies')
                 .then((response) => {
-                    this.typologies = typologies.data.results;
+                    this.typologies = response.data.results;
                     console.log(this.typologies);
                 })
         }
@@ -36,14 +36,12 @@ export default {
                 <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Preferenze?</span>
                 </a>
-                <form action="get">
+                <form>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li v-for="typology in typepologies" class="nav-item text-white mb-3">
+                        <li v-for="typology in typologies" class="nav-item text-white mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    {{ typology.name }}
-                                </label>
+                                <input class="form-check-input" type="checkbox" :value="typology.id" id="typology">
+                                <label class="form-check-label" for="typology">{{ typology.name}}</label>
                             </div>
                         </li>
                     </ul>
