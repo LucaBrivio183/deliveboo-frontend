@@ -9,12 +9,22 @@ export default {
     components: {
     },
     data() {
-    return {
-        store
-    }
+        return {
+            store,
+            restaurants: [],
+        }
+    },
+    methods: {
+        getRestaurants() {
+            axios.get(this.store.apiBaseUrl + this.store.apiUrls.homepage)
+                .then((response) => {
+                    this.restaurants = response.data.results;
+                    console.log(this.restaurants);
+                })
+        }
     },
     created() {
-
+        this.getRestaurants();
     }
 }
 </script>
