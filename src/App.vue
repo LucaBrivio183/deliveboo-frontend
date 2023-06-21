@@ -5,12 +5,14 @@ import axios from 'axios';
 import { store } from './store';
 //components
 import AppHeader from './components/AppHeader.vue';
+import AppSidebardVue from './components/AppSidebard.vue';
 import AppFooter from './components/AppFooter.vue';
 
 export default {
   name: 'App',
   components: {
     AppHeader,
+    AppSidebardVue,
     AppFooter,
   },
   data() {
@@ -26,6 +28,7 @@ export default {
 
 <template>
   <AppHeader />
+  <AppSidebardVue/>
   <router-view></router-view>
   <AppFooter />
 </template>
