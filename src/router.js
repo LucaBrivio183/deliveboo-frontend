@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from 'vue-router';
 
 import AppHome from './pages/AppHome.vue';
+import AppRestaurant from './pages/AppRestaurant.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -10,6 +11,11 @@ const router = createRouter({
             path: '/',
             name: 'home',
             component: AppHome
+        },
+        {
+            path: '/restaurant',
+            name: 'restaurant',
+            component: AppRestaurant
         },
     ]
 });

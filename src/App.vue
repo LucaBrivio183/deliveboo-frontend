@@ -2,7 +2,7 @@
 //libraries
 import axios from 'axios';
 //function
-import { store } from './store';
+import store from './store';
 //components
 import AppHeader from './components/AppHeader.vue';
 import AppSidebardVue from './components/AppSidebard.vue';
