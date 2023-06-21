@@ -3,7 +3,10 @@
 @use '_partials/typography' as *;
 @use '_partials/mixins' as *;
 
+@import "../css/chillax.css";
+
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
 
-
-
+body {
+    font-family: 'Chillax-Medium';
+}

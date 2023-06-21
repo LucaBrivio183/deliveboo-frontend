@@ -79,7 +79,7 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 #nav {
-    background-color: $ms_secondary_color;
+    background-color: $ms_secondary_color_medium;
     border-bottom: 2px solid #68fcff;
 
     h3 {
