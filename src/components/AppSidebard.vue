@@ -2,7 +2,7 @@
 //libraries
 import axios from 'axios';
 //function
-import { store } from '../store';
+import store from '../store';
 //components
 export default {
     name: 'AppSidebar',
