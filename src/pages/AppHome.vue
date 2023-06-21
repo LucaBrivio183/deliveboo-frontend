@@ -20,7 +20,16 @@ export default {
 </script>
 
 <template>
-    <router-view></router-view>
+    <main>
+        <div class="container">
+            <h1 class="mt-5 mb-3">Scelti per te</h1>
+            <div class="row gy-2">
+                <div class="col-4 p-2">
+                    
+                </div>
+            </div>
+        </div>
+    </main>
 </template>
 
 <style lang="scss" scoped>
