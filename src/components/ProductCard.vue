@@ -19,7 +19,7 @@ export default {
         <!-- /Product detail -->
         <!-- Product image -->
         <div class="ms-card-image">
-            <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" class="card-img-top" alt="prodotto">
+            <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" class="h-100" alt="prodotto">
         </div>
         <!-- /Product image -->
     </div>
@@ -34,6 +34,7 @@ export default {
         cursor: pointer;
         width: 100%;
         height: 100%;
+        max-height: 12.5rem;
 
         &:hover {
             box-shadow: .3125rem .3125rem .9375rem 0px rgba(0,0,0,0.75);
@@ -46,9 +47,10 @@ export default {
         .ms-card-image {
             width: 9.375rem;
             flex-shrink: 0;
+            overflow: hidden;
 
             img {
-                width: 100%;
+                height: 100%;
             }
         }
     }
