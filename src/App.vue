@@ -5,14 +5,14 @@ import axios from 'axios';
 import store from './store';
 //components
 import AppHeader from './components/AppHeader.vue';
-import AppSidebardVue from './components/AppSidebard.vue';
+import AppSidebar from './components/AppSidebar.vue';
 import AppFooter from './components/AppFooter.vue';
 
 export default {
   name: 'App',
   components: {
     AppHeader,
-    AppSidebardVue,
+    AppSidebar,
     AppFooter,
   },
   data() {
@@ -28,11 +28,16 @@ export default {
 
 <template>
   <AppHeader />
-  <AppSidebardVue/>
-  <router-view></router-view>
+  <main class="d-flex">
+    <AppSidebar />
+    <router-view class="flex-grow-1"></router-view>
+  </main>
   <AppFooter />
 </template>
 
 <style lang="scss" scoped>
 @use './assets/scss/main.scss' as *;
+
+
+
 </style>
