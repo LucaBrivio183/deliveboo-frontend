@@ -6,14 +6,6 @@ export default {
     name: 'AppHeader',
     components: {
         LogoElement
-    },
-    data() {
-        return {
-
-        }
-    },
-    created() {
-
     }
 }
 </script>
@@ -23,13 +15,13 @@ export default {
         <!-- nav -->
         <nav id="nav" class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="#">
+                <router-link :to="{ name: 'home' }" class="navbar-brand d-flex align-items-center">
                     <!-- logo -->
-                    <LogoElement />
-                    <div class="ms-3 me-3">
+                    <LogoElement class="logo"/>
+                    <div class="ms-3 me-3 d-flex align-items-center">
                         <h3>DeliveBoo</h3>
                     </div>
-                </a>
+                </router-link>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -42,9 +34,12 @@ export default {
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item mx-1">
                             <!-- home -->
-                            <a class="nav-link text-light" href="#">Home</a>
+                            <router-link :to="{ name: 'home' }" class="nav-link text-light">
+                                Home
+                            </router-link>
                         </li>
                         <!-- search input -->
+                        <!--
                         <li class="nav-item d-flex align-items-center">
                             <div class="search mx-0 mx-md-3">
                                 <div class="search-input-container">
@@ -53,18 +48,14 @@ export default {
                                 </div>
                             </div>  
                         </li> 
-                        <!-- /search input -->  
+                        -->
+                        <!-- /search input -->
                     </ul>
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto"> 
-                        <!-- ///// Authentication ///// -->              
-                        <!-- login -->
+                    <ul class="navbar-nav ml-auto">
+                        <!-- authentication -->
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="#">Login</a>
-                        </li>
-                        <!-- register -->
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="#">Registrati</a>
+                            <a href="http://127.0.0.1:8000/" class="nav-link text-light">Collabora con noi</a>
                         </li>
                     </ul>
                 </div>
@@ -85,6 +76,11 @@ export default {
     h3 {
         color: $ms_primary_color;
     }
+    .logo {
+        :deep(img) {
+            height: 3.125rem;
+            width: 2.6875rem;
+        }
+    }
 }
-
 </style>
