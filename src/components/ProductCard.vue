@@ -15,7 +15,7 @@ export default {
         <img :src="product.image" class="card-img-top h-50" :alt="product.name">
         <!-- /Product image -->
         <!-- Product detail -->
-        <div class="card-bodyp-3">
+        <div class="card-body">
             <h2 class="card-title mb-2 fs-3">{{ product.name }}</h2>
             <!-- <div class="mb-2" v-show="product.description">{{ product.description }}</div> -->
             <div class="card-text">{{ product.price }} €</div>

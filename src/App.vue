@@ -28,10 +28,7 @@ export default {
 
 <template>
   <AppHeader />
-  <main class="d-flex">
-    <AppSidebar />
-    <router-view class="flex-grow-1"></router-view>
-  </main>
+  <router-view ></router-view>
   <AppFooter />
 </template>
 

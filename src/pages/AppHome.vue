@@ -5,25 +5,29 @@ import axios from 'axios';
 import store from '../store';
 //components
 import RestaurantCard from '../components/RestaurantCard.vue';
+import AppSidebar from '../components/AppSidebar.vue';
 export default {
     name: 'App',
     components: {
-        RestaurantCard
+        RestaurantCard,
+        AppSidebar
     },
     data() {
         return {
             store,
-            restaurants: [],
         }
     },
     methods: {
         getRestaurants() {
-            axios.get(this.store.apiBaseUrl + this.store.apiUrls.homepage)
-                .then((response) => {
-                    console.log(response.data.results.data);
-                    this.restaurants = response.data.results.data;       
+            axios.get(this.store.apiBaseUrl + this.store.apiUrls.homepage,
+                {
+                    params: this.store.selectedTypologies
                 })
-        }
+                .then((response) => {
+                    console.log(this.store.selectedTypologies);
+                    this.store.restaurants = response.data.results.data;       
+                })
+        },
     },
     created() {
         this.getRestaurants();
@@ -32,11 +36,12 @@ export default {
 </script>
 
 <template>
-    <main>
-        <div class="container">
+    <main class="d-flex">
+        <AppSidebar @getRestaurants="getRestaurants"/>
+        <div class="container flex-grow-1">
             <h1 class="mt-5 mb-3">Scelti per te</h1>
             <div class="row gy-2">
-                <div class="col-sm-12 col-md-6 col-lg-4" v-if="restaurants" v-for="restaurant in restaurants">
+                <div class="col-sm-12 col-md-6 col-lg-4" v-if="store.restaurants" v-for="restaurant in store.restaurants">
                     <RestaurantCard :restaurant="restaurant"/>
                 </div>
             </div>

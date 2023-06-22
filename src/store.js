@@ -6,6 +6,8 @@ const store = reactive({
         homepage: '/homepage',
         restaurant: '/restaurant'
         },
+    restaurants: [],
+    selectedTypologies: [],
 })
 
 export default store;
