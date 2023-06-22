@@ -26,7 +26,8 @@ export default {
 @use '../assets/scss/main.scss' as *;
 
 .card {
-        
+    
+    text-decoration: none;
     overflow: hidden;
     max-height: 200px;
     cursor: pointer;

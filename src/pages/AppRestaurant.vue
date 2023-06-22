@@ -32,12 +32,12 @@ export default {
 
 <template>
     <!-- Restaurant menu -->
-    <div class="ms-container py-5 px-3 mx-auto" v-if="restaurant">
+    <div class="container" v-if="restaurant">
         <!-- Restaurant name -->
-        <h1 class="text-center">{{ restaurant.name }}</h1>
-        <div class="row ms-row">
+        <h1 class="mt-5 mb-3">{{ restaurant.name }}</h1>
+        <div class="row gy-2">
             <!-- Recall ProductCard component and cycle it for every product -->
-            <div v-if="products" v-for="product in products" class="col-sm-12 col-md-6 col-lg-4 gy-4">
+            <div v-if="products" v-for="product in products" class="col-sm-12 col-md-6 col-lg-4">
                 <ProductCard :product="product"/>
             </div>
         </div>
