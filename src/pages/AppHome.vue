@@ -25,7 +25,7 @@ export default {
                 })
                 .then((response) => {
                     console.log(this.store.selectedTypologies);
-                    this.store.restaurants = response.data.results.data;       
+                    this.store.restaurants = response.data.results.data;
                 })
         },
     },
@@ -37,12 +37,12 @@ export default {
 
 <template>
     <main class="d-flex">
-        <AppSidebar @getRestaurants="getRestaurants"/>
+        <AppSidebar @getRestaurants="getRestaurants" />
         <div class="container flex-grow-1">
             <h1 class="mt-5 mb-3">Scelti per te</h1>
             <div class="row gy-2">
                 <div class="col-sm-12 col-md-6 col-lg-4" v-if="store.restaurants" v-for="restaurant in store.restaurants">
-                    <RestaurantCard :restaurant="restaurant"/>
+                    <RestaurantCard :restaurant="restaurant" />
                 </div>
             </div>
         </div>
@@ -51,4 +51,12 @@ export default {
 
 <style lang="scss" scoped>
 @use '../assets/scss/main.scss' as *;
+
+main {
+    background-image: url('/public/images/logo-green.png');
+    background-repeat: no-repeat;
+    background-size: 16%;
+    background-position-y: 20%;
+    background-position-x: right;
+}
 </style>

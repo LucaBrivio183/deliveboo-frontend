@@ -31,7 +31,7 @@ export default {
 
 <template>
         <aside class="px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100  mt-3">
                 <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Preferenze?</span>
                 </a>
@@ -51,7 +51,14 @@ export default {
 
 <style lang="scss" scoped>
 @use '../assets/scss/main.scss' as *;
-#menu{
-    color:white;
+@use '../assets/scss/_partials/variables' as *;
+
+aside {
+    border-right: 2px solid $ms_primary_background;
+
+    #menu{
+        color:white;
+    }
 }
+
 </style>

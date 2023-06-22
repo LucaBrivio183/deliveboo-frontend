@@ -1,8 +1,13 @@
 @use '_partials/reset' as *;
 @use '_partials/variables' as *;
-@use '_partials/typography' as *;
 @use '_partials/mixins' as *;
-
 @import "../css/chillax.css";
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";
+
+body {
+    background-color: $ms_primary_color;
+    background-image: url('/public/images/background-green.png');
+    background-size: cover;
+    font-family: 'Chillax-Medium';
+}

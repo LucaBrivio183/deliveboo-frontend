@@ -16,9 +16,9 @@ export default {
         <!-- nav -->
         <nav id="nav" class="navbar navbar-expand-md navbar-light shadow-sm bg-dark">
             <div class="container px-5">
-                <div class="collapse navbar-collapse">
+                <div class="d-flex w-100">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto" id="socials">
+                    <ul class="navbar-nav me-auto flex-row align-items-center" id="socials">
                         <li class="nav-item mx-1">
                             <a href="#">
                                 <i class="fa-brands fa-twitter"></i>
@@ -56,19 +56,26 @@ export default {
 @use '../assets/scss/main.scss' as *;
 @use '../assets/scss/_partials/variables' as *;
 
-#nav {
-    border-top: 2px solid $ms_primary_color;
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 
-    #socials {
-        a {
-            color: $ms_primary_color;
+        #nav {
+        border-top: 2px solid $ms_primary_color;
+
+        #socials {
+            a {
+                color: $ms_primary_color;
+            }
         }
-    }
 
-    .logo {
-        :deep(img) {
-            height: 2.125rem;
-            width: 1.875rem;
+        .logo {
+            :deep(img) {
+                height: 1.5rem;
+                width: 1.25rem;
+            }
         }
     }
 }
