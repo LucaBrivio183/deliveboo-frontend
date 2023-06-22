@@ -6,14 +6,6 @@ export default {
     name: 'AppHeader',
     components: {
         LogoElement
-    },
-    data() {
-        return {
-
-        }
-    },
-    created() {
-
     }
 }
 </script>
@@ -25,8 +17,8 @@ export default {
             <div class="container">
                 <router-link :to="{ name: 'home' }" class="navbar-brand d-flex align-items-center">
                     <!-- logo -->
-                    <LogoElement />
-                    <div class="ms-3 me-3">
+                    <LogoElement class="logo"/>
+                    <div class="ms-3 me-3 d-flex align-items-center">
                         <h3>DeliveBoo</h3>
                     </div>
                 </router-link>
@@ -83,6 +75,12 @@ export default {
 
     h3 {
         color: $ms_primary_color;
+    }
+    .logo {
+        :deep(img) {
+            height: 3.125rem;
+            width: 2.6875rem;
+        }
     }
 }
 </style>
