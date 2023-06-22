@@ -9,17 +9,17 @@ export default {
 
 <template>
     <!-- Product card -->
-    <div class="ms-card d-flex justify-content-between p-3">
+    <div class="ms-card d-flex h-100">
         <!-- Product detail -->
-        <div class="ms-card-body me-3">
+        <div class="ms-card-body w-50 p-3">
             <h2 class="card-title mb-2 fs-3">{{ product.name }}</h2>
-            <div class="mb-2" v-show="product.description">{{ product.description }}</div>
+            <!-- <div class="mb-2" v-show="product.description">{{ product.description }}</div> -->
             <div class="card-text">{{ product.price }} €</div>
         </div>
         <!-- /Product detail -->
         <!-- Product image -->
-        <div class="ms-card-image">
-            <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1025&q=80" class="h-100" alt="prodotto">
+        <div class="ms-card-image w-50">
+            <img :src="product.image" class="img-fluid h-100" :alt="product.name">
         </div>
         <!-- /Product image -->
     </div>
@@ -32,10 +32,7 @@ export default {
         border: .0625rem solid #bbb;
         border-radius: .3125rem;
         cursor: pointer;
-        width: 100%;
-        height: 100%;
-        max-height: 12.5rem;
-
+        max-height: 200px;
         &:hover {
             box-shadow: .3125rem .3125rem .9375rem 0px rgba(0,0,0,0.75);
         }
@@ -45,12 +42,11 @@ export default {
         }
 
         .ms-card-image {
-            width: 9.375rem;
-            flex-shrink: 0;
             overflow: hidden;
-
+            object-fit: center;
             img {
-                height: 100%;
+                border-top-right-radius: .3125rem;
+                border-bottom-right-radius: .3125rem;
             }
         }
     }

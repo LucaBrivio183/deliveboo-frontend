@@ -16,8 +16,8 @@ export default {
     },
     methods: {
         // Axios call to get a specified restaurant with its products
-        getProject() {  
-            axios.get(`${this.store.apiBaseUrl}${this.store.apiUrls.restaurant}/burger-king`)       //Todo: replace "burger-king" with /${this.$route.params.slug}
+        getProducts() {  
+            axios.get(`${this.store.apiBaseUrl}${this.store.apiUrls.restaurant}/${this.$route.params.slug}`)       //Todo: replace "burger-king" with /${this.$route.params.slug}
                 .then((response) => {
                     this.restaurant = response.data.results;
                     this.products = response.data.results.products;
@@ -25,7 +25,7 @@ export default {
         }
     },
     created() {
-        this.getProject();
+        this.getProducts();
     }
 }
 </script>
@@ -37,7 +37,7 @@ export default {
         <h1 class="text-center">{{ restaurant.name }}</h1>
         <div class="row ms-row">
             <!-- Recall ProductCard component and cycle it for every product -->
-            <div v-if="products" v-for="product in products" class="col-12 col-lg-6 col-xl-4 ms-col gy-4">
+            <div v-if="products" v-for="product in products" class="col-sm-12 col-md-6 col-lg-4 gy-4">
                 <ProductCard :product="product"/>
             </div>
         </div>

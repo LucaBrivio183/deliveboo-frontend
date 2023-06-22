@@ -9,7 +9,7 @@ export default {
 </script>
 
 <template>
-    <div class="card"> 
+    <router-link class="card h-100" :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"> 
         <img class="card-img-top" :src="restaurant.image" :alt="restaurant.name">
         <div class="card-body">
             <h5 class="card-title">{{ restaurant.name }}</h5>
@@ -19,7 +19,7 @@ export default {
                 <p class="card-text px-1">Consegna: {{ restaurant.delivery_cost }} €</p>
             </div>
         </div>
-    </div>
+    </router-link>
 </template>
 
 <style lang="scss" scoped>
@@ -29,8 +29,10 @@ export default {
         
     overflow: hidden;
     max-height: 200px;
-    -webkit-box-shadow: 3px 3px 4px 1px rgba(0,0,0,0.62); 
-    box-shadow: 3px 3px 4px 1px rgba(0,0,0,0.62);
+    cursor: pointer;
+        &:hover {
+            box-shadow: .3125rem .3125rem .9375rem 0px rgba(0,0,0,0.75);
+        }
 
     img {
         object-fit: center;
