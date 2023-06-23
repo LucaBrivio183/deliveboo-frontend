@@ -3,21 +3,29 @@ export default {
     name: 'ProductCard',
     data() {
         return {
-            productQuantity: 5,
+            productQuantity: 1,
+            finalPrice: this.product.price
         }
     },
     props: {
         product: Object
     },
     methods: {
-        decreaseProductQuantity(productQuantity) {
-            if(productQuantity !== 1) {
+        // Decrease the amount of product
+        decreaseProductQuantity() {
+            if(this.productQuantity > 1) {
                 return this.productQuantity--;
             }
         },
-
+        // Increase the amount of product
         increaseProductQuantity() {
             return this.productQuantity++;
+        },
+    },
+    computed: {
+        // Change the price accordingly
+        changeProductPrice() {
+            return this.finalPrice = this.productQuantity * this.product.price;
         }
     }
 }
@@ -54,11 +62,11 @@ export default {
                 </div>
                 <div class="modal-footer">
                     <div class="quantity w-100 text-center fs-5">
-                        <span role="button" @click="decreaseProductQuantity(this.productQuantity)"><i class="fa-solid fa-circle-minus"></i></span>
+                        <span role="button" @click="decreaseProductQuantity()"><i class="fa-solid fa-circle-minus"></i></span>
                         <span class="mx-3">{{ this.productQuantity }}</span>
                         <span role="button" @click="increaseProductQuantity()"><i class="fa-solid fa-circle-plus"></i></span>
                     </div>
-                    <button type="button" class="btn btn-primary w-100">Aggiungi per {{ product.price }} €</button>
+                    <button type="button" class="btn btn-primary w-100">Aggiungi per {{ changeProductPrice }} €</button>
                 </div>
             </div>
         </div>
