@@ -2,10 +2,12 @@
 import axios from 'axios';
 import store from '../store';
 import ProductCard from '../components/ProductCard.vue';
+import ProductsCart from '../components/ProductsCart.vue';
 export default {
     name: 'AppRestaurant',
     components: {
-        ProductCard
+        ProductCard,
+        ProductsCart,
     },
     data() {
         return {
@@ -35,10 +37,15 @@ export default {
     <div class="container" v-if="restaurant">
         <!-- Restaurant name -->
         <h1 class="mt-5 mb-3">{{ restaurant.name }}</h1>
-        <div class="row gy-2">
-            <!-- Recall ProductCard component and cycle it for every product -->
-            <div v-if="products" v-for="product in products" class="col-sm-12 col-md-6 col-lg-4">
-                <ProductCard :product="product"/>
+        <div class="row">
+            <div class="col-9 row gy-2">
+                <!-- Recall ProductCard component and cycle it for every product -->
+                <div v-if="products" v-for="product in products" class="col-sm-12 col-md-6 col-lg-4">
+                    <ProductCard :product="product"/>
+                </div>
+            </div>
+            <div class="col-3 my-5">
+                <ProductsCart/>
             </div>
         </div>
     </div>
