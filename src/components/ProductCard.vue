@@ -8,10 +8,9 @@ export default {
 </script>
 
 <template>
-    <!-- Product card -->
-    <div class="card h-100">
+    <!-- Product card with modal trigger -->
+    <div class="card h-100" data-bs-toggle="modal" data-bs-target="#addToCartModal">
         <!-- Product image -->
-        
         <img src="https://picsum.photos/300/200" class="card-img-top h-50" :alt="product.name">
         <!-- /Product image -->
         <!-- Product detail -->
@@ -23,6 +22,31 @@ export default {
         <!-- /Product detail -->
     </div>
     <!-- /Product card -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addToCartModalLabel">{{ product.name }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://picsum.photos/300/200" class="card-img-top h-50" :alt="product.name">
+                    <div class="card-text mt-2">{{ product.description }}</div>
+                    <div class="card-text mt-2"><strong>Ingredienti:</strong> {{ product.ingredients }}</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="quantity w-100 text-center fs-5">
+                        <span><i class="fa-solid fa-circle-minus"></i></span>
+                        <span class="mx-3">1</span>
+                        <span><i class="fa-solid fa-circle-plus"></i></span>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100">Aggiungi per {{ product.price }} €</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <style lang="scss">
