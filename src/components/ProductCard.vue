@@ -63,8 +63,8 @@ export default {
                 </div>
                 <div class="modal-body">
                     <img src="https://picsum.photos/300/200" class="card-img-top h-50" :alt="product.name">
-                    <div class="card-text mt-2">{{ product.description }}</div>
-                    <div class="card-text mt-2"><strong>Ingredienti:</strong> {{ product.ingredients }}</div>
+                    <div class="card-text mt-2" v-if="product.description">{{ product.description }}</div>
+                    <div class="card-text mt-2" v-if="product.ingredients"><strong>Ingredienti:</strong> {{ product.ingredients }}</div>
                 </div>
                 <div class="modal-footer">
                     <div class="quantity w-100 text-center fs-5">
