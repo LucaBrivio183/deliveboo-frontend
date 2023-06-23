@@ -38,7 +38,7 @@ export default {
 </script>
 
 <template>
-    <!-- Product card with modal trigger -->
+    <!-- Product card with modal trigger // productQuantity gets a reset after each card click -->
     <div class="card h-100" data-bs-toggle="modal" :data-bs-target="'#product' + product.id" @click="resetProductQuantity">
         <!-- Product image -->
         <img src="https://picsum.photos/300/200" class="card-img-top h-50" :alt="product.name">
@@ -46,7 +46,7 @@ export default {
         <!-- Product detail -->
         <div class="card-body">
             <h2 class="card-title mb-2 fs-3">{{ product.name }}</h2>
-            <!-- <div class="mb-2" v-show="product.description">{{ product.description }}</div> -->
+            <!-- <div class="mb-2" v-if="product.description">{{ product.description }}</div> -->
             <div class="card-text">{{ product.price }} €</div>
         </div>
         <!-- /Product detail -->
@@ -68,6 +68,7 @@ export default {
                 </div>
                 <div class="modal-footer">
                     <div class="quantity w-100 text-center fs-5">
+                        <!-- If productQuantity === 1, minus button is gray and not clickable -->
                         <span :role="(this.productQuantity !== 1) ? 'button' : ''" @click="decreaseProductQuantity()"><i :class="`fa-solid fa-circle-minus  ${(this.productQuantity === 1) ? 'opacity-25' : ''}`"></i></span>
                         <span class="mx-3">{{ this.productQuantity }}</span>
                         <span role="button" @click="increaseProductQuantity()"><i class="fa-solid fa-circle-plus"></i></span>
