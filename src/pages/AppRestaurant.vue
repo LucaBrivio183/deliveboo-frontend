@@ -38,10 +38,18 @@ export default {
         <div class="row gy-2">
             <!-- Recall ProductCard component and cycle it for every product -->
             <div v-if="products" v-for="product in products" class="col-sm-12 col-md-6 col-lg-4">
-                <ProductCard :product="product"/>
+                <ProductCard :product="product"
+                             :restaurant="restaurant"
+                             />
             </div>
         </div>
     </div>
+
+    <!-- <div>
+        <div v-for="product in window.localStorage">
+            <h2>product.productName</h2>
+        </div>
+    </div> -->
     <!-- /Restaurant menu -->
 </template>
 

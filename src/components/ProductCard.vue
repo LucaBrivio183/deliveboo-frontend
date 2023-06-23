@@ -1,14 +1,16 @@
 <script>
 export default {
     name: 'ProductCard',
+    props: {
+        product: Object,
+        restaurant: Object,
+    },
     data() {
         return {
             productQuantity: 1,
-            finalPrice: this.product.price
+            finalPrice: this.product.price,
+            indexes: [],
         }
-    },
-    props: {
-        product: Object
     },
     methods: {
         // Decrease the amount of product
@@ -21,6 +23,34 @@ export default {
         increaseProductQuantity() {
             return this.productQuantity++;
         },
+        addItem() {
+            // If you already had an order from another restorant, stop
+            if(this.restaurant.id !== Number(localStorage.getItem('id')) && localStorage.getItem('id') != null) {
+                return
+            } else {
+                // If restaurant.id in local storage is null, set it
+                if(localStorage.getItem('id') == null) {
+                	localStorage.setItem('id', this.restaurant.id);
+		        }
+
+                // If there was a indexes in local storage, parse it and assign it to this.indexes
+                if(JSON.parse(localStorage.getItem('indexes')) != null) {
+                    this.indexes = JSON.parse(localStorage.getItem('indexes'));
+                }
+
+                // If indexes already contains this.product.id, don't push it
+                if(!this.indexes.includes(this.product.id)) {
+                    this.indexes.push(this.product.id);
+                }
+                // Save this.indexes in local storage
+                localStorage.setItem('indexes',
+                JSON.stringify(this.indexes));
+
+                // Set product info
+                localStorage.setItem(this.product.id,
+                JSON.stringify({productName: this.product.name, quantity: this.productQuantity, price: this.finalPrice}));
+            }
+        }
     },
     computed: {
         // Reset product quantity
@@ -74,7 +104,7 @@ export default {
                         <span role="button" @click="increaseProductQuantity()"><i class="fa-solid fa-circle-plus"></i></span>
                     </div>
                     <!-- The final product price gets changed and formatted to two decimals -->
-                    <button type="button" class="btn btn-primary w-100">Aggiungi per {{ changeProductPrice.toFixed(2) }} €</button>
+                    <button type="button" class="btn btn-primary w-100" @click="addItem">Aggiungi per {{ changeProductPrice.toFixed(2) }} €</button>
                 </div>
             </div>
         </div>
