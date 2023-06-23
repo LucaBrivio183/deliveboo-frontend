@@ -53,7 +53,7 @@ export default {
 @use '../assets/scss/main.scss' as *;
 
 main {
-    background-image: url('/public/images/logo-green.png');
+    background-image: url('/images/logo-green.png');
     background-repeat: no-repeat;
     background-size: 16%;
     background-position-y: 20%;
