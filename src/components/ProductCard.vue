@@ -72,7 +72,8 @@ export default {
                         <span class="mx-3">{{ this.productQuantity }}</span>
                         <span role="button" @click="increaseProductQuantity()"><i class="fa-solid fa-circle-plus"></i></span>
                     </div>
-                    <button type="button" class="btn btn-primary w-100">Aggiungi per {{ changeProductPrice }} €</button>
+                    <!-- The final product price gets changed and formatted to two decimals -->
+                    <button type="button" class="btn btn-primary w-100">Aggiungi per {{ changeProductPrice.toFixed(2) }} €</button>
                 </div>
             </div>
         </div>
