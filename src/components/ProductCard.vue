@@ -68,7 +68,7 @@ export default {
                 </div>
                 <div class="modal-footer">
                     <div class="quantity w-100 text-center fs-5">
-                        <span role="button" @click="decreaseProductQuantity()"><i class="fa-solid fa-circle-minus"></i></span>
+                        <span :role="(this.productQuantity !== 1) ? 'button' : ''" @click="decreaseProductQuantity()"><i :class="`fa-solid fa-circle-minus  ${(this.productQuantity === 1) ? 'opacity-25' : ''}`"></i></span>
                         <span class="mx-3">{{ this.productQuantity }}</span>
                         <span role="button" @click="increaseProductQuantity()"><i class="fa-solid fa-circle-plus"></i></span>
                     </div>
