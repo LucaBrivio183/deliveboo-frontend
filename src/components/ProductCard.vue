@@ -1,8 +1,24 @@
 <script>
 export default {
     name: 'ProductCard',
+    data() {
+        return {
+            productQuantity: 5,
+        }
+    },
     props: {
         product: Object
+    },
+    methods: {
+        decreaseProductQuantity(productQuantity) {
+            if(productQuantity !== 1) {
+                return this.productQuantity--;
+            }
+        },
+
+        increaseProductQuantity() {
+            return this.productQuantity++;
+        }
     }
 }
 </script>
@@ -38,9 +54,9 @@ export default {
                 </div>
                 <div class="modal-footer">
                     <div class="quantity w-100 text-center fs-5">
-                        <span><i class="fa-solid fa-circle-minus"></i></span>
-                        <span class="mx-3">1</span>
-                        <span><i class="fa-solid fa-circle-plus"></i></span>
+                        <span role="button" @click="decreaseProductQuantity(this.productQuantity)"><i class="fa-solid fa-circle-minus"></i></span>
+                        <span class="mx-3">{{ this.productQuantity }}</span>
+                        <span role="button" @click="increaseProductQuantity()"><i class="fa-solid fa-circle-plus"></i></span>
                     </div>
                     <button type="button" class="btn btn-primary w-100">Aggiungi per {{ product.price }} €</button>
                 </div>
