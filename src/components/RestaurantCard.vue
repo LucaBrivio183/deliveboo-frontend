@@ -10,7 +10,7 @@ export default {
 
 <template>
     <router-link class="card h-100" :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"> 
-        <img class="card-img-top" :src="restaurant.image" :alt="restaurant.name">
+        <img class="card-img-top h-50" src="https://picsum.photos/300/200" :alt="restaurant.name">
         <div class="card-body">
             <h5 class="card-title">{{ restaurant.name }}</h5>
             <div class="d-flex justify-content-between align-item-center">
@@ -28,7 +28,6 @@ export default {
 .card {
     
     text-decoration: none;
-    overflow: hidden;
     max-height: 200px;
     cursor: pointer;
         &:hover {

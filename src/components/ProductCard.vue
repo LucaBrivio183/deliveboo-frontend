@@ -12,7 +12,7 @@ export default {
     <div class="card h-100">
         <!-- Product image -->
         
-        <img :src="product.image" class="card-img-top h-50" :alt="product.name">
+        <img src="https://picsum.photos/300/200" class="card-img-top h-50" :alt="product.name">
         <!-- /Product image -->
         <!-- Product detail -->
         <div class="card-body">
@@ -35,10 +35,6 @@ export default {
 
         &:hover {
             box-shadow: .3125rem .3125rem .9375rem 0px rgba(0,0,0,0.75);
-        }
-
-        .ms-card-body {
-            // height: 100%;
         }
     }
 </style>
