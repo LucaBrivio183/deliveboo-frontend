@@ -23,6 +23,12 @@ export default {
         },
     },
     computed: {
+        // Reset product quantity
+        resetProductQuantity() {
+            if(this.productQuantity !== 1) {
+                return this.productQuantity = 1;
+            }
+        },
         // Change the price accordingly
         changeProductPrice() {
             return this.finalPrice = this.productQuantity * this.product.price;
@@ -33,7 +39,7 @@ export default {
 
 <template>
     <!-- Product card with modal trigger -->
-    <div class="card h-100" data-bs-toggle="modal" :data-bs-target="'#product' + product.id">
+    <div class="card h-100" data-bs-toggle="modal" :data-bs-target="'#product' + product.id" @click="resetProductQuantity">
         <!-- Product image -->
         <img src="https://picsum.photos/300/200" class="card-img-top h-50" :alt="product.name">
         <!-- /Product image -->
