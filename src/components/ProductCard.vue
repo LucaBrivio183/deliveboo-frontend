@@ -23,10 +23,6 @@ export default {
         },
     },
     computed: {
-        // Find current product id
-        productId() {
-            return 'product' + this.product.id;
-        },
         // Change the price accordingly
         changeProductPrice() {
             return this.finalPrice = this.productQuantity * this.product.price;
@@ -37,7 +33,7 @@ export default {
 
 <template>
     <!-- Product card with modal trigger -->
-    <div class="card h-100" data-bs-toggle="modal" :data-bs-target="'#' + productId">
+    <div class="card h-100" data-bs-toggle="modal" :data-bs-target="'#product' + product.id">
         <!-- Product image -->
         <img src="https://picsum.photos/300/200" class="card-img-top h-50" :alt="product.name">
         <!-- /Product image -->
@@ -52,7 +48,7 @@ export default {
     <!-- /Product card -->
 
     <!-- Modal -->
-    <div class="modal fade" :id="productId" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" :id="'product' + product.id" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
