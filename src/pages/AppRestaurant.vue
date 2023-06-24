@@ -12,6 +12,7 @@ export default {
             store,
             restaurant: null,
             products: [],
+            indexes: [],
         }
     },
     methods: {
@@ -22,6 +23,22 @@ export default {
                     this.restaurant = response.data.results;
                     this.products = response.data.results.products;
                 });
+        },
+        getindexes() {
+            this.indexes = JSON.parse(localStorage.getItem('indexes'));
+            // console.log(this.indexes);
+            return this.indexes;
+        },
+        getProduct(index) {
+            console.log(JSON.parse(localStorage.getItem(this.indexes[index])));
+            return JSON.parse(localStorage.getItem(this.indexes[index]));
+        },
+        deleteItem(index) {
+            localStorage.removeItem(this.indexes[index]);
+            let tempIndexes = JSON.parse(localStorage.getItem('indexes'));
+            tempIndexes.splice(index, 1);
+            localStorage.setItem('indexes',
+            JSON.stringify(tempIndexes));
         }
     },
     created() {
@@ -45,11 +62,16 @@ export default {
         </div>
     </div>
 
-    <!-- <div>
-        <div v-for="product in window.localStorage">
-            <h2>product.productName</h2>
+    <div>
+        <div v-for="(product, index) in getindexes()">
+            <div v-if="getProduct(index)">
+                <h2>{{getProduct(index).productName}}</h2>
+                <div>{{ getProduct(index).quantity }}</div>
+                <div>{{ getProduct(index).price }}</div>
+            </div>
+            <button class="btn btn-danger" @click="deleteItem(index)">Cancella</button>
         </div>
-    </div> -->
+    </div>
     <!-- /Restaurant menu -->
 </template>
 

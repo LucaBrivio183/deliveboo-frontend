@@ -10,6 +10,7 @@ export default {
             productQuantity: 1,
             finalPrice: this.product.price,
             indexes: [],
+            // products: {},
         }
     },
     methods: {
@@ -49,6 +50,18 @@ export default {
                 // Set product info
                 localStorage.setItem(this.product.id,
                 JSON.stringify({productName: this.product.name, quantity: this.productQuantity, price: this.finalPrice}));
+
+                // if(JSON.parse(localStorage.getItem('products')) != null) {
+                //     this.products = JSON.parse(localStorage.getItem('products'));
+                // }
+
+                // let currentId = this.product.id;
+                // currentId = {name: this.product.name, quantity: this.productQuantity, price: this.finalPrice};
+                // this.products.currentId; 
+                // console.log(this.products);
+
+                // localStorage.setItem('products',
+                // JSON.stringify(this.products));
             }
         }
     },
