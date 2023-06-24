@@ -9,14 +9,19 @@ export default {
 </script>
 
 <template>
-    <router-link class="card h-100" :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"> 
-        <img class="card-img-top h-50" src="https://picsum.photos/300/200" :alt="restaurant.name">
-        <div class="card-body">
-            <h5 class="card-title">{{ restaurant.name }}</h5>
-            <div class="d-flex justify-content-between align-item-center">
-                <p class="card-text px-1">{{ restaurant.business_times }}</p>
-                <p class="card-text fs-5">&#x2022;</p>
-                <p class="card-text px-1">Consegna: {{ restaurant.delivery_cost }} €</p>
+    <router-link class="row py-3" :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"> 
+        <div class="col-sm-12 col-md-3">
+            <img class="img-fluid" src="https://picsum.photos/500/300" :alt="restaurant.name">
+        </div>
+        <div class="col-sm-12 col-md-9 py-3">
+            <h3 class="mb-3">{{ restaurant.name }}</h3>
+            <div class="d-flex justify-content-between">
+                <span>categorie</span>
+                <div class="d-flex justify-content-between">
+                    <span>consegna: € {{ restaurant.delivery_cost }}</span>
+                    <span>-</span>
+                    <span>Ordine Minimo: € {{ restaurant.min_purchase }}</span>
+                </div>
             </div>
         </div>
     </router-link>
@@ -25,10 +30,10 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/scss/main.scss' as *;
 
-.card {
-    
+.row {
+    color: black;
     text-decoration: none;
-    max-height: 200px;
+
     cursor: pointer;
         &:hover {
             box-shadow: .3125rem .3125rem .9375rem 0px rgba(0,0,0,0.75);
@@ -37,11 +42,9 @@ export default {
     img {
         object-fit: center;
     }
-    .card-body {
-        .card-title {
-            padding: .75rem 0;
-            font-weight: bold;
-        }
+
+    span: {
+        font-size: .875rem;
     }
 }
 </style>

@@ -4,9 +4,12 @@ import axios from 'axios';
 //function
 import store from '../store';
 //components
+import TypologyCard from './TypologyCard.vue';
+
 export default {
-    name: 'AppSidebar',
+    name: 'TypologiesList',
     components: {
+        TypologyCard,
     },
     data() {
         return {
@@ -30,7 +33,7 @@ export default {
 </script>
 
 <template>
-        <aside class="px-0 bg-dark">
+        <section class="px-0 bg-dark">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100  mt-3">
                 <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Preferenze?</span>
@@ -46,7 +49,7 @@ export default {
                     </ul>
                 </form>
             </div>
-        </aside> 
+        </section> 
 </template>
 
 <style lang="scss" scoped>

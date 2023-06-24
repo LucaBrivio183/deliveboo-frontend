@@ -5,14 +5,12 @@ import axios from 'axios';
 import store from './store';
 //components
 import AppHeader from './components/AppHeader.vue';
-import AppSidebar from './components/AppSidebar.vue';
 import AppFooter from './components/AppFooter.vue';
 
 export default {
   name: 'App',
   components: {
     AppHeader,
-    AppSidebar,
     AppFooter,
   },
   data() {
