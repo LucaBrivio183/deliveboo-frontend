@@ -5,12 +5,13 @@ import axios from 'axios';
 import store from '../store';
 //components
 import RestaurantCard from '../components/RestaurantCard.vue';
-import AppSidebar from '../components/AppSidebar.vue';
+import TypologiesList from '../components/TypologiesList.vue';
+
 export default {
     name: 'App',
     components: {
         RestaurantCard,
-        AppSidebar
+        TypologiesList,
     },
     data() {
         return {
@@ -36,14 +37,12 @@ export default {
 </script>
 
 <template>
-    <main class="d-flex">
-        <AppSidebar @getRestaurants="getRestaurants" />
-        <div class="container flex-grow-1">
-            <h1 class="mt-5 mb-3">Scelti per te</h1>
-            <div class="row gy-2">
-                <div class="col-sm-12 col-md-6 col-lg-4" v-if="store.restaurants" v-for="restaurant in store.restaurants">
-                    <RestaurantCard :restaurant="restaurant" />
-                </div>
+    <main>
+        <TypologiesList @getRestaurants="getRestaurants" />
+        <div class="container">
+            <h1 class="mt-5 mb-3">Consegna nella zona:</h1>
+            <div v-if="store.restaurants" v-for="restaurant in store.restaurants">
+                <RestaurantCard :restaurant="restaurant" />
             </div>
         </div>
     </main>
