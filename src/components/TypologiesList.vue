@@ -15,15 +15,14 @@ export default {
     data() {
         return {
             store,
-            typologies: [],
+
         }
     },
     methods: {
         getTypologies() {
             axios.get('http://127.0.0.1:8000/api/homepage/typologies')
                 .then((response) => {
-                    this.typologies = response.data.results;
-                    console.log(this.typologies);
+                    this.store.typologies = response.data.results;
                 })
         }
     },
@@ -37,7 +36,7 @@ export default {
     <section>
             <div class="container my-3">
                 <div class="row">
-                    <div v-for="typology in typologies" class="col-2">
+                    <div v-for="typology in store.typologies" class="col-2 align-self-stretch">
                         <TypologyCard :typology="typology" @change="$emit('getRestaurants')" />
                     </div>
                 </div>

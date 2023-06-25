@@ -4,6 +4,7 @@ export default {
     name: 'RestaurantCard',
     props: {
         restaurant: Object,
+        typologies: Array,
     },
 }
 </script>
@@ -34,13 +35,17 @@ export default {
     color: black;
     text-decoration: none;
 
+
     cursor: pointer;
         &:hover {
             box-shadow: .3125rem .3125rem .9375rem 0px rgba(0,0,0,0.75);
         }
 
     img {
-        object-fit: center;
+        aspect-ratio: 16/9;
+        object-fit: contain;
+        display: block;
+        border-radius: 5px;
     }
 
     span: {

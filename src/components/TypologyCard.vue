@@ -18,10 +18,10 @@ export default {
 </script>
 
 <template>
-    <div class="d-flex justify-content-center" :class="{ 'bg-success': this.clickedCard }" id="typology-card" @click="this.clickedCard = !this.clickedCard">
+    <div class="d-flex justify-content-center h-100" :class="{ 'clicked': this.clickedCard }" id="typology-card" @click="this.clickedCard = !this.clickedCard">
         <input class="d-none" type="checkbox" :value="typology.id" :id="typology.name"
             v-model="store.selectedTypologies">
-        <label class="d-flex flex-column justify-content-center align-items-center" :for="typology.name" :name="typology.name">
+        <label class="d-flex flex-column align-items-center p-2" :for="typology.name" :name="typology.name">
             <img class="img-fluid" src="https://picsum.photos/100/50" :alt="typology.name">
             <small>{{ typology.name }}</small>
         </label>
@@ -32,25 +32,34 @@ export default {
 @use '../assets/scss/main.scss' as *;
 @use '../assets/scss/_partials/_variables' as *;
 
-div{
+#typology-card {
     cursor: pointer;
+    border-radius: 5px;
+
     &:hover{
         border: 2px solid $ms_primary_color;
     }
     label {
         cursor: pointer;
         img{
-            aspect-ratio: 3/2;
+            aspect-ratio: 16/9;
             object-fit: contain;
             display: block;
+            border-radius: 5px;
         }
         small {
             display: block;
+            font-size: .75rem;
         }
     }
 }
 .clicked{
     border: 2px solid $ms_secondary_color; // background and dark text
+}
 
+@media (min-width: 576px) {
+    small {
+        font-size: .75rem;
+    }
 }
 </style>
