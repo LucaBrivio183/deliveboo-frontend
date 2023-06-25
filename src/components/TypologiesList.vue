@@ -4,12 +4,13 @@ import axios from 'axios';
 //function
 import store from '../store';
 //components
+//import TypologyCard from './TypologyCard.vue';
 import TypologyCard from './TypologyCard.vue';
 
 export default {
     name: 'TypologiesList',
     components: {
-        TypologyCard,
+        TypologyCard
     },
     data() {
         return {
@@ -17,7 +18,7 @@ export default {
             typologies: [],
         }
     },
-    methods:{
+    methods: {
         getTypologies() {
             axios.get('http://127.0.0.1:8000/api/homepage/typologies')
                 .then((response) => {
@@ -33,23 +34,32 @@ export default {
 </script>
 
 <template>
-        <section class="px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100  mt-3">
-                <a href="#" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Preferenze?</span>
-                </a>
-                <form>
-                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                        <li v-for="typology in typologies" class="nav-item text-white mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" :value="typology.id" :id="typology.name" v-model="store.selectedTypologies" @change="$emit('getRestaurants')">
-                                <label class="form-check-label" :for="typology.name" :name="typology.name">{{ typology.name}}</label>
-                            </div>
-                        </li>
-                    </ul>
-                </form>
+    <section>
+            <div class="container py-3">
+                <div class="row">
+                    <div v-for="typology in typologies" class="col-2">
+                        <TypologyCard :typology="typology" @change="$emit('getRestaurants')" />
+                    </div>
+                </div>
             </div>
-        </section> 
+        </section>
+        <!--
+    <section class="bg-dark">
+        <div class="container d-flex flex-column align-items-center px-3 pt-2 text-white mt-3">
+            <a href="#" class="text-white my-3 text-decoration-none">
+                <span class="fs-5 d-none d-sm-inline">Preferenze?</span>
+            </a>
+
+            <form class="w-100 px-5">
+                <ul class="nav nav-pills align-items-center justify-content-between bg-success" id="menu">
+                    <li v-for="typology in typologies" class="nav-item text-white">
+                        <TypologyCard :typology="typology" @change="$emit('getRestaurants')"/>
+                        
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </section>-->
 </template>
 
 <style lang="scss" scoped>
@@ -59,9 +69,8 @@ export default {
 aside {
     border-right: 2px solid $ms_primary_background;
 
-    #menu{
-        color:white;
+    #menu {
+        color: white;
     }
 }
-
 </style>
