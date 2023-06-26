@@ -57,11 +57,6 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
         #nav {
         border-top: 2px solid $ms_primary_color;
 
