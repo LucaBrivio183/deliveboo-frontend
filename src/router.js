@@ -19,7 +19,7 @@ const router = createRouter({
             component: AppRestaurant
         },
         {
-            path: '/payment',
+            path: '/restaurant/:slug/payment',
             name: 'payment',
             component: AppPayment
         },
