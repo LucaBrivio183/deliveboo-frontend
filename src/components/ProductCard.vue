@@ -57,6 +57,18 @@ export default {
                 // localStorage.setItem(`${this.product.id}quantity`,  this.productQuantity)
                 // localStorage.setItem(`${this.product.id}price`, this.finalPrice)
 
+                const existingObject = this.store.cartProducts.find(obj => obj.id === this.product.id);
+                if (!existingObject) {
+                this.store.cartProducts.push({
+                    id: this.product.id,
+                    name: this.product.name,
+                    quantity: this.productQuantity,
+                    price: this.finalPrice,
+                })
+                }
+
+                console.log(this.store.cartProducts);
+
             }
         }
     },

@@ -55,6 +55,7 @@ export default {
             console.log(product);
             localStorage.setItem(this.store.indexes[index],
                 JSON.stringify({ productName: this.getProductName(index), quantity: this.getProductQuantity(index) + 1, price: Number(this.getProductPrice(index)) + Number(product.price) }));
+            this.fillCartProducts();
         },
         // Subtract one item from an already existing product. Delete if quantity = 0
         subQuantity(index) {
@@ -64,6 +65,7 @@ export default {
             if (this.getProductQuantity(index) > 1) {
                 localStorage.setItem(this.store.indexes[index],
                     JSON.stringify({ productName: this.getProductName(index), quantity: this.getProductQuantity(index) - 1, price: Number(this.getProductPrice(index)) - Number(product.price) }));
+                this.fillCartProducts();
             } else {
                 localStorage.removeItem(this.store.indexes[index]);
                 // let tempIndexes = JSON.parse(localStorage.getItem('indexes'));
@@ -79,7 +81,21 @@ export default {
             this.store.indexes.splice(index, 1);
             localStorage.setItem('indexes',
                 JSON.stringify(this.store.indexes));
+            this.fillCartProducts();
+            console.log(this.store.cartProducts);
         },
+        fillCartProducts() {
+            this.store.cartProducts = [];
+            for (let i = 0; i < this.store.indexes.length; i++) {
+                this.store.cartProducts.push({
+                    id: this.store.indexes[i],
+                    name: this.getProductName(i),
+                    quantity: this.getProductQuantity(i),
+                    price: this.getProductPrice(i),
+                })
+            }
+            console.log(this.store.cartProducts);
+        }
     },
     computed: {
         getProduct(index) {
@@ -90,6 +106,7 @@ export default {
     created() {
         this.getProducts();
         this.getIndexes();
+        this.fillCartProducts();
     }
 }
 </script>
@@ -137,10 +154,12 @@ export default {
     </div>
 
     <div>
-        <div v-for="(product, index) in store.indexes">
+        <div v-for="(product, index) in store.indexes" v-if="store.cartProducts !== []">
             <div>1</div>
+            <div v-if="store.cartProducts !== []">{{ store.cartProducts[index].name }}</div>
             <div>{{ getProductName(index) }}</div>
             <div>{{ getProductQuantity(index) }}</div>
+            <!-- <div>{{ store.cartProducts[index].quantity }}</div> -->
             <div>{{ getProductPrice(index) }} €</div>
             <div class="btn btn-primary" @click="subQuantity(index)">Remove item</div>
             <div class="btn btn-success" @click="addQuantity(index)">Add item</div>
