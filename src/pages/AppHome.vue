@@ -6,12 +6,14 @@ import store from '../store';
 //components
 import RestaurantCard from '../components/RestaurantCard.vue';
 import TypologiesList from '../components/TypologiesList.vue';
+import JumbotronElement from '../components/JumbotronElement.vue';
 
 export default {
     name: 'App',
     components: {
         RestaurantCard,
         TypologiesList,
+        JumbotronElement
     },
     data() {
         return {
@@ -39,10 +41,14 @@ export default {
 
 <template>
     <main>
+        <!-- Jumbotron -->
+        <JumbotronElement />
+        <!-- Typologies List -->
         <TypologiesList @getRestaurants="getRestaurants" />
         <div class="container">
             <h1 class="my-3">Consegna nella zona:</h1>
             <div v-if="store.restaurants" v-for="restaurant in store.restaurants">
+                <!-- Restaurant Card -->
                 <RestaurantCard :restaurant="restaurant" />
             </div>
         </div>
@@ -52,13 +58,4 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/scss/main.scss' as *;
 
-main {
-    /*
-    background-image: url('/images/logo-green.png');
-    background-repeat: no-repeat;
-    background-size: 16%;
-    background-position-y: 20%;
-    background-position-x: right;
-    */
-}
 </style>
