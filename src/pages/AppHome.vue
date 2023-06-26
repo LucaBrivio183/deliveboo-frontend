@@ -25,13 +25,14 @@ export default {
                     params: this.store.selectedTypologies
                 })
                 .then((response) => {
-                    console.log(this.store.selectedTypologies);
                     this.store.restaurants = response.data.results.data;
                 })
         },
     },
     created() {
-        this.getRestaurants();
+        this.getRestaurants(
+            console.log(this.store.restaurants)
+        );
     }
 }
 </script>
@@ -40,7 +41,7 @@ export default {
     <main>
         <TypologiesList @getRestaurants="getRestaurants" />
         <div class="container">
-            <h1 class="mt-5 mb-3">Consegna nella zona:</h1>
+            <h1 class="my-3">Consegna nella zona:</h1>
             <div v-if="store.restaurants" v-for="restaurant in store.restaurants">
                 <RestaurantCard :restaurant="restaurant" />
             </div>
