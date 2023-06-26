@@ -11,6 +11,7 @@ const store = reactive({
     selectedTypologies: [],
     // Indexes of products in cart in local storage
     indexes: [],
+    cartProducts: [],
 })
 
 export default store;
