@@ -76,7 +76,7 @@ export default {
 </script>
 
 <template>
-    <!-- product card -->
+    <!-- Product card with modal trigger // productQuantity gets a reset after each card click -->
     <div id="product-card" class="row mb-3 bg-light p-2 align-items-center text-dark">
         <!-- col details -->
         <div class="col py-3">
@@ -85,27 +85,15 @@ export default {
                 <div>
                     <span class="fw-bold">€ {{ product.price }}</span>
                     <span class="fw-bold ms-3">{{ product.discount }}</span>
-                    <p class="badge rounded-pill py-2 px-3 text-light">Ingredienti</p>
+                    <p class="badge rounded-pill py-2 px-3 text-light" data-bs-toggle="modal-ingredients" :data-bs-target="'#product' + product.id">Dettagli</p>
                 </div>
                 <div class="actions">
-                    <button>+</button>
+                    <div class="btn" data-bs-toggle="modal" :data-bs-target="'#product' + product.id" @click="resetProductQuantity">+</div>
                 </div>
                 <!--<p>{{ product.ingredients 
                     v-if="(product.discount !== 0)"
                     }}</p>-->
             </div>
-
-    <!-- Product card with modal trigger // productQuantity gets a reset after each card click -->
-    <div class="card h-100" data-bs-toggle="modal" :data-bs-target="'#product' + product.id" @click="resetProductQuantity">
-        <!-- Product image -->
-        <img src="https://picsum.photos/300/200" class="card-img-top h-50" :alt="product.name">
-        <!-- /Product image -->
-        <!-- Product detail -->
-        <div class="card-body">
-            <h2 class="card-title mb-2 fs-3">{{ product.name }}</h2>
-            <!-- <div class="mb-2" v-if="product.description">{{ product.description }}</div> -->
-            <div class="card-text">{{ product.price }} €</div>
-            
         </div>
         <!-- /col details -->
         <!-- col image -->
@@ -114,10 +102,6 @@ export default {
         </div>
         <!-- /col image -->
     </div>
-
-    <!-- product card -->
-
-    <!-- /Product card -->
 
     <!-- Modal -->
     <div class="modal fade" :id="'product' + product.id" tabindex="-1" aria-hidden="true">
@@ -145,7 +129,7 @@ export default {
             </div>
         </div>
     </div>
-    
+    <!-- /Modal -->
 </template>
 
 <style lang="scss">
@@ -157,6 +141,15 @@ export default {
     .badge {
         background-color: $ms_secondary_color;
         cursor: pointer;
+    }
+
+    .actions {
+        btn {
+            
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
     }
 }
 </style>
