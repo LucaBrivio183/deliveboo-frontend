@@ -131,20 +131,9 @@ export default {
             <!-- Cart -->
             <div class="col-5">
                 <ProductsCart />
-
-
-        <!-- Restaurant name -->
-        <h1 class="mt-5 mb-3">{{ restaurant.name }}</h1>
-        <div class="row gy-2">
-            <!-- Recall ProductCard component and cycle it for every product -->
-            <div v-if="products" v-for="product in products" class="col-sm-12 col-md-6 col-lg-4">
-                <ProductCard :product="product" :restaurant="restaurant" />
-
-
-
-
             </div>
         </div>
+        
     </div>
 
     <div>
@@ -164,7 +153,6 @@ export default {
 </template>
 
 <style lang="scss">
-
 @use '../assets/scss/_partials/variables' as *;
 
 .ms-container {
@@ -198,5 +186,4 @@ export default {
         background-color: $ms_secondary_color;
     }
 }
-
 </style>
