@@ -21,7 +21,7 @@ export default {
         <input class="d-none" type="checkbox" :value="typology.id" :id="typology.name"
             v-model="store.selectedTypologies" @change="this.isActive = !this.isActive">
         <label class="d-flex flex-column align-items-center p-2" :for="typology.name" :name="typology.name">
-            <img class="img-fluid" src="https://picsum.photos/100/50" :alt="typology.name">
+            <img class="img-fluid rounded" src="https://picsum.photos/100/50" :alt="typology.name">
             <small>{{ typology.name }}</small>
         </label>
     </div>
@@ -34,7 +34,7 @@ export default {
 #typology-card {
     cursor: pointer;
     border-radius: 5px;
-    border: 2px solid white;
+    border: 2px solid rgba(white,0);
 
     &:hover{
         border: 2px solid $ms_primary_color;
@@ -45,7 +45,6 @@ export default {
             aspect-ratio: 16/9;
             object-fit: contain;
             display: block;
-            border-radius: 5px;
         }
         small {
             display: block;

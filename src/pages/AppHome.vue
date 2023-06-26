@@ -25,13 +25,14 @@ export default {
                     params: this.store.selectedTypologies
                 })
                 .then((response) => {
-                    console.log(this.store.selectedTypologies);
                     this.store.restaurants = response.data.results.data;
                 })
         },
     },
     created() {
-        this.getRestaurants();
+        this.getRestaurants(
+            console.log(this.store.restaurants)
+        );
     }
 }
 </script>
