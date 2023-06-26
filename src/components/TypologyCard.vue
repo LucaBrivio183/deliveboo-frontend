@@ -7,8 +7,7 @@ export default {
     data() {
         return {
             store,
-            typologies: [],
-            clickedCard: false,
+            isActive: false,
         }
     },
     props: {
@@ -18,9 +17,9 @@ export default {
 </script>
 
 <template>
-    <div class="d-flex justify-content-center h-100" :class="{ 'clicked': this.clickedCard }" id="typology-card" @click="this.clickedCard = !this.clickedCard">
+    <div class="d-flex justify-content-center h-100" :class="{ 'clicked': this.isActive }" id="typology-card">
         <input class="d-none" type="checkbox" :value="typology.id" :id="typology.name"
-            v-model="store.selectedTypologies">
+            v-model="store.selectedTypologies" @change="this.isActive = !this.isActive">
         <label class="d-flex flex-column align-items-center p-2" :for="typology.name" :name="typology.name">
             <img class="img-fluid" src="https://picsum.photos/100/50" :alt="typology.name">
             <small>{{ typology.name }}</small>
@@ -35,6 +34,7 @@ export default {
 #typology-card {
     cursor: pointer;
     border-radius: 5px;
+    border: 2px solid white;
 
     &:hover{
         border: 2px solid $ms_primary_color;
@@ -54,7 +54,7 @@ export default {
     }
 }
 .clicked{
-    border: 2px solid $ms_secondary_color; // background and dark text
+    border: 2px solid $ms_secondary_color !important; // background and dark text
 }
 
 @media (min-width: 576px) {
