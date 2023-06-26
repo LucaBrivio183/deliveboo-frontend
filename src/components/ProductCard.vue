@@ -1,4 +1,5 @@
 <script>
+import store from '../store';
 export default {
     name: 'ProductCard',
     props: {
@@ -7,9 +8,10 @@ export default {
     },
     data() {
         return {
+            store,
             productQuantity: 1,
             finalPrice: this.product.price,
-            indexes: [],
+            // indexes: [],
             // products: {},
         }
     },
@@ -34,34 +36,27 @@ export default {
                 	localStorage.setItem('id', this.restaurant.id);
 		        }
 
-                // If there was a indexes in local storage, parse it and assign it to this.indexes
+                // If there was a indexes in local storage, parse it and assign it to this.store.indexes
                 if(JSON.parse(localStorage.getItem('indexes')) != null) {
-                    this.indexes = JSON.parse(localStorage.getItem('indexes'));
+                    this.store.indexes = JSON.parse(localStorage.getItem('indexes'));
                 }
 
                 // If indexes already contains this.product.id, don't push it
-                if(!this.indexes.includes(this.product.id)) {
-                    this.indexes.push(this.product.id);
+                if(!this.store.indexes.includes(this.product.id)) {
+                    this.store.indexes.push(this.product.id);
                 }
-                // Save this.indexes in local storage
+                // Save this.store.indexes in local storage
                 localStorage.setItem('indexes',
-                JSON.stringify(this.indexes));
+                JSON.stringify(this.store.indexes));
 
                 // Set product info
                 localStorage.setItem(this.product.id,
                 JSON.stringify({productName: this.product.name, quantity: this.productQuantity, price: this.finalPrice}));
+                // Set product info
+                // localStorage.setItem(`${this.product.id}name`, this.product.name)
+                // localStorage.setItem(`${this.product.id}quantity`,  this.productQuantity)
+                // localStorage.setItem(`${this.product.id}price`, this.finalPrice)
 
-                // if(JSON.parse(localStorage.getItem('products')) != null) {
-                //     this.products = JSON.parse(localStorage.getItem('products'));
-                // }
-
-                // let currentId = this.product.id;
-                // currentId = {name: this.product.name, quantity: this.productQuantity, price: this.finalPrice};
-                // this.products.currentId; 
-                // console.log(this.products);
-
-                // localStorage.setItem('products',
-                // JSON.stringify(this.products));
             }
         }
     },
