@@ -7,7 +7,10 @@ const store = reactive({
         restaurant: '/restaurant'
         },
     restaurants: [],
+    typologies: [],
     selectedTypologies: [],
+    // Indexes of products in cart in local storage
+    indexes: [],
 })
 
 export default store;

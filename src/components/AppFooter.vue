@@ -12,7 +12,7 @@ export default {
 </script>
 
 <template>
-    <footer>
+    <footer class="mt-3">
         <!-- nav -->
         <nav id="nav" class="navbar navbar-expand-md navbar-light shadow-sm bg-dark">
             <div class="container px-5">
@@ -57,6 +57,7 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 footer {
+
         #nav {
         border-top: 2px solid $ms_primary_color;
 
