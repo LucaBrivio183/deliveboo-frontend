@@ -8,33 +8,44 @@ export default {
 </script>
 
 <template>
-    <!-- Product card -->
-    <div class="card h-100">
-        <!-- Product image -->
-        
-        <img src="https://picsum.photos/300/200" class="card-img-top h-50" :alt="product.name">
-        <!-- /Product image -->
-        <!-- Product detail -->
-        <div class="card-body">
-            <h2 class="card-title mb-2 fs-3">{{ product.name }}</h2>
-            <!-- <div class="mb-2" v-show="product.description">{{ product.description }}</div> -->
-            <div class="card-text">{{ product.price }} €</div>
+    <!-- product card -->
+    <div id="product-card" class="row mb-3 bg-light p-2 align-items-center text-dark">
+        <!-- col details -->
+        <div class="col py-3">
+            <h3 class="mb-3">{{ product.name }}</h3>
+            <div class="d-flex justify-content-between">
+                <div>
+                    <span class="fw-bold">€ {{ product.price }}</span>
+                    <span class="fw-bold ms-3">{{ product.discount }}</span>
+                    <p class="badge rounded-pill py-2 px-3 text-light">Ingredienti</p>
+                </div>
+                <div class="actions">
+                    <button>+</button>
+                </div>
+                <!--<p>{{ product.ingredients 
+                    v-if="(product.discount !== 0)"
+                    }}</p>-->
+            </div>
         </div>
-        <!-- /Product detail -->
+        <!-- /col details -->
+        <!-- col image -->
+        <div id="img-container" class="col-3">
+            <img src="https://picsum.photos/300/200" class="img-fluid" :alt="product.name">
+        </div>
+        <!-- /col image -->
     </div>
-    <!-- /Product card -->
+    <!-- product card -->
 </template>
 
 <style lang="scss">
-    .card {
+@use '../assets/scss/_partials/variables' as *;
 
-        border: .0625rem solid #bbb;
-        border-radius: .3125rem;
+#product-card {
+    border: 2px solid #e7e7e7;
+
+    .badge {
+        background-color: $ms_secondary_color;
         cursor: pointer;
-        max-height: 200px;
-
-        &:hover {
-            box-shadow: .3125rem .3125rem .9375rem 0px rgba(0,0,0,0.75);
-        }
     }
+}
 </style>

@@ -33,11 +33,14 @@ export default {
 </script>
 
 <template>
+    <!-- /RESTAURANT DESCRIPTION -->
+
     <!-- restaurant image -->
     <div class="restaurant-image">
         <img src="https://picsum.photos/900/500" alt="restaurant" class="w-100">
     </div>
     <!-- /restaurant image -->
+
     <!-- restaurant details -->
     <div id="restaurant-details" class="p-4" style="width: 27.5rem;">
         <div class="card-body d-flex flex-column align-items-center">
@@ -50,16 +53,20 @@ export default {
         </div>
     </div>
     <!-- /restaurant details -->
+
+    <!-- /RESTAURANT DESCRIPTION -->
+
     <!-- Restaurant menu -->
     <div class="container" v-if="restaurant">
         <div class="row">
-            <div class="col-9 row gy-2">
+            <div class="col-7">
                 <!-- Recall ProductCard component and cycle it for every product -->
-                <div v-if="products" v-for="product in products" class="col-sm-12 col-md-6 col-lg-4">
+                <div v-if="products" v-for="product in products">
                     <ProductCard :product="product" />
                 </div>
             </div>
-            <div class="col-3 my-5">
+            <!-- Cart -->
+            <div class="col-5">
                 <ProductsCart />
             </div>
         </div>
