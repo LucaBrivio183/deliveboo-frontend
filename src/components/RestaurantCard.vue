@@ -16,7 +16,9 @@ export default {
         <div class="col-sm-12 col-md-9 py-3">
             <h3 class="mb-3">{{ restaurant.name }}</h3>
             <div class="d-flex justify-content-between">
-                <span class="me-2 badge text-bg-info" v-for="typology in restaurant.typologies">{{ typology.name }}</span>
+                <div>
+                    <span class="me-2 badge text-bg-info" v-for="typology in restaurant.typologies">{{ typology.name }}</span>
+                </div>
                 <div class="d-flex justify-content-between">
                     <span class="me-2">consegna: € {{ restaurant.delivery_cost }}</span>
                     <span class="me-2">-</span>

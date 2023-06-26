@@ -7,6 +7,7 @@ const store = reactive({
         restaurant: '/restaurant'
         },
     restaurants: [],
+    typologies: [],
     selectedTypologies: [],
 })
 
