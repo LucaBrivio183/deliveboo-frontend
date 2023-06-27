@@ -50,7 +50,11 @@ export default {
                 // Save this.store.indexes in local storage
                 localStorage.setItem('indexes',
                 JSON.stringify(this.store.indexes));
-
+                //save the quantity presents in the local storage
+                //if(JSON.parse(localStorage.getItem(this.restaurant.id))) {
+                //const presentProduct = JSON.parse(localStorage.getItem(this.restaurant.id));   
+                //console.log(presentProduct.quantity);
+                //}
                 // Set product info
                 localStorage.setItem(this.product.id,
                 JSON.stringify({productName: this.product.name, quantity: this.productQuantity, price: this.finalPrice}));
@@ -92,7 +96,6 @@ export default {
                 // Save this.store.indexes in local storage
                 localStorage.setItem('indexes',
                 JSON.stringify(this.store.indexes));
-
                 // Set product info
                 localStorage.setItem(this.product.id,
                 JSON.stringify({productName: this.product.name, quantity: this.productQuantity, price: this.finalPrice}));
