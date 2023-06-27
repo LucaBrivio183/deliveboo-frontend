@@ -1,4 +1,5 @@
 <script>
+// Import payment system
 import braintree from 'braintree-web';
 
 export default {
@@ -17,32 +18,35 @@ export default {
                 this.nonce = '';
                 this.error = '';
                 
+                // Tokenize the form info
                 this.hostedFieldInstance.tokenize().then(payload => {
-                    console.log(payload);
+                    // Token needed by backend in order to create the payment
                     this.nonce = payload.nonce;
                 })
                 .catch(err => {
-                    console.error(err);
                     this.error = err.message;
                 })
             }
         }
     },
     mounted() {
+        // Create a client instance
         braintree.client.create({
+            // Personal token
             authorization: 'sandbox_9qd65ssc_nvtdqmxz7yc3gvfh'
         })
         .then(clientInstance => {
             let options = {
                 client: clientInstance,
+                // Configuring hosted fields
                 fields: {
                     number: {
                         selector: '#creditCardNumber',
-                        placeholder: 'Enter Credit Card'
+                        placeholder: 'Inserisci il numero della Carta di credito'
                     },
                     cvv: {
                         selector: '#cvv',
-                        placeholder: 'Enter CVV'
+                        placeholder: 'Inserisci il CVV'
                     },
                     expirationDate: {
                         selector: '#expireDate',
@@ -50,8 +54,10 @@ export default {
                     }
                 }
             }
+            // Create hosted fields
             return braintree.hostedFields.create(options)
         })
+        // Send data do Braintree
         .then(hostedFieldInstance => {
             this.hostedFieldInstance = hostedFieldInstance;
         })
@@ -67,29 +73,29 @@ export default {
             <div class="col-6 offset-3">
                 <form>
                     <div class="fieldset">
-                        <legend>Payment Information</legend>
+                        <legend>Informazioni di pagamento</legend>
                         <div class="alert alert-success" v-if="nonce">
-                            Successfully generated nonce.
+                            Pagamento inviato con successo.
                         </div>
                         <div class="alert alert-danger" v-if="error">
                             {{ error }}
                         </div>
                         <div class="mb-3">
-                            <label for="amount" class="form-label">Amount</label>
+                            <label for="amount" class="form-label">Importo</label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">$</span>
-                                <input type="number" id="amount" class="form-control" placeholder="Enter Amount" aria-label="Amount (to the nearest dollar)">
+                                <span class="input-group-text">€</span>
+                                <input type="number" id="amount" class="form-control" placeholder="Inserisci l'importo" aria-label="Inserisci l'importo">
                             </div>
                         </div>
                         <hr>
                         <div class="mb-3">
-                            <label for="creditCardNumber" class="form-label">Credit Card Number</label>
+                            <label for="creditCardNumber" class="form-label">Carta di credito</label>
                             <div class="form-control" id="creditCardNumber"></div>
                         </div>
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-6">
-                                    <label for="expireDate" class="form-label">Expire Date</label>
+                                    <label for="expireDate" class="form-label">Data di scadenza</label>
                                     <div class="form-control" id="expireDate"></div>
                                 </div>
                                 <div class="col-6">
@@ -98,7 +104,7 @@ export default {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" @click.prevent="payWithCreditCard()">Pay with Credit Card</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="payWithCreditCard()">Invia il pagamento</button>
                     </div>
                 </form>
             </div>
