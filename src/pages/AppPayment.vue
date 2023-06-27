@@ -1,4 +1,7 @@
 <script>
+import axios from 'axios';
+import store from '../store';
+
 // Import payment system
 import braintree from 'braintree-web';
 
@@ -6,12 +9,26 @@ export default {
     name: 'AppPayment',
     data() {
         return {
+            store,
             hostedFieldInstance: false,
             nonce: '',
             error: ''
         }
     },
     methods: {
+        createOrder() {
+            axios.post(`${this.store.apiBaseUrl}${this.store.apiUrls.orders}`, {
+                        restaurant_id: 1,
+                        name: 'Pippo',
+                        email: 'pippo@pippo.it',
+                        address: 'Pippolandia n2',
+                        phone_number: '3336667890',
+                        total_price: 199.05,
+                    })
+                .then((response) => {
+                    console.log(response);
+                });
+        },
         payWithCreditCard() {
             if(this.hostedFieldInstance)
             {
@@ -22,6 +39,8 @@ export default {
                 this.hostedFieldInstance.tokenize().then(payload => {
                     // Token needed by backend in order to create the payment
                     this.nonce = payload.nonce;
+                }).then((response) => { 
+                    this.createOrder();
                 })
                 .catch(err => {
                     if (err.code === 'HOSTED_FIELDS_FIELDS_EMPTY') {
