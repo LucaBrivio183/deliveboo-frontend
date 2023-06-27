@@ -40,9 +40,9 @@ export default {
                 <!-- /logo -->
             </div>
 
-            <!-- search -->
+            <!-- search 
             <div id="search-container" class="w-25 align-self-center">
-                <!-- search input -->
+                 search input 
                 <div class="search rounded bg-dark">
                     <form class="form-inline d-flex rounded">
                         <input class="form-control mr-sm-2" type="search" placeholder="Trova i ristoranti">
@@ -50,8 +50,8 @@ export default {
                             placeholder="Trova i ristoranti">Cerca</button>
                     </form>
                 </div>
-                <!-- /search input -->
-            </div>
+                 /search input
+            </div>-->
             <!-- /search -->
         </div>
     </div>

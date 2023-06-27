@@ -36,7 +36,7 @@ export default {
                     <ul class="navbar-nav ml-auto">
                         <!-- authentication -->
                         <li class="nav-item">
-                            <a href="http://127.0.0.1:8000/" class="nav-link">Collabora con noi</a>
+                            <a href="http://127.0.0.1:8000/" class="nav-link">Accedi o registrati</a>
                         </li>
                     </ul>
                 </div>
