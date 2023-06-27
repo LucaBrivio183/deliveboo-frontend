@@ -13,6 +13,7 @@ export default {
             indexes: JSON.parse(localStorage.getItem('indexes')),
             deliveryCost: this.restaurant.delivery_cost,
             finalPrice: 0,
+            totalPrice: 0,
         }
     },
     methods: {
@@ -107,13 +108,17 @@ export default {
         },
         getTotalPrice() {
             this.finalPrice = 0;
+            this.totalPrice = 0;
             for (let i = 0; i < this.store.indexes.length; i++) {
                 const product = JSON.parse(localStorage.getItem(this.store.indexes[i]))
                 console.log(product.price)
                 this.finalPrice = this.finalPrice + Number(product.price);
             }
-            console.log(this.finalPrice);
-            return this.finalPrice + Number(this.deliveryCost);
+
+            this.totalPrice = this.finalPrice + Number(this.deliveryCost);
+            localStorage.setItem( "totalPrice", this.totalPrice );
+
+            return Number(this.finalPrice + Number(this.deliveryCost)).toFixed(2);
         }
     },
     computed: {
@@ -155,10 +160,10 @@ export default {
             </div>
         </div>
         <div class="bg-light p-3 m-2">
-            Consegna: {{ deliveryCost }}
+            Consegna: € {{ deliveryCost }}
         </div>
-        <div class="bg-light p-3 m-2">
-            Totale: {{ getTotalPrice() }} €
+        <div class="bg-light p-3 m-2 fw-bold">
+            Totale: € {{ getTotalPrice() }} 
         </div>
 
         <div class="text-center m-2">

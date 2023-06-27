@@ -15,24 +15,23 @@ export default {
     },
     methods: {
         payWithCreditCard() {
-            if(this.hostedFieldInstance)
-            {
+            if (this.hostedFieldInstance) {
                 this.nonce = '';
                 this.error = '';
-                
+
                 // Tokenize the form info
                 this.hostedFieldInstance.tokenize().then(payload => {
                     // Token needed by backend in order to create the payment
                     this.nonce = payload.nonce;
                 })
-                .catch(err => {
-                    if (err.code === 'HOSTED_FIELDS_FIELDS_EMPTY') {
-                        err.message = 'Tutti i dati sono obbligatori.';
-                    } else if (err.code === 'HOSTED_FIELDS_FIELDS_INVALID') {
-                        err.message = 'Alcuni dati non sono corretti.';
-                    }
-                    this.error = err.message;
-                })
+                    .catch(err => {
+                        if (err.code === 'HOSTED_FIELDS_FIELDS_EMPTY') {
+                            err.message = 'Tutti i dati sono obbligatori.';
+                        } else if (err.code === 'HOSTED_FIELDS_FIELDS_INVALID') {
+                            err.message = 'Alcuni dati non sono corretti.';
+                        }
+                        this.error = err.message;
+                    })
             }
         },
         getTotalPrice() {
@@ -44,7 +43,10 @@ export default {
             }
             console.log(finalPrice);
             */
-            return(this.store.finalPrice + Number(this.store.deliveryCost));
+            let totalPrice = 0
+            totalPrice = localStorage.getItem('totalPrice');
+            console.log(totalPrice);
+            return (Number(totalPrice).toFixed(2));
         }
     },
     mounted() {
@@ -53,42 +55,42 @@ export default {
             // Personal token
             authorization: 'sandbox_9qd65ssc_nvtdqmxz7yc3gvfh'
         })
-        .then(clientInstance => {
-            let options = {
-                client: clientInstance,
-                // Configuring hosted fields
-                fields: {
-                    number: {
-                        selector: '#creditCardNumber',
-                        placeholder: 'Inserisci il numero della Carta di credito'
-                    },
-                    cvv: {
-                        selector: '#cvv',
-                        placeholder: 'Inserisci il CVV'
-                    },
-                    expirationDate: {
-                        selector: '#expireDate',
-                        placeholder: '00 / 0000'
+            .then(clientInstance => {
+                let options = {
+                    client: clientInstance,
+                    // Configuring hosted fields
+                    fields: {
+                        number: {
+                            selector: '#creditCardNumber',
+                            placeholder: 'Inserisci il numero della Carta di credito'
+                        },
+                        cvv: {
+                            selector: '#cvv',
+                            placeholder: 'Inserisci il CVV'
+                        },
+                        expirationDate: {
+                            selector: '#expireDate',
+                            placeholder: '00 / 0000'
+                        }
                     }
                 }
-            }
-            // Create hosted fields
-            return braintree.hostedFields.create(options)
-        })
-        // Send data do Braintree
-        .then(hostedFieldInstance => {
-            this.hostedFieldInstance = hostedFieldInstance;
-        })
-        .catch(err => {
-        });
+                // Create hosted fields
+                return braintree.hostedFields.create(options)
+            })
+            // Send data do Braintree
+            .then(hostedFieldInstance => {
+                this.hostedFieldInstance = hostedFieldInstance;
+            })
+            .catch(err => {
+            });
     }
 }
 </script>
 
 <template>
-    <div class="container my-5">
+    <div class="container py-1 my-4">
         <div class="row">
-            <div class="col-6 offset-3">
+            <div class="col-6 offset-3 rounded py-3">
                 <form>
                     <div class="fieldset">
                         <legend>Informazioni di pagamento</legend>
@@ -99,9 +101,8 @@ export default {
                             {{ error }}
                         </div>
                         <div class="mb-3">
-                            <label for="amount" class="form-label">Importo totale senza costi di consegna</label>
-                            <div class="input-group mb-3">
-                                <span>€ {{ getTotalPrice() }}</span>
+                            <div class="mb-3 mt-3">
+                                <span class="fw-bold">Importo totale: € {{ getTotalPrice() }}</span>
                             </div>
                         </div>
                         <hr>
@@ -121,7 +122,8 @@ export default {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" @click.prevent="payWithCreditCard()">Invia il pagamento</button>
+                        <button type="submit" class="btn btn-primary" @click.prevent="payWithCreditCard()">Invia il
+                            pagamento</button>
                     </div>
                 </form>
             </div>
@@ -130,4 +132,9 @@ export default {
 </template>
 
 <style lang="scss" scoped>
+@use '../assets/scss/_partials/variables' as *;
+
+.col-6 {
+    background-color: $ms_secondary_color_light;
+}
 </style>
