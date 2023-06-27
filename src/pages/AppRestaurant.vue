@@ -167,7 +167,11 @@ export default {
         </div>
     </div>
 
-    <div>{{ potatoes }}</div>
+    <!-- New cart modal -->
+    <div class="ms-new-cart-modal">
+
+</div>
+<!-- /New cart modal -->
     <!-- /Restaurant menu -->
 </template>
 
@@ -204,5 +208,16 @@ export default {
     .highlight {
         background-color: $ms_secondary_color;
     }
+}
+
+.ms-new-cart-modal {
+    height: 18.75rem;
+    width: 34.375rem;
+    background-color: black;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
 }
 </style>
