@@ -35,12 +35,6 @@ export default {
         .then(clientInstance => {
             let options = {
                 client: clientInstance,
-                styles: {
-                    input: {
-                        'font-size': '14px',
-                        'font-family': 'Open Sans'
-                    }
-                },
                 fields: {
                     number: {
                         selector: '#creditCardNumber',
