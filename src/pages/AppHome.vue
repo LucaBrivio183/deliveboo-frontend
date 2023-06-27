@@ -47,9 +47,12 @@ export default {
         <TypologiesList @getRestaurants="getRestaurants" />
         <div class="container-md">
             <h1 class="my-3">Consegna nella zona:</h1>
-            <div v-if="store.restaurants" v-for="restaurant in store.restaurants">
+            <div v-if="this.store.restaurants.length > 0" v-for="restaurant in store.restaurants">
                 <!-- Restaurant Card -->
                 <RestaurantCard :restaurant="restaurant" />
+            </div>
+            <div v-else class="row">
+                <h3 class="my-3 ms-3">Nessun ristorante corrisponde alla ricerca</h3>
             </div>
         </div>
     </main>
