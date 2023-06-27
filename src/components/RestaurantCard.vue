@@ -38,7 +38,8 @@ export default {
 
     cursor: pointer;
         &:hover {
-            box-shadow: .3125rem .3125rem .9375rem 0px rgba(0,0,0,0.75);
+            -webkit-box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4); 
+            box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4);
         }
         
     img {

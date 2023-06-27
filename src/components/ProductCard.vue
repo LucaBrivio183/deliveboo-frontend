@@ -170,7 +170,7 @@ export default {
                                 class="fa-solid fa-circle-plus"></i></span>
                     </div>
                     <!-- The final product price gets changed and formatted to two decimals -->
-                    <button type="button" class="btn btn-primary w-100" @click="addItem">Aggiungi per {{
+                    <button type="button" class="btn btn-primary w-100" @click="addItem" data-bs-dismiss="modal">Aggiungi per {{
                         changeProductPrice.toFixed(2) }} €</button>
                 </div>
                 <div class="modal-footer" v-else>
