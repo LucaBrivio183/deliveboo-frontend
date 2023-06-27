@@ -204,7 +204,7 @@ export default {
     <!-- /Modal for start new cart -->
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use '../assets/scss/_partials/variables' as *;
 
 .card {

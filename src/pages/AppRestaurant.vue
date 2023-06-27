@@ -136,7 +136,7 @@ export default {
 
         <h1>Menù</h1>
         <div class="row">
-            <div class="col-8">
+            <div class="col-10 mx-auto col-md-8">
                 <div class="row">
             <!-- Recall ProductCard component and cycle it for every product -->
                     <div class="col-md-4 p-2" v-if="products" v-for="(product) in products">
@@ -145,7 +145,7 @@ export default {
                 </div>
             </div>
             <!-- Cart -->
-            <div class="col-4">
+            <div class="col-10 mx-auto col-md-4">
                 <div class="row">
                     <ProductsCart :restaurant="restaurant"/>
                 </div>
