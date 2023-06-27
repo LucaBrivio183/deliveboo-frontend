@@ -152,26 +152,6 @@ export default {
             </div> 
         </div>      
     </div>
-
-    <div>
-        <div v-for="(product, index) in store.indexes" v-if="store.cartProducts !== []">
-            <div>1</div>
-            <div v-if="store.cartProducts !== []">{{ store.cartProducts[index].name }}</div>
-            <div>{{ getProductName(index) }}</div>
-            <div>{{ getProductQuantity(index) }}</div>
-            <!-- <div>{{ store.cartProducts[index].quantity }}</div> -->
-            <div>{{ getProductPrice(index) }} €</div>
-            <div class="btn btn-primary" @click="subQuantity(index)">Remove item</div>
-            <div class="btn btn-success" @click="addQuantity(index)">Add item</div>
-            <div class="btn btn-danger" @click="deleteItem(index)">Delete item</div>
-        </div>
-    </div>
-
-    <!-- New cart modal -->
-    <div class="ms-new-cart-modal">
-
-    </div>
-<!-- /New cart modal -->
     <!-- /Restaurant menu -->
 </template>
 
