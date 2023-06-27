@@ -20,13 +20,13 @@ export default {
                     <small class="me-2 badge text-bg-info" v-for="typology in restaurant.typologies">{{ typology.name }}</small>
                 </div>
                 <div>
-                    <div class="d-flex justify-content-between align-items-center gap-2">
+                    <div class="d-flex align-items-center gap-2">
                         <i class="fa-solid fa-phone"></i>
                         <span class="info-text">Telefono: € {{ restaurant.phone_number}}</span>
                         <span>-</span>
                         <span class="info-text">Orari di consegna: {{ restaurant.business_times }}</span>
                     </div>
-                    <div class="d-flex justify-content-between align-items-center gap-2">
+                    <div class="d-flex align-items-center gap-2">
                         <i class="fa-solid fa-money-bill-wave"></i>
                         <span class="info-text">Consegna: € {{ restaurant.delivery_cost }}</span>
                         <span>-</span>
