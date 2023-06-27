@@ -89,16 +89,19 @@ export default {
 
 <template>
     <!-- Product card with modal trigger // productQuantity gets a reset after each card click -->
-    <div class="card" data-bs-toggle="modal"
-        :data-bs-target="'#product' + product.id" @click="resetProductQuantity">
+    <div class="card h-100" :class="{ 'inTheBasket': this.store.indexes.includes(product.id) }" @click="resetProductQuantity">
         <!-- card img -->
         <img src="https://picsum.photos/300/200" class="card-img-top" :alt="product.name">
         <!-- /card img -->
         <!-- col details -->
-        <div class="card-body">
+        <div class="card-body d-flex flex-column justify-content-between">
             <h5 class="card-title">{{ product.name }}</h5>
             <p :class="{ 'text-decoration-line-through': product.discount !== 0 }" class="card-text">€ {{ product.price }}</p>
             <p v-if="(product.discount !== 0)" class="card-text">€ {{ product.discount }}</p>
+            <div class="">
+                <a href="#" class="btn btn-outline-success w-100" data-bs-toggle="modal"
+                :data-bs-target="'#product' + product.id" @click.stop="$emit('addQuantity')">+</a>
+            </div>
         </div>
             <!-- /col details -->
     </div>
@@ -141,7 +144,19 @@ export default {
 
 .card {
     border: 2px solid #e7e7e7;
-
+    &:hover{
+        -webkit-box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4); 
+        box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4);
+    }
+    .card-body{
+        h5{
+            font-size: 14px;
+            font-weight: bold;
+        }
+        p{
+            font-size: 12px;
+        }
+    }
     .badge {
         background-color: $ms_secondary_color;
         cursor: pointer;
@@ -157,5 +172,8 @@ export default {
     }
 }
 
+.inTheBasket {
+    border-bottom: 5px solid $ms_secondary_color !important;
+}
 
 </style>
