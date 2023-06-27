@@ -110,7 +110,7 @@ export default {
             for (let i = 0; i < this.store.indexes.length; i++) {
                 const product = JSON.parse(localStorage.getItem(this.store.indexes[i]))
                 console.log(product.price)
-                this.finalPrice = this.finalPrice + (Number(product.price) * product.quantity);
+                this.finalPrice = this.finalPrice + Number(product.price);
             }
             console.log(this.finalPrice);
             return this.finalPrice + Number(this.deliveryCost);
