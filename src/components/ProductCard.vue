@@ -13,7 +13,6 @@ export default {
             finalPrice: this.product.price,
             // indexes: [],
             // products: {},
-            sameRestaurant: true,
         }
     },
     methods: {
@@ -29,9 +28,9 @@ export default {
         },
         addItem() {
             // If you already had an order from another restorant, stop
-            if(this.restaurant.id !== Number(localStorage.getItem('id')) && localStorage.getItem('id') != null) {
-                this.sameRestaurant = false;
-            } else {
+            // if(this.restaurant.id !== Number(localStorage.getItem('id')) && localStorage.getItem('id') != null) {
+            //     this.sameRestaurant = false;
+            // } else {
                 // If restaurant.id in local storage is null, set it
                 if(localStorage.getItem('id') != null) {
                     localStorage.removeItem('id');
@@ -75,44 +74,48 @@ export default {
 
                 console.log(this.store.cartProducts);
 
-            }
+            // }
         },
         newCart() {
-            this.sameRestaurant = true;
             localStorage.clear();
             // If restaurant.id in local storage is null, set it
-                if(localStorage.getItem('id') != null) {
-                    localStorage.removeItem('id');
-		        }
-                	localStorage.setItem('id', this.restaurant.id);
+                // if(localStorage.getItem('id') != null) {
+                //     localStorage.removeItem('id');
+		        // }
+                // 	localStorage.setItem('id', this.restaurant.id);
 
                 // If there was a indexes in local storage, parse it and assign it to this.store.indexes
                 this.store.indexes = [];
-
+                //keep the restaurant in local storage
+                localStorage.setItem('id', this.restaurant.id);	
                 // If indexes already contains this.product.id, don't push it
-                if(!this.store.indexes.includes(this.product.id)) {
-                    this.store.indexes.push(this.product.id);
-                }
-                // Save this.store.indexes in local storage
-                localStorage.setItem('indexes',
-                JSON.stringify(this.store.indexes));
-                // Set product info
-                localStorage.setItem(this.product.id,
-                JSON.stringify({productName: this.product.name, quantity: this.productQuantity, price: this.finalPrice}));
-                // Set product info
-                // localStorage.setItem(`${this.product.id}name`, this.product.name)
-                // localStorage.setItem(`${this.product.id}quantity`,  this.productQuantity)
-                // localStorage.setItem(`${this.product.id}price`, this.finalPrice)
+                // if(!this.store.indexes.includes(this.product.id)) {
+                //     this.store.indexes.push(this.product.id);
+                // }
+                // // Save this.store.indexes in local storage
+                // localStorage.setItem('indexes',
+                // JSON.stringify(this.store.indexes));
+                // // Set product info
+                // localStorage.setItem(this.product.id,
+                // JSON.stringify({productName: this.product.name, quantity: this.productQuantity, price: this.finalPrice}));
+                // // Set product info
+                // // localStorage.setItem(`${this.product.id}name`, this.product.name)
+                // // localStorage.setItem(`${this.product.id}quantity`,  this.productQuantity)
+                // // localStorage.setItem(`${this.product.id}price`, this.finalPrice)
 
-                const existingObject = this.store.cartProducts.find(obj => obj.id === this.product.id);
-                if (!existingObject) {
-                this.store.cartProducts.push({
-                    id: this.product.id,
-                    name: this.product.name,
-                    quantity: this.productQuantity,
-                    price: this.finalPrice,
-                })
-                }
+                // const existingObject = this.store.cartProducts.find(obj => obj.id === this.product.id);
+                // if (!existingObject) {
+                // this.store.cartProducts.push({
+                //     id: this.product.id,
+                //     name: this.product.name,
+                //     quantity: this.productQuantity,
+                //     price: this.finalPrice,
+                // })
+                // }
+        },
+        checkCurrentRestaurantID(){
+            let currentRestaurantID = localStorage.getItem('id');
+            return currentRestaurantID;
         }
     },
     computed: {
@@ -126,6 +129,9 @@ export default {
         changeProductPrice() {
             return this.finalPrice = this.productQuantity * this.product.price;
         }
+    },
+    created() {
+        this.checkCurrentRestaurantID();
     }
 }
 </script>
@@ -143,13 +149,13 @@ export default {
             <p v-if="(product.discount !== 0)" class="card-text">€ {{ product.discount }}</p>
             <div class="">
                 <a href="#" class="btn btn-outline-success w-100" data-bs-toggle="modal"
-                :data-bs-target="'#product' + product.id" @click.stop="$emit('addQuantity')">+</a>
+                :data-bs-target="(checkCurrentRestaurantID()==restaurant.id || checkCurrentRestaurantID()==undefined) ? '#product' + product.id : '#productNew' + product.id"  @click.stop="$emit('addQuantity')">+</a>
             </div>
         </div>
             <!-- /col details -->
     </div>
 
-    <!-- Modal -->
+    <!-- Modal for adding orders-->
     <div class="modal fade" :id="'product' + product.id" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -163,7 +169,7 @@ export default {
                     <div class="card-text mt-2" v-if="product.ingredients"><strong>Ingredienti:</strong> {{
                         product.ingredients }}</div>
                 </div>
-                <div class="modal-footer" v-if="sameRestaurant">
+                <div class="modal-footer">
                     <div class="quantity w-100 text-center fs-5">
                         <!-- If productQuantity === 1, minus button is gray and not clickable -->
                         <span :role="(this.productQuantity !== 1) ? 'button' : ''" @click="decreaseProductQuantity()"><i
@@ -176,14 +182,26 @@ export default {
                     <button type="button" class="btn btn-primary w-100" @click="addItem" data-bs-dismiss="modal">Aggiungi per {{
                         changeProductPrice.toFixed(2) }} €</button>
                 </div>
-                <div class="modal-footer" v-else>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal for adding orders -->
+    <!-- Modal for start new cart -->
+    <div class="modal fade" :id="'productNew' + product.id" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{ product.name }}</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
                     <div>Hai già un carrello in un altro ristorante! Clicca procedi per creare un nuovo carrello!</div>
-                    <div class="btn btn-danger" @click="newCart">Procedi</div>
+                    <div class="btn btn-danger" @click=newCart()  data-bs-dismiss="modal">Procedi</div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- /Modal -->
+    <!-- /Modal for start new cart -->
 </template>
 
 <style lang="scss">
