@@ -132,7 +132,7 @@ export default {
     <!-- /card restaurant details -->
 
     <!-- Restaurant menu -->
-    <div class="container" v-if="restaurant">
+    <div class="container-md" v-if="restaurant">
 
         <h1>Menù</h1>
         <div class="row">

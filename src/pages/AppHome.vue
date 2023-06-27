@@ -45,7 +45,7 @@ export default {
         <JumbotronElement />
         <!-- Typologies List -->
         <TypologiesList @getRestaurants="getRestaurants" />
-        <div class="container">
+        <div class="container-md">
             <h1 class="my-3">Consegna nella zona:</h1>
             <div v-if="store.restaurants" v-for="restaurant in store.restaurants">
                 <!-- Restaurant Card -->

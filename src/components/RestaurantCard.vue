@@ -17,12 +17,21 @@ export default {
             <h3 class="mb-3">{{ restaurant.name }}</h3>
             <div class="d-flex justify-content-between">
                 <div>
-                    <span class="me-2 badge text-bg-info" v-for="typology in restaurant.typologies">{{ typology.name }}</span>
+                    <small class="me-2 badge text-bg-info" v-for="typology in restaurant.typologies">{{ typology.name }}</small>
                 </div>
-                <div class="d-flex justify-content-between">
-                    <span class="me-2">consegna: € {{ restaurant.delivery_cost }}</span>
-                    <span class="me-2">-</span>
-                    <span class="me-2">Ordine Minimo: € {{ restaurant.min_purchase }}</span>
+                <div>
+                    <div class="d-flex justify-content-between align-items-center gap-2">
+                        <i class="fa-solid fa-phone"></i>
+                        <span class="info-text">Telefono: € {{ restaurant.phone_number}}</span>
+                        <span>-</span>
+                        <span class="info-text">Orari: {{ restaurant.business_times }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center gap-2">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                        <span class="info-text">Consegna: € {{ restaurant.delivery_cost }}</span>
+                        <span>-</span>
+                        <span class="info-text">Ordine Minimo: € {{ restaurant.min_purchase }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,6 +44,7 @@ export default {
 .row {
     color: black;
     text-decoration: none;
+    width: max(100%,25rem);
 
     cursor: pointer;
         &:hover {
@@ -47,9 +57,18 @@ export default {
         object-fit: contain;
         display: block;
     }
-
-    span: {
-        font-size: .875rem;
+    .info-text {
+        font-size: 0.75rem;
     }
+
+}
+
+@media (min-width: 576px) {
+    .row{
+        .info-text {
+        font-size: 1rem;
+        }
+    }
+    
 }
 </style>
