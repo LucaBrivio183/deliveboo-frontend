@@ -13,6 +13,7 @@ export default {
             finalPrice: this.product.price,
             // indexes: [],
             // products: {},
+            sameRestaurant: true,
         }
     },
     methods: {
@@ -29,12 +30,13 @@ export default {
         addItem() {
             // If you already had an order from another restorant, stop
             if(this.restaurant.id !== Number(localStorage.getItem('id')) && localStorage.getItem('id') != null) {
-                return
+                this.sameRestaurant = false;
             } else {
                 // If restaurant.id in local storage is null, set it
-                if(localStorage.getItem('id') == null) {
-                	localStorage.setItem('id', this.restaurant.id);
+                if(localStorage.getItem('id') != null) {
+                    localStorage.removeItem('id');
 		        }
+                	localStorage.setItem('id', this.restaurant.id);
 
                 // If there was a indexes in local storage, parse it and assign it to this.store.indexes
                 if(JSON.parse(localStorage.getItem('indexes')) != null) {
@@ -70,6 +72,44 @@ export default {
                 console.log(this.store.cartProducts);
 
             }
+        },
+        newCart() {
+            this.sameRestaurant = true;
+            localStorage.clear();
+            // If restaurant.id in local storage is null, set it
+                if(localStorage.getItem('id') != null) {
+                    localStorage.removeItem('id');
+		        }
+                	localStorage.setItem('id', this.restaurant.id);
+
+                // If there was a indexes in local storage, parse it and assign it to this.store.indexes
+                this.store.indexes = [];
+
+                // If indexes already contains this.product.id, don't push it
+                if(!this.store.indexes.includes(this.product.id)) {
+                    this.store.indexes.push(this.product.id);
+                }
+                // Save this.store.indexes in local storage
+                localStorage.setItem('indexes',
+                JSON.stringify(this.store.indexes));
+
+                // Set product info
+                localStorage.setItem(this.product.id,
+                JSON.stringify({productName: this.product.name, quantity: this.productQuantity, price: this.finalPrice}));
+                // Set product info
+                // localStorage.setItem(`${this.product.id}name`, this.product.name)
+                // localStorage.setItem(`${this.product.id}quantity`,  this.productQuantity)
+                // localStorage.setItem(`${this.product.id}price`, this.finalPrice)
+
+                const existingObject = this.store.cartProducts.find(obj => obj.id === this.product.id);
+                if (!existingObject) {
+                this.store.cartProducts.push({
+                    id: this.product.id,
+                    name: this.product.name,
+                    quantity: this.productQuantity,
+                    price: this.finalPrice,
+                })
+                }
         }
     },
     computed: {
@@ -120,7 +160,7 @@ export default {
                     <div class="card-text mt-2" v-if="product.ingredients"><strong>Ingredienti:</strong> {{
                         product.ingredients }}</div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" v-if="sameRestaurant">
                     <div class="quantity w-100 text-center fs-5">
                         <!-- If productQuantity === 1, minus button is gray and not clickable -->
                         <span :role="(this.productQuantity !== 1) ? 'button' : ''" @click="decreaseProductQuantity()"><i
@@ -133,6 +173,10 @@ export default {
                     <button type="button" class="btn btn-primary w-100" @click="addItem">Aggiungi per {{
                         changeProductPrice.toFixed(2) }} €</button>
                 </div>
+                <div class="modal-footer" v-else>
+                    <div>Hai già un carrello in un altro ristorante! Clicca procedi per creare un nuovo carrello!</div>
+                    <div class="btn btn-danger" @click="newCart">Procedi</div>
+                </div>
             </div>
         </div>
     </div>
@@ -144,6 +188,7 @@ export default {
 
 .card {
     border: 2px solid #e7e7e7;
+
     &:hover{
         -webkit-box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4); 
         box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4);
@@ -161,6 +206,7 @@ export default {
         background-color: $ms_secondary_color;
         cursor: pointer;
     }
+
 
     .actions {
         btn {

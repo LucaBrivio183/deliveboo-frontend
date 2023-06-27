@@ -2,13 +2,17 @@
 import store from '../store';
 export default {
     name: 'ProductsCart',
+    props: {
+        restaurant: Object,
+    },
     data() {
         return {
             store,
-            restaurant: null,
+            // restaurant: null,
             products: [],
             indexes: JSON.parse(localStorage.getItem('indexes')),
-            potatoes: 3,
+            deliveryCost: this.restaurant.delivery_cost,
+            finalPrice: 0,
         }
     },
     methods: {
@@ -41,6 +45,9 @@ export default {
             // console.log(JSON.parse(localStorage.getItem(this.store.indexes[index])));
             return JSON.parse(localStorage.getItem(this.store.indexes[index])).price;
         },
+        getRestaurantId() {
+            return Number(localStorage.getItem('id'));
+        },
         // Add one item to an already existing product
         addQuantity(index) {
             console.log(this.products);
@@ -64,7 +71,11 @@ export default {
                 // let tempIndexes = JSON.parse(localStorage.getItem('indexes'));
                 this.store.indexes.splice(index, 1);
                 localStorage.setItem('indexes',
-                JSON.stringify(this.store.indexes));
+                    JSON.stringify(this.store.indexes));
+                if (this.store.indexes.length === 0) {
+                    console.log('cancella ristorante');
+                    localStorage.removeItem('id');
+                }
                 this.fillCartProducts();
             }
         },
@@ -75,6 +86,10 @@ export default {
             this.store.indexes.splice(index, 1);
             localStorage.setItem('indexes',
                 JSON.stringify(this.store.indexes));
+            if (this.store.indexes.length === 0) {
+                console.log('cancella ristorante');
+                localStorage.removeItem('id');
+            }
             this.fillCartProducts();
             console.log(this.store.cartProducts);
         },
@@ -89,6 +104,16 @@ export default {
                 })
             }
             console.log(this.store.cartProducts);
+        },
+        getTotalPrice() {
+            this.finalPrice = 0;
+            for (let i = 0; i < this.store.indexes.length; i++) {
+                const product = JSON.parse(localStorage.getItem(this.store.indexes[i]))
+                console.log(product.price)
+                this.finalPrice = this.finalPrice + Number(product.price);
+            }
+            console.log(this.finalPrice);
+            return this.finalPrice + Number(this.deliveryCost);
         }
     },
     computed: {
@@ -106,14 +131,15 @@ export default {
 </script>
 
 <template>
-    <div class="bg-secondary">
-        <div class="bg-success p-4 text-center ">
-            <div><i class="fa-solid fa-cart-shopping fs-1"></i></div>
+    <div class="cart-container">
+        <div class="cart-top p-4 text-center">
+            <div><img src="/images/cart.png" alt="cart" class="cart-logo"></div>
             <h1 class="text-center">Il tuo Carrello</h1>
         </div>
         <!-- agiungere i v-for="(product, index) in store.indexes"> -->
         <div class="overflow-y-scroll items">
-            <div class="bg-light p-3 m-2 d-flex justify-content-between" v-for="(product, index) in store.indexes" v-if="store.cartProducts">
+            <div class="bg-light p-3 m-2 d-flex justify-content-between" v-for="(product, index) in store.indexes"
+                v-if="store.cartProducts">
                 <!-- <div v-if="store.cartProducts !== []">{{ store.cartProducts[index].name }}</div> -->
                 <div class="d-flex">
                     <div>{{ getProductName(index) }}</div>
@@ -129,20 +155,42 @@ export default {
             </div>
         </div>
         <div class="bg-light p-3 m-2">
-            Consegna:
+            Consegna: {{ deliveryCost }}
         </div>
         <div class="bg-light p-3 m-2">
-            Totale:
+            Totale: {{ getTotalPrice() }} €
         </div>
 
         <div class="text-center m-2">
-            <a href="#" class="btn btn-success">Ordina!</a>
+            <router-link :to="{ name: 'payment' }" class="btn order-button">
+                Ordina!
+            </router-link>
         </div>
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use '../assets/scss/_partials/variables' as *;
+
+.cart-container {
+    border: 2px solid $ms_primary_background;
+}
+
 .items {
     max-height: 400px;
+}
+
+.cart-top {
+    background-color: $ms_primary_color;
+    border-bottom: 2px solid $ms_primary_background;
+}
+
+.cart-logo {
+
+    max-height: 5rem;
+}
+
+.order-button {
+    background-color: $ms_secondary_color_light;
 }
 </style>
