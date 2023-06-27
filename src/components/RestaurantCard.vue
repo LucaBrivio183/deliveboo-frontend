@@ -24,7 +24,7 @@ export default {
                         <i class="fa-solid fa-phone"></i>
                         <span class="info-text">Telefono: € {{ restaurant.phone_number}}</span>
                         <span>-</span>
-                        <span class="info-text">Orari: {{ restaurant.business_times }}</span>
+                        <span class="info-text">Orari di consegna: {{ restaurant.business_times }}</span>
                     </div>
                     <div class="d-flex justify-content-between align-items-center gap-2">
                         <i class="fa-solid fa-money-bill-wave"></i>
