@@ -11,7 +11,7 @@ export default {
 <template>
     <router-link class="row py-3 rounded" :to="{ name: 'restaurant', params: { slug: restaurant.slug } }"> 
         <div class="col-sm-12 col-md-3">
-            <img class="img-fluid rounded" src="https://picsum.photos/500/300" :alt="restaurant.name">
+            <img class="img-fluid rounded" src="https://picsum.photos/500/300" :alt=" restaurant.name ">
         </div>
         <div class="col-sm-12 col-md-9 py-3">
             <h3 class="mb-3">{{ restaurant.name }}</h3>
