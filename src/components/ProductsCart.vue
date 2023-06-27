@@ -116,7 +116,7 @@ export default {
             }
 
             this.totalPrice = this.finalPrice + Number(this.deliveryCost);
-            localStorage.setItem( "totalPrice", this.totalPrice );
+            localStorage.setItem("totalPrice", this.totalPrice);
 
             return Number(this.finalPrice + Number(this.deliveryCost)).toFixed(2);
         }
@@ -136,40 +136,75 @@ export default {
 </script>
 
 <template>
-    <div class="cart-container">
-        <div class="cart-top p-4 text-center">
-            <div><img src="/images/cart.png" alt="cart" class="cart-logo"></div>
-            <h1 class="text-center">Il tuo Carrello</h1>
-        </div>
-        <!-- agiungere i v-for="(product, index) in store.indexes"> -->
-        <div class="overflow-y-scroll items">
-            <div class="bg-light p-3 m-2 d-flex justify-content-between" v-for="(product, index) in store.indexes"
-                v-if="store.cartProducts">
-                <!-- <div v-if="store.cartProducts !== []">{{ store.cartProducts[index].name }}</div> -->
-                <div class="d-flex">
-                    <div>{{ getProductName(index) }}</div>
-                    <div class="btn btn-danger" @click="deleteItem(index)">Delete item</div>
-                </div>
-                <div class="d-flex align-items-center">
-                    <div class="btn btn-primary" @click="subQuantity(index)">-</div>
-                    <div>{{ getProductQuantity(index) }}</div>
-                    <div class="btn btn-success" @click="addQuantity(index)">+</div>
-                    <!-- <div>{{ store.cartProducts[index].quantity }}</div> -->
-                    <div>{{ getProductPrice(index) }} €</div>
-                </div>
+    <div class="cart-container p-0 mt-2 rounded">
+        <!-- cart top -->
+        <div class="cart-top p-4 text-center rounded">
+            <div>
+                <img src="/images/cart.png" alt="cart" class="cart-logo">
+                <h1 class="text-center">Il tuo Carrello</h1>
             </div>
         </div>
-        <div class="bg-light p-3 m-2">
-            Consegna: € {{ deliveryCost }}
+        <!--
+        <div class="restaurant-name text-center py-3 fw-bold rounded">
+            Ristorante {{ restaurant.name }}
         </div>
-        <div class="bg-light p-3 m-2 fw-bold">
-            Totale: € {{ getTotalPrice() }} 
+        -->
+        <!-- agiungere i v-for="(product, index) in store.indexes"> -->
+        <div class="overflow-y-scroll items">
+            <div class="bg-light p-3 m-2" v-for="(product, index) in store.indexes" v-if="store.cartProducts">
+                <!-- <div v-if="store.cartProducts !== []">{{ store.cartProducts[index].name }}</div> -->
+                <div class=" d-flex justify-content-between">
+                    <!-- product name -->
+                    <div class="d-flex">
+                        <div>{{ getProductName(index) }}</div>
+                    </div>
+
+                    <!-- delete product -->
+                    <div class="delete-button" @click="deleteItem(index)">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </div>
+                </div>
+
+                <!-- actions -->
+                <div class="mt-3 d-flex justify-content-between">
+                    <div class="d-flex">
+                        <!-- minus -->
+                        <div class="quantity-button" @click="subQuantity(index)">
+                            <i class="fa-solid fa-circle-minus"></i>
+                        </div>
+                        <!-- product quantity -->
+                        <div class="mx-2">{{ getProductQuantity(index) }}</div>
+                        <!-- plus -->
+                        <div class="quantity-button" @click="addQuantity(index)">
+                            <i class="fa-solid fa-circle-plus"></i>
+                        </div>
+                    </div>
+
+                    <!-- <div>{{ store.cartProducts[index].quantity }}</div> -->
+                    <!-- product price -->
+                    <div>€ {{ Number(getProductPrice(index)).toFixed(2) }}</div>
+                </div>
+                <!-- /actions -->
+            </div>
         </div>
 
-        <div class="text-center m-2">
+        <!-- delivery cost -->
+        <div v-if="store.indexes.length !== 0" class="bg-light p-3 m-2">
+            Consegna: € {{ deliveryCost }}
+        </div>
+        <!-- final price -->
+        <div v-if="store.indexes.length !== 0" class="bg-light p-3 m-2 fw-bold">
+            Totale: € {{ getTotalPrice() }}
+        </div>
+        <!-- order -->
+        <div v-if="store.indexes.length !== 0" class="text-center m-2">
             <router-link :to="{ name: 'payment' }" class="btn order-button">
                 Ordina!
             </router-link>
+        </div>
+        <!-- empty cart -->
+        <div v-else class="bg-light p-3 m-2">
+            Il tuo carrello è vuoto
         </div>
     </div>
 </template>
@@ -179,23 +214,43 @@ export default {
 
 .cart-container {
     border: 2px solid $ms_primary_background;
-}
 
-.items {
-    max-height: 400px;
-}
+    .items {
+        max-height: 400px;
+    }
 
-.cart-top {
-    background-color: $ms_primary_color;
-    border-bottom: 2px solid $ms_primary_background;
-}
+    .cart-top {
+        background-color: $ms_primary_color;
+        border-bottom: 2px solid $ms_primary_background;
 
-.cart-logo {
+        .cart-logo {
+            max-height: 5rem;
+        }
+    }
 
-    max-height: 5rem;
-}
+    .restaurant-name {
+        border-bottom: 2px solid $ms_primary_background;
+    }
 
-.order-button {
-    background-color: $ms_secondary_color_light;
+    .order-button {
+        background-color: $ms_secondary_color_light;
+    }
+
+    .quantity-button {
+        color: $ms_secondary_color_medium;
+    }
+
+    .delete-button {
+        color: rgb(175, 175, 175);
+    }
+
+    .quantity-button,
+    .delete-button {
+        cursor: pointer;
+
+        &:hover {
+            color: $ms_secondary_color;
+        }
+    }
 }
 </style>
