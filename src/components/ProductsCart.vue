@@ -106,9 +106,9 @@ export default {
 </script>
 
 <template>
-    <div class="bg-secondary">
-        <div class="bg-success p-4 text-center ">
-            <div><i class="fa-solid fa-cart-shopping fs-1"></i></div>
+    <div class="cart-container">
+        <div class="cart-top p-4 text-center">
+            <div><img src="/images/cart.png" alt="cart" class="cart-logo"></div>
             <h1 class="text-center">Il tuo Carrello</h1>
         </div>
         <!-- agiungere i v-for="(product, index) in store.indexes"> -->
@@ -136,13 +136,32 @@ export default {
         </div>
 
         <div class="text-center m-2">
-            <a href="#" class="btn btn-success">Ordina!</a>
+            <a href="#" class="btn order-button">Ordina!</a>
         </div>
     </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
+@use '../assets/scss/_partials/variables' as *;
+
+.cart-container {
+    border: 2px solid $ms_primary_background;
+}
 .items {
     max-height: 400px;
+}
+
+.cart-top {
+    background-color: $ms_primary_color;
+    border-bottom: 2px solid $ms_primary_background;
+}
+
+.cart-logo {
+    
+    max-height: 5rem;
+}
+
+.order-button {
+    background-color: $ms_secondary_color_light;
 }
 </style>

@@ -145,11 +145,6 @@ export default {
 #product-card {
     border: 2px solid #e7e7e7;
 
-    .badge {
-        background-color: $ms_secondary_color;
-        cursor: pointer;
-    }
-
     .actions {
         btn {
             
