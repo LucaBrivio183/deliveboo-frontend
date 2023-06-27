@@ -106,27 +106,14 @@ export default {
             console.log(this.store.cartProducts);
         },
         getTotalPrice() {
-            // this.finalPrice = 0;
-            console.log(this.store.cartProducts);
-            let finalPrice = 0;
-            for (let i = 0; i < this.store.cartProducts.length; i++) {
-                let productprice = this.store.cartProducts[i].price * this.store.cartProducts[i].quantity;
-                finalPrice = finalPrice + Number(productprice);
-            }
-            console.log(finalPrice);
-
-            this.store.finalPrice = finalPrice;
-            this.store.deliveryCost = this.deliveryCost;
-            return(finalPrice + Number(this.deliveryCost));
-            /*
+            this.finalPrice = 0;
             for (let i = 0; i < this.store.indexes.length; i++) {
                 const product = JSON.parse(localStorage.getItem(this.store.indexes[i]))
                 console.log(product.price)
-                this.finalPrice = this.finalPrice + Number(product.price);
+                this.finalPrice = this.finalPrice + (Number(product.price) * product.quantity);
             }
             console.log(this.finalPrice);
             return this.finalPrice + Number(this.deliveryCost);
-            */
         }
     },
     computed: {
