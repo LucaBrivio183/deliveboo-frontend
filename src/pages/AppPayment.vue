@@ -24,6 +24,11 @@ export default {
                     this.nonce = payload.nonce;
                 })
                 .catch(err => {
+                    if (err.code === 'HOSTED_FIELDS_FIELDS_EMPTY') {
+                        err.message = 'Tutti i dati sono obbligatori.';
+                    } else if (err.code === 'HOSTED_FIELDS_FIELDS_INVALID') {
+                        err.message = 'Alcuni dati non sono corretti.';
+                    }
                     this.error = err.message;
                 })
             }
