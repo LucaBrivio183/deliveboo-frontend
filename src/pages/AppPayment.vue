@@ -1,6 +1,7 @@
 <script>
 // Import payment system
 import braintree from 'braintree-web';
+import store from '../store';
 
 export default {
     name: 'AppPayment',
@@ -8,7 +9,8 @@ export default {
         return {
             hostedFieldInstance: false,
             nonce: '',
-            error: ''
+            error: '',
+            store,
         }
     },
     methods: {
@@ -32,6 +34,17 @@ export default {
                     this.error = err.message;
                 })
             }
+        },
+        getTotalPrice() {
+            /*
+            let finalPrice = 0;
+            for (let i = 0; i < this.store.cartProducts.length; i++) {
+                let productprice = this.store.cartProducts[i].price * this.store.cartProducts[i].quantity;
+                finalPrice = finalPrice + Number(productprice);
+            }
+            console.log(finalPrice);
+            */
+            return(this.store.finalPrice + Number(this.store.deliveryCost));
         }
     },
     mounted() {
@@ -86,10 +99,9 @@ export default {
                             {{ error }}
                         </div>
                         <div class="mb-3">
-                            <label for="amount" class="form-label">Importo</label>
+                            <label for="amount" class="form-label">Importo totale senza costi di consegna</label>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">€</span>
-                                <input type="number" id="amount" class="form-control" placeholder="Inserisci l'importo" aria-label="Inserisci l'importo">
+                                <span>€ {{ getTotalPrice() }}</span>
                             </div>
                         </div>
                         <hr>
