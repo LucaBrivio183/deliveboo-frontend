@@ -147,7 +147,7 @@ export default {
             </div>
             <!-- Cart -->
             <div class="col-5">
-                <ProductsCart />
+                <ProductsCart :restaurant="restaurant"/>
             </div>
         </div>
         
