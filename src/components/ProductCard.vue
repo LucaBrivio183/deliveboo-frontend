@@ -155,7 +155,7 @@ export default {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="https://picsum.photos/300/200" class="card-img-top h-50" :alt="product.name">
+                    <img src="https://picsum.photos/300/200" class="card-img-top" :alt="product.name">
                     <div class="card-text mt-2" v-if="product.description">{{ product.description }}</div>
                     <div class="card-text mt-2" v-if="product.ingredients"><strong>Ingredienti:</strong> {{
                         product.ingredients }}</div>
