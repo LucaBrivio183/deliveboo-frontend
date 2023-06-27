@@ -133,20 +133,24 @@ export default {
 
     <!-- Restaurant menu -->
     <div class="container" v-if="restaurant">
+
         <h1>Menù</h1>
         <div class="row">
-            <div class="col-7">
-                <!-- Recall ProductCard component and cycle it for every product -->
-                <div v-if="products" v-for="product in products">
-                    <ProductCard :product="product" :restaurant="restaurant" />
+            <div class="col-8">
+                <div class="row">
+            <!-- Recall ProductCard component and cycle it for every product -->
+                    <div class="col-md-4 p-2" v-if="products" v-for="(product) in products">
+                        <ProductCard :product="product" :restaurant="restaurant"/>
+                    </div>
                 </div>
             </div>
             <!-- Cart -->
-            <div class="col-5">
-                <ProductsCart :restaurant="restaurant"/>
-            </div>
-        </div>
-        
+            <div class="col-4">
+                <div class="row">
+                    <ProductsCart :restaurant="restaurant"/>
+                </div>
+            </div> 
+        </div>      
     </div>
 
     <div>
@@ -166,7 +170,7 @@ export default {
     <!-- New cart modal -->
     <div class="ms-new-cart-modal">
 
-</div>
+    </div>
 <!-- /New cart modal -->
     <!-- /Restaurant menu -->
 </template>
