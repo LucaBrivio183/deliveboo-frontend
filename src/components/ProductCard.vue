@@ -142,6 +142,7 @@ export default {
         </div>
     </div>
     <!-- /Modal -->
+    
 </template>
 
 <style lang="scss">
@@ -164,4 +165,6 @@ export default {
         }
     }
 }
+
+
 </style>
