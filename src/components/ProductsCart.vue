@@ -71,11 +71,11 @@ export default {
                 // let tempIndexes = JSON.parse(localStorage.getItem('indexes'));
                 this.store.indexes.splice(index, 1);
                 localStorage.setItem('indexes',
-                JSON.stringify(this.store.indexes));
-                if(this.store.indexes.length === 0) {
-                console.log('cancella ristorante');
-                localStorage.removeItem('id');
-            }
+                    JSON.stringify(this.store.indexes));
+                if (this.store.indexes.length === 0) {
+                    console.log('cancella ristorante');
+                    localStorage.removeItem('id');
+                }
                 this.fillCartProducts();
             }
         },
@@ -86,7 +86,7 @@ export default {
             this.store.indexes.splice(index, 1);
             localStorage.setItem('indexes',
                 JSON.stringify(this.store.indexes));
-            if(this.store.indexes.length === 0) {
+            if (this.store.indexes.length === 0) {
                 console.log('cancella ristorante');
                 localStorage.removeItem('id');
             }
@@ -138,7 +138,8 @@ export default {
         </div>
         <!-- agiungere i v-for="(product, index) in store.indexes"> -->
         <div class="overflow-y-scroll items">
-            <div class="bg-light p-3 m-2 d-flex justify-content-between" v-for="(product, index) in store.indexes"  v-if="store.cartProducts">
+            <div class="bg-light p-3 m-2 d-flex justify-content-between" v-for="(product, index) in store.indexes"
+                v-if="store.cartProducts">
                 <!-- <div v-if="store.cartProducts !== []">{{ store.cartProducts[index].name }}</div> -->
                 <div class="d-flex">
                     <div>{{ getProductName(index) }}</div>
@@ -161,7 +162,9 @@ export default {
         </div>
 
         <div class="text-center m-2">
-            <a href="#" class="btn order-button">Ordina!</a>
+            <router-link :to="{ name: 'payment' }" class="btn order-button">
+                Ordina!
+            </router-link>
         </div>
     </div>
 </template>
@@ -172,6 +175,7 @@ export default {
 .cart-container {
     border: 2px solid $ms_primary_background;
 }
+
 .items {
     max-height: 400px;
 }
@@ -182,7 +186,7 @@ export default {
 }
 
 .cart-logo {
-    
+
     max-height: 5rem;
 }
 
