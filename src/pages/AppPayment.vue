@@ -125,7 +125,6 @@ export default {
             }
         },
         getProductQuantity(index) {
-            // console.log(JSON.parse(localStorage.getItem(this.store.indexes[index])));
             return JSON.parse(localStorage.getItem(this.store.indexes[index])).quantity;
         },
     },
