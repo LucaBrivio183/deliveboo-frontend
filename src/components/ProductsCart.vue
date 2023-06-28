@@ -161,7 +161,7 @@ export default {
 
                     <!-- delete product -->
                     <div class="delete-button" @click="deleteItem(index)">
-                        <i class="fa-solid fa-trash-can"></i>
+                        <i class="fa-regular fa-circle-xmark"></i>
                     </div>
                 </div>
 

@@ -52,13 +52,20 @@ export default {
 @use '../assets/scss/main.scss' as *;
 @use '../assets/scss/_partials/variables' as *;
 
-#nav {
-    background-color: $ms_secondary_color_light;
-    border-bottom: 2px solid $ms_primary_background;
-    color: $ms_secondary_color;
+header {
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 99;
+    #nav{
+        background-color: $ms_secondary_color_light;
+        border-bottom: 2px solid $ms_primary_background;
+        color: $ms_secondary_color;
 
-    a:hover {
-        color: $ms_primary_background;
+        a:hover {
+            color: $ms_primary_background;
+        }
     }
 }
 </style>
