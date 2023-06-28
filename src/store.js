@@ -14,7 +14,6 @@ const store = reactive({
     selectedTypologies: [],
     // Indexes of products in cart in local storage
     indexes: [],
-    //checked value for typologies
     cartProducts: [],
     finalPrice: 0,
     deliveryCost: 0,
