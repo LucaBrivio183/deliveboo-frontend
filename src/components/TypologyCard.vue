@@ -7,20 +7,22 @@ export default {
     data() {
         return {
             store,
-            isActive: false,
         }
     },
     props: {
         typology: Object,
     },
+    methods: {
+
+    }
 }
 </script>
 
 <template>
-    <div class="d-flex justify-content-center h-100" :class="{ 'clicked': this.isActive }" id="typology-card">
+    <div class="d-flex justify-content-center h-100" :class="{ 'clicked': store.selectedTypologies.includes(typology.id) }" id="typology-card">
         <input class="d-none" type="checkbox" :value="typology.id" :id="typology.name"
-            v-model="store.selectedTypologies" @change="this.isActive = !this.isActive">
-        <label class="d-flex flex-column align-items-center p-2" :for="typology.name" :name="typology.name">
+            v-model="store.selectedTypologies">
+        <label class="d-flex w-100 flex-column align-items-center p-2" :for="typology.name" :name="typology.name" >
             <img class="img-fluid rounded" src="https://picsum.photos/100/50" :alt="typology.name">
             <small>{{ typology.name }}</small>
         </label>
