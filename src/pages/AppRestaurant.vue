@@ -158,20 +158,6 @@ export default {
 <style lang="scss">
 @use '../assets/scss/_partials/variables' as *;
 
-// .ms-container {
-//     max-width: 90rem;
-//     // margin: 0 auto;
-
-//     .ms-row {
-//         // height: 100%;
-
-//         .ms-col {
-//             // height: 100%;
-//         }
-//     }
-// }
-
-
 .restaurant-image {
     max-height: 21.875rem;
     overflow-y: hidden;

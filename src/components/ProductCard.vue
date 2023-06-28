@@ -88,6 +88,7 @@ export default {
                 this.store.indexes = [];
                 //keep the restaurant in local storage
                 localStorage.setItem('id', this.restaurant.id);	
+                localStorage.setItem('activeRestaurantName', this.restaurant.name);
                 // If indexes already contains this.product.id, don't push it
                 // if(!this.store.indexes.includes(this.product.id)) {
                 //     this.store.indexes.push(this.product.id);
@@ -116,7 +117,12 @@ export default {
         checkCurrentRestaurantID(){
             let currentRestaurantID = localStorage.getItem('id');
             return currentRestaurantID;
+        },
+        getActiveRestaurantName(){	
+            let activeRestaurantName = localStorage.getItem('activeRestaurantName');
+            return activeRestaurantName;
         }
+
     },
     computed: {
         // Reset product quantity
@@ -187,16 +193,17 @@ export default {
     </div>
     <!-- /Modal for adding orders -->
     <!-- Modal for start new cart -->
-    <div class="modal fade" :id="'productNew' + product.id" tabindex="-1" aria-hidden="true">
+    <div class="modal modal-sm fade" :id="'productNew' + product.id" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">{{ product.name }}</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Creare un nuovo carrello?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-footer">
-                    <div>Hai già un carrello in un altro ristorante! Clicca procedi per creare un nuovo carrello!</div>
-                    <div class="btn btn-danger" @click=newCart()  data-bs-dismiss="modal">Procedi</div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <div>Questa azione svuoterà il carrello per <b>{{ getActiveRestaurantName() }}</b> e ne creerà uno nuovo per <b>{{ restaurant.name }}</b></div>
+                    <div class="btn btn-secondary" aria-label="Close" data-bs-dismiss="modal">Cancella</div>
+                    <div class="btn btn-danger" @click=newCart()  data-bs-dismiss="modal">Nuovo carrello</div>
                 </div>
             </div>
         </div>
