@@ -3,6 +3,8 @@
 import braintree from 'braintree-web';
 import store from '../store';
 import axios from 'axios';
+// Import beautiful alerts
+import swal from 'sweetalert';
 
 export default {
     name: 'AppPayment',
@@ -22,6 +24,7 @@ export default {
     },
     methods: {
         createOrder() {
+            // Object to send to backend
             const data = {
                 name: this.formData.name,
                 phone_number: this.formData.number,
@@ -47,9 +50,12 @@ export default {
                     this.nonce = payload.nonce;
                     this.createOrder();
                     
+                    // Clear the old cart
                     localStorage.clear();
                     this.store.indexes = [];
 
+                    // The user gets notified about the successful payment
+                    swal("Pagamento effettuato!", "Il tuo ordine è stato inviato al ristorante!", "success");
                     this.$router.push({ name: 'home' });
                 })
                     .catch(err => {
