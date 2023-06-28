@@ -94,6 +94,10 @@ export default {
             this.fillCartProducts();
             console.log(this.store.cartProducts);
         },
+        deleteCart() {
+            localStorage.setItem('cartproducts', []);
+            this.store.indexes = [];
+        },
         fillCartProducts() {
             this.store.cartProducts = [];
             for (let i = 0; i < this.store.indexes.length; i++) {
@@ -158,8 +162,9 @@ export default {
                 Ristorante {{ restaurant.name }}
             </div>
             -->
-        <div v-if="store.indexes.length !== 0" class="restaurant-name text-center py-3 fw-bold rounded">
-            Ristorante {{ getActiveRestaurantName() }}
+        <div v-if="store.indexes.length !== 0" class="restaurant-cart px-4 d-flex justify-content-between align-items-center">
+            <div class="text-center py-3 fw-bold rounded">Ristorante {{ getActiveRestaurantName() }}</div>
+            <div  @click="deleteCart()"><i class="fa-regular fa-circle-xmark delete-button me-3"></i></div>
         </div>
 
         <!-- agiungere i v-for="(product, index) in store.indexes"> -->
@@ -249,7 +254,7 @@ export default {
         }
     }
 
-    .restaurant-name {
+    .restaurant-cart {
         border-bottom: 2px solid $ms_primary_background;
     }
 

@@ -74,9 +74,14 @@ export default {
 
                 console.log(this.store.cartProducts);
 
-                // save active restaurant name and delivery cost in local storage
-                localStorage.setItem('activeRestaurantName', this.restaurant.name);
-                localStorage.setItem('activeRestaurantDeliverycost', this.restaurant.delivery_cost);
+                // store active restaurant name and delivery cost in local storage if not existing
+                if (!localStorage.getItem('activeRestaurantName')) {
+                    localStorage.setItem('activeRestaurantName', this.restaurant.name);
+                }
+                if (!localStorage.getItem('activeRestaurantDeliverycost')) {
+                    localStorage.setItem('activeRestaurantDeliverycost', this.restaurant.delivery_cost);
+                }
+                
             // }
         },
         newCart() {
