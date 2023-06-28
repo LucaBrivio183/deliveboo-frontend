@@ -37,7 +37,7 @@ export default {
             <div class="container py-3">
                 <div class="row">
                     <div v-for="typology in store.typologies"  class="col-2 align-self-stretch">
-                        <TypologyCard :typology="typology" @change="$emit('getRestaurants')" />
+                        <TypologyCard :typology="typology" @change="$emit('getRestaurants')"/>
                     </div>
                 </div>
             </div>

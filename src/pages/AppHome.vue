@@ -33,7 +33,7 @@ export default {
     },
     created() {
         this.getRestaurants(
-            console.log(this.store.restaurants)
+            console.log(this.store.selectedTypologies)
         );
     }
 }
@@ -44,7 +44,7 @@ export default {
         <!-- Jumbotron -->
         <JumbotronElement />
         <!-- Typologies List -->
-        <TypologiesList @getRestaurants="getRestaurants" />
+        <TypologiesList @getRestaurants="getRestaurants"/>
         <div class="container-md">
             <h1 class="my-3">Consegna nella zona:</h1>
             <div v-if="this.store.restaurants.length > 0" v-for="restaurant in store.restaurants">
