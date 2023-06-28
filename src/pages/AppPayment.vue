@@ -23,6 +23,34 @@ export default {
         }
     },
     methods: {
+        validateForm() {
+            // Validate name
+            if (!this.formData.name) {
+            this.error = 'Inserisci un nome';
+            return false;
+            }
+            
+            // Validate number
+            if (!this.formData.number) {
+                this.error = 'Inserisci un numero di telefono';
+                return false;
+            }
+            
+            // Validate address
+            if (!this.formData.address) {
+                this.error = 'Inserisci un indirizzo';
+                return false;
+            }
+
+            // Validate email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!this.formData.email || !emailRegex.test(this.formData.email)) {
+            this.error = 'Inserire un indirizzo email valido';
+            return false;
+            }
+            
+            return true;
+        },
         createOrder() {
             // Object to send to backend
             const data = {
@@ -41,6 +69,9 @@ export default {
         },
         payWithCreditCard() {
             if (this.hostedFieldInstance) {
+                if (!this.validateForm()) {
+                    return;
+                }
                 this.nonce = '';
                 this.error = '';
 
@@ -62,7 +93,7 @@ export default {
                         if (err.code === 'HOSTED_FIELDS_FIELDS_EMPTY') {
                             err.message = 'Tutti i dati sono obbligatori.';
                         } else if (err.code === 'HOSTED_FIELDS_FIELDS_INVALID') {
-                            err.message = 'Alcuni dati non sono corretti.';
+                            err.message = 'Alcuni dati di pagamento non sono corretti.';
                         }
                         this.error = err.message;
                     })
