@@ -24,21 +24,14 @@ export default {
         createOrder() {
             const data = {
                 name: this.formData.name,
-                number: this.formData.number,
+                phone_number: this.formData.number,
                 address: this.formData.address,
                 email: this.formData.email,
                 products: this.store.cartProducts,
-                restaurant: localStorage.getItem('id'),
-                totalPrice: localStorage.getItem('totalPrice'),
+                restaurant_id: localStorage.getItem('id'),
+                total_price: localStorage.getItem('totalPrice'),
             }
-            axios.post(`${this.store.apiBaseUrl}${this.store.apiUrls.orders}`, {
-                restaurant_id: 1,
-                name: 'Pippo',
-                email: 'pippo@pippo.it',
-                address: 'Pippolandia n2',
-                phone_number: '3336667890',
-                total_price: 199.05,
-            })
+            axios.post(`${this.store.apiBaseUrl}${this.store.apiUrls.orders}`, data)
                 .then((response) => {
                     console.log(response);
                 });
@@ -53,6 +46,11 @@ export default {
                     // Token needed by backend in order to create the payment
                     this.nonce = payload.nonce;
                     this.createOrder();
+                    
+                    localStorage.clear();
+                    this.store.indexes = [];
+
+                    this.$router.push({ name: 'home' });
                 })
                     .catch(err => {
                         if (err.code === 'HOSTED_FIELDS_FIELDS_EMPTY') {
@@ -78,19 +76,24 @@ export default {
             console.log(totalPrice);
             return (Number(totalPrice).toFixed(2));
         },
-        // fillCartProducts() {
-        //     this.store.cartProducts = [];
-        //     for (let i = 0; i < this.store.indexes.length; i++) {
-        //         this.store.cartProducts.push({
-        //             id: this.store.indexes[i],
-        //             name: this.getProductName(i),
-        //             quantity: this.getProductQuantity(i),
-        //             price: this.getProductPrice(i),
-        //         })
-        //     }
-        // },
+        fillCartProducts() {
+            this.store.cartProducts = [];
+            for (let i = 0; i < this.store.indexes.length; i++) {
+                this.store.cartProducts.push({
+                    id: this.store.indexes[i],
+                    // name: this.getProductName(i),
+                    quantity: this.getProductQuantity(i),
+                    // price: this.getProductPrice(i),
+                })
+            }
+        },
+        getProductQuantity(index) {
+            // console.log(JSON.parse(localStorage.getItem(this.store.indexes[index])));
+            return JSON.parse(localStorage.getItem(this.store.indexes[index])).quantity;
+        },
     },
     mounted() {
+        console.log(this.store.indexes);
         // Create a client instance
         braintree.client.create({
             // Personal token
@@ -125,15 +128,21 @@ export default {
             .catch(err => {
             });
     },
-    // created() {
-    //     this.fillCartProducts();
-    // }
+    created() {
+        this.fillCartProducts();
+    }
 }
 </script>
 
 <template>
     <div class="container py-1 my-4">
-        <div class="row">
+        <div class="text-center">
+            <router-link :to="{ name: 'home' }" class="btn btn-primary">
+                Torna alla home
+            </router-link>
+        </div>
+        
+        <div class="row mt-3">
             <div class="col-6 offset-3 rounded py-3">
                 <form>
                     <div class="fieldset">
@@ -159,7 +168,7 @@ export default {
                             <!-- Number -->
                             <div class="mb-3 col-12 col-lg-6">
                                 <label for="number" class="form-label">Numero di telefono</label>
-                                <input type="text" class="form-control" id="number" name="number" v-mode="formData.number" required />
+                                <input type="text" class="form-control" id="number" name="number" v-model="formData.number" required />
                             </div>
                             <!-- Address -->
                             <div class="mb-3 col-12 col-lg-6">
