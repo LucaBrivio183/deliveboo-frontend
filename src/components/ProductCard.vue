@@ -74,6 +74,9 @@ export default {
 
                 console.log(this.store.cartProducts);
 
+                // save active restaurant name and delivery cost in local storage
+                localStorage.setItem('activeRestaurantName', this.restaurant.name);
+                localStorage.setItem('activeRestaurantDeliverycost', this.restaurant.delivery_cost);
             // }
         },
         newCart() {
@@ -88,7 +91,9 @@ export default {
                 this.store.indexes = [];
                 //keep the restaurant in local storage
                 localStorage.setItem('id', this.restaurant.id);	
+                // updates active restaurant name and delivery cost in local storage
                 localStorage.setItem('activeRestaurantName', this.restaurant.name);
+                localStorage.setItem('activeRestaurantDeliverycost', this.restaurant.delivery_cost);
                 // If indexes already contains this.product.id, don't push it
                 // if(!this.store.indexes.includes(this.product.id)) {
                 //     this.store.indexes.push(this.product.id);
@@ -122,7 +127,6 @@ export default {
             let activeRestaurantName = localStorage.getItem('activeRestaurantName');
             return activeRestaurantName;
         }
-
     },
     computed: {
         // Reset product quantity
