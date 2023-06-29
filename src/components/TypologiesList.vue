@@ -34,9 +34,9 @@ export default {
 
 <template>
     <section>
-            <div class="container py-3">
-                <div class="row">
-                    <div v-for="typology in store.typologies"  class="col-2 align-self-stretch">
+            <div class="container-fluid py-3">
+                <div class="row flex-nowrap">
+                    <div v-for="typology in store.typologies" class="col-6 col-sm-4 col-md-3 col-lg-2">
                         <TypologyCard :typology="typology" @change="$emit('getRestaurants')"/>
                     </div>
                 </div>
@@ -49,5 +49,11 @@ export default {
 @use '../assets/scss/_partials/_variables' as *;
 section {
     background-color: $ms_secondary_color_light;
+    .container-fluid{
+        .row{
+            overflow-y: scroll;
+        }
+    }
 }
+
 </style>
