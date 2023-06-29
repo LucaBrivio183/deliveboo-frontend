@@ -74,14 +74,16 @@ export default {
 
                 console.log(this.store.cartProducts);
 
-                // store active restaurant name and delivery cost in local storage if not existing
+                // store active restaurant data in local storage if not existing
                 if (!localStorage.getItem('activeRestaurantName')) {
                     localStorage.setItem('activeRestaurantName', this.restaurant.name);
                 }
                 if (!localStorage.getItem('activeRestaurantDeliverycost')) {
                     localStorage.setItem('activeRestaurantDeliverycost', this.restaurant.delivery_cost);
                 }
-                
+                if (!localStorage.getItem('activeRestaurantMinPurchase')) {
+                    localStorage.setItem('activeRestaurantMinPurchase', this.restaurant.min_purchase);
+                }
             // }
         },
         newCart() {
@@ -96,9 +98,10 @@ export default {
                 this.store.indexes = [];
                 //keep the restaurant in local storage
                 localStorage.setItem('id', this.restaurant.id);	
-                // updates active restaurant name and delivery cost in local storage
+                // updates active restaurant data in local storage
                 localStorage.setItem('activeRestaurantName', this.restaurant.name);
                 localStorage.setItem('activeRestaurantDeliverycost', this.restaurant.delivery_cost);
+                localStorage.setItem('activeRestaurantMinPurchase', this.restaurant.min_purchase);
                 // If indexes already contains this.product.id, don't push it
                 // if(!this.store.indexes.includes(this.product.id)) {
                 //     this.store.indexes.push(this.product.id);

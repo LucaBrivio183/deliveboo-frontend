@@ -95,7 +95,7 @@ export default {
             console.log(this.store.cartProducts);
         },
         deleteCart() {
-            localStorage.setItem('cartproducts', []);
+            localStorage.clear()
             this.store.indexes = [];
         },
         fillCartProducts() {
@@ -131,6 +131,10 @@ export default {
         getActiveRestaurantDeliverycost() {
             let activeRestaurantDeliverycost = localStorage.getItem('activeRestaurantDeliverycost');
             return activeRestaurantDeliverycost;
+        },
+        getActiveRestaurantMinPurchase() {
+            let activeRestaurantMinPurchase = localStorage.getItem('activeRestaurantMinPurchase');
+            return activeRestaurantMinPurchase;
         }
     },
     computed: {
@@ -157,17 +161,11 @@ export default {
             </div>
         </div>
 
-        <!--
-            <div v-if="!getActiveRestaurantName()" class="restaurant-name text-center py-3 fw-bold rounded">
-                Ristorante {{ restaurant.name }}
-            </div>
-            -->
-        <div v-if="store.indexes.length !== 0" class="restaurant-cart px-4 d-flex justify-content-between align-items-center">
-            <div class="text-center py-3 fw-bold rounded">Ristorante {{ getActiveRestaurantName() }}</div>
-            <div  @click="deleteCart()"><i class="fa-regular fa-circle-xmark delete-button me-3"></i></div>
+        <div v-if="store.indexes.length !== 0" class="restaurant-cart rounded px-3 px-lg-4 d-flex justify-content-between align-items-center">
+            <div class="py-3 fw-bold rounded">Ristorante {{ getActiveRestaurantName() }}</div>
+            <div  @click="deleteCart()"><i class="fa-regular fa-circle-xmark delete-button"></i></div>
         </div>
 
-        <!-- agiungere i v-for="(product, index) in store.indexes"> -->
         <div class="overflow-y-scroll items">
             <div class="bg-light p-3 m-2" v-for="(   product, index   ) in    store.indexes   " v-if="store.cartProducts">
                 <!-- <div v-if="store.cartProducts !== []">{{ store.cartProducts[index].name }}</div> -->
@@ -210,7 +208,7 @@ export default {
             <div v-if="!getActiveRestaurantDeliverycost()" class="bg-light p-3 m-2">
                 Consegna: € {{ restaurant.delivery_cost }}
             </div>
-            -->
+        -->
         <div  v-if="store.indexes.length !== 0">
             <!-- delivery cost -->
             <div class="bg-light p-3 m-2">
@@ -223,9 +221,12 @@ export default {
             </div>
             <!-- order -->
             <div class="text-center m-2">
-                <router-link :to="{ name: 'payment' }" class="btn order-button">
+                <router-link :to="{ name: 'payment' }" v-if="getTotalPrice() - getActiveRestaurantDeliverycost() >= getActiveRestaurantMinPurchase()" class="btn order-button">
                     Ordina!
                 </router-link>
+                <div v-else class="btn bg-light border-secondary text-secondary">
+                    Ordina!
+                </div>
             </div>
         </div>
         <!-- empty cart -->
@@ -242,7 +243,7 @@ export default {
     border: 2px solid $ms_primary_background;
 
     .items {
-        max-height: 400px;
+        max-height: 420px;
     }
 
     .cart-top {

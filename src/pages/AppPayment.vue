@@ -23,19 +23,42 @@ export default {
         }
     },
     methods: {
+        getIndexes() {
+            if (JSON.parse(localStorage.getItem('indexes')) != null) {
+                this.store.indexes = JSON.parse(localStorage.getItem('indexes'));
+            }
+        },
+        // Get product name from local storage
+        getProductName(index) {
+            // console.log(JSON.parse(localStorage.getItem(this.store.indexes[index])));
+            return JSON.parse(localStorage.getItem(this.store.indexes[index])).productName;
+        },
+        // Get product quantity from local storage
+        getProductQuantity(index) {
+            // console.log(JSON.parse(localStorage.getItem(this.store.indexes[index])));
+            return JSON.parse(localStorage.getItem(this.store.indexes[index])).quantity;
+        },
+        // Get product price from local storage
+        getProductPrice(index) {
+            // console.log(JSON.parse(localStorage.getItem(this.store.indexes[index])));
+            return JSON.parse(localStorage.getItem(this.store.indexes[index])).price;
+        },
+        getRestaurantId() {
+            return Number(localStorage.getItem('id'));
+        },
         validateForm() {
             // Validate name
             if (!this.formData.name) {
-            this.error = 'Inserisci un nome';
-            return false;
+                this.error = 'Inserisci un nome';
+                return false;
             }
-            
+
             // Validate number
             if (!this.formData.number) {
                 this.error = 'Inserisci un numero di telefono';
                 return false;
             }
-            
+
             // Validate address
             if (!this.formData.address) {
                 this.error = 'Inserisci un indirizzo';
@@ -45,10 +68,10 @@ export default {
             // Validate email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!this.formData.email || !emailRegex.test(this.formData.email)) {
-            this.error = 'Inserire un indirizzo email valido';
-            return false;
+                this.error = 'Inserire un indirizzo email valido';
+                return false;
             }
-            
+
             return true;
         },
         createOrder() {
@@ -80,7 +103,7 @@ export default {
                     // Token needed by backend in order to create the payment
                     this.nonce = payload.nonce;
                     this.createOrder();
-                    
+
                     // Clear the old cart
                     localStorage.clear();
                     this.store.indexes = [];
@@ -99,20 +122,6 @@ export default {
                     })
             }
         },
-        getTotalPrice() {
-            /*
-            let finalPrice = 0;
-            for (let i = 0; i < this.store.cartProducts.length; i++) {
-                let productprice = this.store.cartProducts[i].price * this.store.cartProducts[i].quantity;
-                finalPrice = finalPrice + Number(productprice);
-            }
-            console.log(finalPrice);
-            */
-            let totalPrice = 0
-            totalPrice = localStorage.getItem('totalPrice');
-            console.log(totalPrice);
-            return (Number(totalPrice).toFixed(2));
-        },
         fillCartProducts() {
             this.store.cartProducts = [];
             for (let i = 0; i < this.store.indexes.length; i++) {
@@ -126,6 +135,18 @@ export default {
         },
         getProductQuantity(index) {
             return JSON.parse(localStorage.getItem(this.store.indexes[index])).quantity;
+        },
+        getTotalPrice() {
+            const totalPrice = localStorage.getItem('totalPrice');
+            return (Number(totalPrice).toFixed(2));
+        },
+        getActiveRestaurantName() {
+            let activeRestaurantName = localStorage.getItem('activeRestaurantName');
+            return activeRestaurantName;
+        },
+        getActiveRestaurantDeliverycost() {
+            let activeRestaurantDeliverycost = localStorage.getItem('activeRestaurantDeliverycost');
+            return activeRestaurantDeliverycost;
         },
     },
     mounted() {
@@ -172,14 +193,57 @@ export default {
 
 <template>
     <div class="container py-1 my-4">
-        <div class="text-center">
-            <router-link :to="{ name: 'home' }" class="btn btn-primary">
-                Torna alla home
-            </router-link>
-        </div>
-        
-        <div class="row mt-3">
-            <div class="col-6 offset-3 rounded py-3">
+        <div class="row mt-3 align-items-start">
+
+            <!-- Order-summary -->
+            <div class="order-summary col-10 col-md-6 col-lg-4 bg-light border">
+                <div class="cart-container rounded">
+                    <!-- Cart top -->
+                    <div class="cart-top p-3 text-center">
+                        <h5>Riepilogo dell'ordine</h5>
+                        <h5 class="pt-2 fw-bold">{{ getActiveRestaurantName() }}</h5>
+                    </div>
+
+                    <!-- Items -->
+                    <div class="overflow-y-scroll items mb-3 border">
+                        <!-- Product -->
+                        <div class="bg-light p-3 m-2 bg-white" v-for="(   product, index   ) in    store.indexes   "
+                            v-if="store.cartProducts">
+                            <div class=" d-flex justify-content-between">
+                                <!-- Product name -->
+                                <div class="d-flex">
+                                    <div>{{ getProductName(index) }}</div>
+                                </div>
+
+                            </div>
+                            <div class="mt-3 d-flex justify-content-between">
+                                <!-- Product quantity -->
+                                <div class="mx-2"><small>Qtà</small> {{ getProductQuantity(index) }}</div>
+                                <!-- Product price -->
+                                <div>€ {{ Number(getProductPrice(index)).toFixed(2) }}</div>
+                            </div>
+                        </div>
+                        <!-- /Product -->
+                    </div>
+                    <!-- /Items -->
+
+                    <div v-if="store.indexes.length !== 0">
+                        <!-- Delivery cost -->
+                        <div class="bg-light p-2 m-2">
+                            Consegna: € {{ getActiveRestaurantDeliverycost() }}
+                        </div>
+
+                        <!-- Final price -->
+                        <div class="bg-light p-2 m-2 fw-bold">
+                            Totale: € {{ getTotalPrice() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Order-summary -->
+
+            <!-- Payment -->
+            <div class="col-10 col-md-8 col-lg-6 p-4 border">
                 <form>
                     <div class="fieldset">
                         <legend>Informazioni di pagamento</legend>
@@ -189,63 +253,119 @@ export default {
                         <div class="alert alert-danger" v-if="error">
                             {{ error }}
                         </div>
-                        <div class="mb-3">
-                            <div class="mb-3 mt-3">
-                                <span class="fw-bold">Importo totale: € {{ getTotalPrice() }}</span>
-                            </div>
+                        <div class="bg-light rounded p-3">
+                            <!-- Restaurant name -->
+                            <div class="">Pagamento a favore di {{ getActiveRestaurantName() }}</div>
+                            <!-- Final price -->
+                            <div class="fw-bold mt-2">Importo totale: € {{ getTotalPrice() }}</div>
                         </div>
                         <hr>
                         <div class="row">
                             <!-- Name -->
                             <div class="mb-3 col-12 col-lg-6">
                                 <label for="name" class="form-label">Nome e Cognome</label>
-                                <input type="text" class="form-control" id="name" name="name" v-model="formData.name" required />
+                                <input type="text" class="form-control" id="name" name="name" v-model="formData.name"
+                                    required />
                             </div>
                             <!-- Number -->
                             <div class="mb-3 col-12 col-lg-6">
                                 <label for="number" class="form-label">Numero di telefono</label>
-                                <input type="text" class="form-control" id="number" name="number" v-model="formData.number" required />
+                                <input type="text" class="form-control" id="number" name="number" v-model="formData.number"
+                                    required />
                             </div>
                             <!-- Address -->
                             <div class="mb-3 col-12 col-lg-6">
                                 <label for="address" class="form-label">Indirizzo</label>
-                                <input type="text" class="form-control" id="address" name="address" v-model="formData.address" required />
+                                <input type="text" class="form-control" id="address" name="address"
+                                    v-model="formData.address" required />
                             </div>
                             <!-- Email -->
                             <div class="mb-3 col-12 col-lg-6">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" v-model="formData.email" required />
+                                <input type="email" class="form-control" id="email" name="email" v-model="formData.email"
+                                    required />
                             </div>
+                            <!-- Credit card -->
                             <div class="mb-3">
                                 <label for="creditCardNumber" class="form-label">Carta di credito</label>
-                                <div class="form-control" id="creditCardNumber"></div>
+                                <div class="credit-card d-flex align-items-center justify-content-start form-control"
+                                    id="creditCardNumber" type="text"></div>
                             </div>
                             <div class="mb-3">
                                 <div class="row">
+                                    <!-- Expire Date -->
                                     <div class="col-6">
                                         <label for="expireDate" class="form-label">Data di scadenza</label>
-                                        <div class="form-control" id="expireDate"></div>
+                                        <div class="expire-date form-control d-flex align-items-center justify-content-start"
+                                            id="expireDate"></div>
                                     </div>
+                                    <!-- CVV -->
                                     <div class="col-6">
                                         <label for="cvv" class="form-label">CVV</label>
-                                        <div class="form-control" id="cvv"></div>
+                                        <div class="cvv form-control d-flex align-items-center justify-content-start"
+                                            id="cvv"></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary" @click.prevent="payWithCreditCard()">Invia il
-                            pagamento</button>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary payment-button border-0"
+                                @click.prevent="payWithCreditCard()">Invia il
+                                pagamento</button>
+                        </div>
                     </div>
                 </form>
             </div>
+            <!-- /Payment -->
+
+            <!-- Back button -->
+            <div class="col">
+                <div class="text-center">
+                    <router-link :to="{ name: 'restaurant' }" class="btn btn-primary back-button text-dark border-0">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Torna al carrello
+                    </router-link>
+                </div>
+            </div>
+            <!-- /Back button -->
         </div>
+
+
     </div>
 </template>
 
 <style lang="scss" scoped>
 @use '../assets/scss/_partials/variables' as *;
 
-.col-6 {
-    background-color: $ms_secondary_color_light;
+.items {
+    max-height: 20rem;
+}
+
+.payment-button {
+    background-color: $ms_secondary_color_medium;
+
+    &:hover {
+        background-color: $ms_secondary_color;
+    }
+}
+
+.back-button {
+    background-color: $ms_primary_color_light;
+
+    &:hover {
+        background-color: $ms_primary_color_ultralight;
+    }
+}
+
+.credit-card,
+.expire-date,
+.cvv {
+    max-height: 2.5rem;
+}
+
+.order-summary {
+    position: sticky;
+    top: 0;
+    left: 0;
 }
 </style>
