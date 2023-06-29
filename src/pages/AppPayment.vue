@@ -115,6 +115,9 @@ export default {
         },
         fillCartProducts() {
             this.store.cartProducts = [];
+            if (JSON.parse(localStorage.getItem('indexes')) != null) {
+                this.store.indexes = JSON.parse(localStorage.getItem('indexes'));
+            }
             for (let i = 0; i < this.store.indexes.length; i++) {
                 this.store.cartProducts.push({
                     id: this.store.indexes[i],
