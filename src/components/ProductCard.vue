@@ -158,10 +158,10 @@ export default {
     <!-- Product card with modal trigger // productQuantity gets a reset after each card click -->
     <div class="card h-100" :class="{ 'inTheBasket': this.store.indexes.includes(product.id) }" @click="resetProductQuantity">
         <!-- card img -->
-        <img src="https://picsum.photos/300/200" class="card-img-top" :alt="product.name">
+        <img :src="product.image" class="card-img-top" :alt="product.name">
         <!-- /card img -->
         <!-- col details -->
-        <div class="card-body d-flex flex-column justify-content-between">
+        <div class="card-body d-flex flex-column justify-content-end">
             <h5 class="card-title">{{ product.name }}</h5>
             <p :class="{ 'text-decoration-line-through': product.discount !== 0 }" class="card-text">€ {{ product.price }}</p>
             <p v-if="(product.discount !== 0)" class="card-text">€ {{ product.discount }}</p>
@@ -182,7 +182,7 @@ export default {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="https://picsum.photos/300/200" class="card-img-top" :alt="product.name">
+                    <img :src="product.image" class="card-img-top" :alt="product.name">
                     <div class="card-text mt-2" v-if="product.description">{{ product.description }}</div>
                     <div class="card-text mt-2" v-if="product.ingredients"><strong>Ingredienti:</strong> {{
                         product.ingredients }}</div>
@@ -228,6 +228,10 @@ export default {
 
 .card {
     border: 2px solid #e7e7e7;
+    .card-img-top {
+        object-fit: cover;
+        height: 70%;
+    }
 
     &:hover{
         -webkit-box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4); 
@@ -235,11 +239,11 @@ export default {
     }
     .card-body{
         h5{
-            font-size: 14px;
+            font-size: 20px;
             font-weight: bold;
         }
         p{
-            font-size: 12px;
+            font-size: 16px;
         }
     }
     .badge {
@@ -257,9 +261,43 @@ export default {
         }
     }
 }
-
+.modal {
+    .card-img-top {
+        aspect-ratio: 3/2;
+        object-fit: contain;
+    }
+}
 .inTheBasket {
     border-bottom: 5px solid $ms_secondary_color !important;
+}
+
+@media only screen and (width>= 576px) {
+    .card{
+        .card-img-top{
+            height: 60%;
+        }
+    .card-body{
+
+            h5{
+                font-size: 12px;
+            }
+            p{
+                font-size: 12px;
+            }
+        }   
+    }
+}
+
+@media only screen and (width>= 992px) {
+    .card-body{
+        h5{
+            font-size: 15px;
+        }
+        p{
+            font-size: 14px;
+        }
+    }
+    
 }
 
 </style>
