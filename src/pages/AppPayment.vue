@@ -6,8 +6,13 @@ import axios from 'axios';
 // Import beautiful alerts
 import swal from 'sweetalert';
 
+import CartSummaryElement from '../components/CartSummaryElement.vue';
+
 export default {
     name: 'AppPayment',
+    components: {
+        CartSummaryElement
+    },
     data() {
         return {
             hostedFieldInstance: false,
@@ -32,11 +37,6 @@ export default {
         getProductName(index) {
             // console.log(JSON.parse(localStorage.getItem(this.store.indexes[index])));
             return JSON.parse(localStorage.getItem(this.store.indexes[index])).productName;
-        },
-        // Get product quantity from local storage
-        getProductQuantity(index) {
-            // console.log(JSON.parse(localStorage.getItem(this.store.indexes[index])));
-            return JSON.parse(localStorage.getItem(this.store.indexes[index])).quantity;
         },
         // Get product price from local storage
         getProductPrice(index) {
@@ -196,57 +196,12 @@ export default {
 
 <template>
     <div class="container py-1 my-4">
-        <div class="row mt-3 align-items-start">
+        <div class="row mt-3 align-items-start justify-content-center">
 
-            <!-- Order-summary -->
-            <div class="order-summary col-10 col-md-6 col-lg-4 bg-light border">
-                <div class="cart-container rounded">
-                    <!-- Cart top -->
-                    <div class="cart-top p-3 text-center">
-                        <h5>Riepilogo dell'ordine</h5>
-                        <h5 class="pt-2 fw-bold">{{ getActiveRestaurantName() }}</h5>
-                    </div>
-
-                    <!-- Items -->
-                    <div class="overflow-y-scroll items mb-3 border">
-                        <!-- Product -->
-                        <div class="bg-light p-3 m-2 bg-white" v-for="(   product, index   ) in    store.indexes   "
-                            v-if="store.cartProducts">
-                            <div class=" d-flex justify-content-between">
-                                <!-- Product name -->
-                                <div class="d-flex">
-                                    <div>{{ getProductName(index) }}</div>
-                                </div>
-
-                            </div>
-                            <div class="mt-3 d-flex justify-content-between">
-                                <!-- Product quantity -->
-                                <div class="mx-2"><small>Qtà</small> {{ getProductQuantity(index) }}</div>
-                                <!-- Product price -->
-                                <div>€ {{ Number(getProductPrice(index)).toFixed(2) }}</div>
-                            </div>
-                        </div>
-                        <!-- /Product -->
-                    </div>
-                    <!-- /Items -->
-
-                    <div v-if="store.indexes.length !== 0">
-                        <!-- Delivery cost -->
-                        <div class="bg-light p-2 m-2">
-                            Consegna: € {{ getActiveRestaurantDeliverycost() }}
-                        </div>
-
-                        <!-- Final price -->
-                        <div class="bg-light p-2 m-2 fw-bold">
-                            Totale: € {{ getTotalPrice() }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- /Order-summary -->
+            <CartSummaryElement  class="d-none d-lg-block" />
 
             <!-- Payment -->
-            <div class="col-10 col-md-8 col-lg-6 p-4 border">
+            <div class="col-10 col-md-8 col-lg-6 p-4 border order-1 order-md-0">
                 <form>
                     <div class="fieldset">
                         <legend>Informazioni di pagamento</legend>
@@ -321,16 +276,27 @@ export default {
             </div>
             <!-- /Payment -->
 
-            <!-- Back button -->
-            <div class="col">
-                <div class="text-center">
-                    <router-link :to="{ name: 'restaurant' }" class="btn btn-primary back-button text-dark border-0">
-                        <i class="fa-solid fa-arrow-left"></i>
-                        Torna al carrello
-                    </router-link>
+            <!-- Buttons -->
+            <div class="col d-flex flex-md-column my-md-0 mb-2 justify-content-center order-0 order-md-0">
+                <router-link :to="{ name: 'restaurant' }" class="btn btn-primary back-button text-dark border-0 mb-3 me-3">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Torna al carrello
+                </router-link>
+
+                <button class="summary-button btn btn-primary d-lg-none mb-3 me-3 border-0 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
+                    aria-controls="offcanvasRight">Riepilogo ordine</button>
+            </div>
+            <!-- /Buttons -->
+
+            <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <CartSummaryElement />
                 </div>
             </div>
-            <!-- /Back button -->
         </div>
 
 
@@ -357,6 +323,14 @@ export default {
 
     &:hover {
         background-color: $ms_primary_color_ultralight;
+    }
+}
+
+.summary-button {
+    background-color: $ms_secondary_color_light;
+
+    &:hover {
+        background-color: $ms_secondary_color_medium;
     }
 }
 
