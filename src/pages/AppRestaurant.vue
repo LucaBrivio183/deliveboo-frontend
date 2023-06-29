@@ -136,21 +136,43 @@ export default {
 
         <h1>Menù</h1>
         <div class="row">
-            <div class="col-10 mx-auto col-md-8">
+            <div class="col-10 col-md-8">
                 <div class="row">
-            <!-- Recall ProductCard component and cycle it for every product -->
-                    <div class="col-sm-4 p-2" v-if="products" v-for="product in products">
-                        <ProductCard :product="product" :restaurant="restaurant"/>
+
+                    <!-- Recall ProductCard component and cycle it for every product -->
+                    <div class="col-md-4 p-2" v-if="products" v-for="product in products">
+                        <ProductCard :product="product" :restaurant="restaurant" />
+
                     </div>
                 </div>
             </div>
             <!-- Cart -->
-            <div class="col-10 mx-auto col-md-4">
+            <div class="d-none d-md-block col-10 col-md-4 mt-2">
                 <div class="row">
-                    <ProductsCart :restaurant="restaurant"/>
+                    <ProductsCart :restaurant="restaurant" />
                 </div>
-            </div> 
-        </div>      
+            </div>
+            <!-- Cart -->
+            <div class="d-md-none col-1 col-md-4">
+                <button id="cart-button" class="btn mt-2" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <img src="/images/cart.png" alt="cart" class="cart-logo mb-1">
+                    <div><i class="fa-solid fa-arrow-right-long"></i></div>
+                </button>
+
+                <div class="row">
+                    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                        aria-labelledby="offcanvasRightLabel">
+                        <div class="offcanvas-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            <ProductsCart :restaurant="restaurant" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- /Restaurant menu -->
 </template>
@@ -188,5 +210,13 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
     visibility: hidden;
+}
+
+#cart-button {
+    background-color: $ms_primary_color;
+
+    .cart-logo {
+        max-width: 20px;
+    }
 }
 </style>
