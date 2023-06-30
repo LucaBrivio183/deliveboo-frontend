@@ -22,13 +22,16 @@ export default {
     },
     methods: {
         getRestaurants() {
+            store.loading = true;
             axios.get(this.store.apiBaseUrl + this.store.apiUrls.homepage,
                 {
                     params: this.store.selectedTypologies
                 })
                 .then((response) => {
                     this.store.restaurants = response.data.results.data;
-                })
+                }).finally(() => {
+                    store.loading = false; // Hide the loader
+                });
         },
     },
     created() {
