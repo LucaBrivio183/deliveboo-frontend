@@ -27,10 +27,11 @@ export default {
 </script>
 
 <template>
+
+  <AppHeader />
   <PageLoader v-if="store.loading"/>
-  <AppHeader v-if="!['payment'].includes($route.name)" />
   <router-view :key="$route.fullPath" ></router-view>
-  <AppFooter v-if="!['payment'].includes($route.name)" />
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped>

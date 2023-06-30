@@ -103,7 +103,7 @@ export default {
                 </div>
             </div>
 
-            <router-link :to="{ name: 'restaurant' }" class="btn btn-primary back-button text-dark border-0 mb-3 me-3">
+            <router-link :to="{ name: 'restaurant' }" class="btn btn-primary back-button text-dark border-0 mb-3 me-3 ms-3 mt-3">
                 <i class="fa-solid fa-arrow-left"></i>
                 Torna al carrello
             </router-link>
