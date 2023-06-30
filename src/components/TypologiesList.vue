@@ -34,8 +34,8 @@ export default {
 
 <template>
     <section>
-            <div class="container-fluid py-3">
-                <div class="row flex-nowrap">
+            <div class="container-fluid py-2">
+                <div class="row flex-nowrap py-2">
                     <div v-for="typology in store.typologies" class="col-6 col-sm-4 col-md-3 col-lg-2">
                         <TypologyCard :typology="typology" @change="$emit('getRestaurants')"/>
                     </div>
@@ -52,8 +52,31 @@ section {
     .container-fluid{
         .row{
             overflow-y: scroll;
+            &::-webkit-scrollbar {
+                background-color: transparent;
+                visibility: hidden;
+                width: 0;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: transparent;
+                visibility: hidden;
+                width: 0;
+            }
+            &::-webkit-scrollbar-track {
+                background: rgba(0, 0, 0, 0);
+            }
         }
+        .row:hover {
+            &::-webkit-scrollbar {
+                visibility: visible;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: $ms_primary_color_light;
+                visibility: visible;
+            }
+        }       
     }
+
 }
 
 </style>

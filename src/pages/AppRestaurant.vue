@@ -140,7 +140,7 @@ export default {
                 <div class="row">
 
                     <!-- Recall ProductCard component and cycle it for every product -->
-                    <div class="col-md-4 p-2" v-if="products" v-for="product in products">
+                    <div class="col-12 col-sm-6 col-md-4 p-2" v-if="products" v-for="product in products">
                         <ProductCard :product="product" :restaurant="restaurant" />
 
                     </div>

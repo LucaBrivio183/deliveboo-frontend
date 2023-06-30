@@ -17,7 +17,7 @@ export default {
             <h3 class="mb-3">{{ restaurant.name }}</h3>
             <div class="row flex-no-wrap">
                 <div class="col-12 col-md-4 p-1">
-                    <small class="me-2 badge text-bg-info" v-for="typology in restaurant.typologies">{{ typology.name }}</small>
+                    <small class="me-2 badge" v-for="typology in restaurant.typologies">{{ typology.name }}</small>
                 </div>
                 <div class="col-12 col-md-8 p-2">
                     <div class="d-flex align-items-center gap-2">
@@ -40,11 +40,18 @@ export default {
 
 <style lang="scss" scoped>
 @use '../assets/scss/main.scss' as *;
-
+@use '../assets/scss/_partials/_variables' as *;
 .restaurant-card {
     color: black;
     text-decoration: none;
 
+    .badge{
+        background-color: $ms_primary_color;
+        color: black !important;
+        &:nth-child(even) {
+            background-color: $ms_secondary_color_light;
+        }
+    }
     .img-container {
 
         .restaurant-img {
