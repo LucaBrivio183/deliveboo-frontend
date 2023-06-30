@@ -17,6 +17,7 @@ const store = reactive({
     cartProducts: [],
     finalPrice: 0,
     deliveryCost: 0,
+    loading: true,
 })
 
 export default store;
