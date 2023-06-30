@@ -278,10 +278,6 @@ export default {
 
             <!-- Buttons -->
             <div class="col d-flex flex-md-column my-md-0 mb-2 justify-content-center order-0 order-md-0">
-                <router-link :to="{ name: 'restaurant' }" class="btn btn-primary back-button text-dark border-0 mb-3 me-3">
-                    <i class="fa-solid fa-arrow-left"></i>
-                    Torna al carrello
-                </router-link>
 
                 <button class="summary-button btn btn-primary d-lg-none mb-3 me-3 border-0 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
                     aria-controls="offcanvasRight">Riepilogo ordine</button>
@@ -315,14 +311,6 @@ export default {
 
     &:hover {
         background-color: $ms_secondary_color;
-    }
-}
-
-.back-button {
-    background-color: $ms_primary_color_light;
-
-    &:hover {
-        background-color: $ms_primary_color_ultralight;
     }
 }
 
