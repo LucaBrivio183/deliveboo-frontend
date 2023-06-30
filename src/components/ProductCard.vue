@@ -166,7 +166,7 @@ export default {
             <p :class="{ 'text-decoration-line-through': product.discount !== 0 }" class="card-text">€ {{ product.price }}</p>
             <p v-if="(product.discount !== 0)" class="card-text">€ {{ product.discount }}</p>
             <div class="">
-                <a href="#" class="btn btn-outline-success w-100" data-bs-toggle="modal"
+                <a href="#" class="btn card-btn w-100" data-bs-toggle="modal"
                 :data-bs-target="(checkCurrentRestaurantID()==restaurant.id || checkCurrentRestaurantID()==undefined) ? '#product' + product.id : '#productNew' + product.id"  @click.stop="$emit('addQuantity')">+</a>
             </div>
         </div>
@@ -227,15 +227,15 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 .card {
-    border: 2px solid #e7e7e7;
+    border: 2px solid $ms_secondary_color;
     .card-img-top {
         object-fit: cover;
         height: 70%;
     }
 
     &:hover{
-        -webkit-box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4); 
-        box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4);
+        -webkit-box-shadow: 6px 15px 25px 6px rgba(32,77,72,0.4); 
+        box-shadow: 6px 15px 25px 6px rgba(32,77,72,0.4);
     }
     .card-body{
         h5{
@@ -244,6 +244,14 @@ export default {
         }
         p{
             font-size: 16px;
+        }
+        .card-btn{
+            border: 2px solid $ms_secondary_color;
+            color: $ms_secondary_color;
+            &:hover{
+                background-color: $ms_secondary_color;
+                color: white;
+            }
         }
     }
     .badge {
@@ -271,7 +279,7 @@ export default {
     border-bottom: 5px solid $ms_secondary_color !important;
 }
 
-@media only screen and (width>= 576px) {
+@media only screen and (width>= 768px) {
     .card{
         .card-img-top{
             height: 60%;
@@ -279,7 +287,7 @@ export default {
     .card-body{
 
             h5{
-                font-size: 12px;
+                font-size: 16px;
             }
             p{
                 font-size: 12px;
@@ -288,16 +296,5 @@ export default {
     }
 }
 
-@media only screen and (width>= 992px) {
-    .card-body{
-        h5{
-            font-size: 15px;
-        }
-        p{
-            font-size: 14px;
-        }
-    }
-    
-}
 
 </style>

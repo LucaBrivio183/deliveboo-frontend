@@ -54,7 +54,7 @@ export default {
     }
 }
 .clicked{
-    border: 2px solid $ms_secondary_color !important; // background and dark text
+    border: 2px solid $ms_primary_color !important; // background and dark text
 }
 
 @media only screen and (width>= 576px) {
