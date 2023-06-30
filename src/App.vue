@@ -25,9 +25,9 @@ export default {
 </script>
 
 <template>
-  <AppHeader v-if="!['payment'].includes($route.name)" />
+  <AppHeader />
   <router-view :key="$route.fullPath" ></router-view>
-  <AppFooter v-if="!['payment'].includes($route.name)" />
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped>

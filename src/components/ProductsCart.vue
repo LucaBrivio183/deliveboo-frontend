@@ -139,7 +139,7 @@ export default {
         },
         missingAmount() {
             const missingAmount = this.getActiveRestaurantMinPurchase() - this.getTotalPrice() + Number(this.getActiveRestaurantDeliverycost());
-            return missingAmount;
+            return (missingAmount).toFixed(2);
         }
     },
     computed: {
