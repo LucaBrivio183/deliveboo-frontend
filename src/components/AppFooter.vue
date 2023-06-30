@@ -14,8 +14,9 @@ export default {
 <template>
     <footer class="mt-3">
         <!-- nav up -->
+        
         <div v-if="!['payment'].includes($route.name)" id="nav" class="p-3 navbar navbar-expand-md navbar-light shadow-sm bg-dark">
-            <div class="container">
+            <div class="container px-5">
                 <div class="row gy-5">
                     <div class="col-lg-4">
                         <div class="social-links">
@@ -77,6 +78,8 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 footer {
+    
+        font-size: small;
 
         #nav {
         border-top: 2px solid $ms_primary_color;
