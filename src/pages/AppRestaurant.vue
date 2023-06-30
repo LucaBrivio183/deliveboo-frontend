@@ -112,6 +112,11 @@ export default {
 </script>
 
 <template>
+    <!-- back button-->
+    <router-link :to="{ name: 'home' }" class="nav-link ms-5">
+        <button type="button" class="btn btn-secondary m-2 me-5 position-absolute end-0">Torna ai Ristoranti</button>
+    </router-link>
+    <!-- /back button -->
     <!-- restaurant image -->
     <div class="restaurant-image">
         <img :src="restaurant.image" :alt="restaurant.name" class="restaurant-image w-100">
