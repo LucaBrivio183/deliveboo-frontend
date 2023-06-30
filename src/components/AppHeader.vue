@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-    <header>
+    <header :id="!['payment'].includes($route.name) ? 'header-sticky' : ''">
         <!-- nav -->
         <nav id="nav" class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
@@ -27,13 +27,17 @@ export default {
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item mx-1">
                             <!-- home -->
-                            <router-link :to="{ name: 'home' }" class="nav-link">
+                            <router-link :to="{ name: 'home' }" class="nav-link d-flex">
+                                <div class="home-img-container position-relative">
+                                    <img id="img-home" class="logo-green position-absolute" src="/images/logo-green.png" alt="logo">
+                                    <img id="img-home-azure" class="logo-azure position-absolute" src="/images/logo-azure.png" alt="logo">
+                                </div>
                                 Home
                             </router-link>
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul v-if="!['payment'].includes($route.name)" class="navbar-nav ml-auto">
                         <!-- authentication -->
                         <li class="nav-item">
                             <a href="http://127.0.0.1:8000/" class="nav-link">
@@ -53,19 +57,51 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 header {
+
+    #nav {
+        background-color: $ms_secondary_color_light;
+        border-bottom: 2px solid $ms_primary_background;
+        color: $ms_secondary_color;
+
+        #img-home {
+            max-height: 1.75rem;
+        }
+
+        #img-home-azure {
+            max-height: 1.75rem;
+        }
+
+        a:hover {
+            color: $ms_primary_background;
+        }
+    }
+}
+
+#header-sticky {
     position: sticky;
     top: 0;
     right: 0;
     left: 0;
     z-index: 99;
-    #nav{
-        background-color: $ms_secondary_color_light;
-        border-bottom: 2px solid $ms_primary_background;
-        color: $ms_secondary_color;
+}
 
-        a:hover {
-            color: $ms_primary_background;
-        }
+.home-img-container {
+    width: 1.25rem;
+}
+.logo-azure {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.nav-link {
+    &:hover .logo-green {
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    &:hover .logo-azure {
+        opacity: 1;
+        transition: opacity 0.2s;
     }
 }
 </style>
