@@ -169,7 +169,9 @@ export default {
         <div v-if="store.indexes.length !== 0"
             class="restaurant-cart rounded px-3 px-lg-4 d-flex justify-content-between align-items-center">
             <div class="py-3 fw-bold rounded">Ristorante {{ getActiveRestaurantName() }}</div>
+
             <div @click="deleteCart()"><i class="fa-regular fa-circle-xmark delete-button"></i></div>
+
         </div>
 
         <div class="overflow-y-scroll items">
@@ -284,4 +286,17 @@ export default {
             color: $ms_secondary_color;
         }
     }
-}</style>
+    
+    .trash {
+        color: #c00;
+        border: .0625rem solid #c00;
+        padding: .5rem;
+        border-radius: 6px;
+
+        &:hover {
+            color: #fff;
+            background-color: #c00;
+        }
+    }
+}
+</style>

@@ -45,9 +45,9 @@ export default {
         <JumbotronElement />
         <!-- Typologies List -->
         <TypologiesList @getRestaurants="getRestaurants"/>
-        <div class="container-md">
+        <div class="container">
             <h1 class="my-3">Consegna nella zona:</h1>
-            <div v-if="this.store.restaurants.length > 0" v-for="restaurant in store.restaurants">
+            <div v-if="this.store.restaurants.length > 0" v-for="restaurant in store.restaurants" class="p-3">
                 <!-- Restaurant Card -->
                 <RestaurantCard :restaurant="restaurant" />
             </div>

@@ -1,6 +1,7 @@
 @use '_partials/reset' as *;
 @use '_partials/variables' as *;
 @use '_partials/mixins' as *;
+@use '_partials/scrollbar' as *; 
 @import "../css/chillax.css";
 
 @import "../../../node_modules/bootstrap/scss/bootstrap.scss";

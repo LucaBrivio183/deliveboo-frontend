@@ -114,7 +114,7 @@ export default {
 <template>
     <!-- restaurant image -->
     <div class="restaurant-image">
-        <img src="https://picsum.photos/900/500" alt="restaurant" class="w-100">
+        <img :src="restaurant.image" :alt="restaurant.name" class="restaurant-image w-100">
     </div>
     <!-- /restaurant image -->
 
@@ -132,15 +132,17 @@ export default {
     <!-- /card restaurant details -->
 
     <!-- Restaurant menu -->
-    <div class="container-md" v-if="restaurant">
+    <div class="container" v-if="restaurant">
 
         <h1>Menù</h1>
         <div class="row">
             <div class="col-10 col-md-8">
                 <div class="row">
+
                     <!-- Recall ProductCard component and cycle it for every product -->
-                    <div class="col-md-4 p-2" v-if="products" v-for="(product) in products">
+                    <div class="col-12 col-sm-6 col-md-4 p-2" v-if="products" v-for="product in products">
                         <ProductCard :product="product" :restaurant="restaurant" />
+
                     </div>
                 </div>
             </div>
@@ -179,8 +181,11 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 .restaurant-image {
-    max-height: 21.875rem;
-    overflow-y: hidden;
+    height: 21.875rem;
+
+    img {
+        object-fit: cover;
+    }
 }
 
 #restaurant-details {

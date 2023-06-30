@@ -134,6 +134,16 @@ export default {
         getActiveRestaurantName(){	
             let activeRestaurantName = localStorage.getItem('activeRestaurantName');
             return activeRestaurantName;
+        },
+        stringifyRestaurantName() {
+            if(this.getActiveRestaurantName()) {
+                let oldRestaurant = this.getActiveRestaurantName();
+                oldRestaurant = oldRestaurant.split(' ');
+                oldRestaurant = oldRestaurant.join('-');
+                return oldRestaurant;
+            }
+            
+            return '';
         }
     },
     computed: {
@@ -158,15 +168,15 @@ export default {
     <!-- Product card with modal trigger // productQuantity gets a reset after each card click -->
     <div class="card h-100" :class="{ 'inTheBasket': this.store.indexes.includes(product.id) }" @click="resetProductQuantity">
         <!-- card img -->
-        <img src="https://picsum.photos/300/200" class="card-img-top" :alt="product.name">
+        <img :src="product.image" class="card-img-top" :alt="product.name">
         <!-- /card img -->
         <!-- col details -->
-        <div class="card-body d-flex flex-column justify-content-between">
+        <div class="card-body d-flex flex-column justify-content-end">
             <h5 class="card-title">{{ product.name }}</h5>
             <p :class="{ 'text-decoration-line-through': product.discount !== 0 }" class="card-text">€ {{ product.price }}</p>
             <p v-if="(product.discount !== 0)" class="card-text">€ {{ product.discount }}</p>
             <div class="">
-                <a href="#" class="btn btn-outline-success w-100" data-bs-toggle="modal"
+                <a href="#" class="btn card-btn w-100" data-bs-toggle="modal"
                 :data-bs-target="(checkCurrentRestaurantID()==restaurant.id || checkCurrentRestaurantID()==undefined) ? '#product' + product.id : '#productNew' + product.id"  @click.stop="$emit('addQuantity')">+</a>
             </div>
         </div>
@@ -182,7 +192,7 @@ export default {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="https://picsum.photos/300/200" class="card-img-top" :alt="product.name">
+                    <img :src="product.image" class="card-img-top" :alt="product.name">
                     <div class="card-text mt-2" v-if="product.description">{{ product.description }}</div>
                     <div class="card-text mt-2" v-if="product.ingredients"><strong>Ingredienti:</strong> {{
                         product.ingredients }}</div>
@@ -209,13 +219,13 @@ export default {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Creare un nuovo carrello?</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Vuoi davvero creare un nuovo carrello?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
-                    <div>Questa azione svuoterà il carrello per <b>{{ getActiveRestaurantName() }}</b> e ne creerà uno nuovo per <b>{{ restaurant.name }}</b></div>
-                    <div class="btn btn-secondary" aria-label="Close" data-bs-dismiss="modal">Cancella</div>
-                    <div class="btn btn-danger" @click=newCart()  data-bs-dismiss="modal">Nuovo carrello</div>
+                    <div>Questa azione svuoterà il carrello del ristorante <b data-bs-dismiss="modal"><router-link :to="{ path: `/restaurant/${stringifyRestaurantName()}` }">{{ getActiveRestaurantName() }}</router-link></b> e ne creerà uno nuovo per il ristorante <b>{{ restaurant.name }}.</b></div>
+                    <div class="btn btn-secondary" aria-label="Close" data-bs-dismiss="modal">Indietro</div>
+                    <div class="btn btn-danger" @click=newCart()  data-bs-dismiss="modal">Svuota il carrello</div>
                 </div>
             </div>
         </div>
@@ -227,19 +237,31 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 .card {
-    border: 2px solid #e7e7e7;
+    border: 2px solid $ms_secondary_color;
+    .card-img-top {
+        object-fit: cover;
+        height: 70%;
+    }
 
     &:hover{
-        -webkit-box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4); 
-        box-shadow: 6px 15px 25px 6px rgba(0,0,0,0.4);
+        -webkit-box-shadow: 6px 15px 25px 6px rgba(32,77,72,0.4); 
+        box-shadow: 6px 15px 25px 6px rgba(32,77,72,0.4);
     }
     .card-body{
         h5{
-            font-size: 14px;
+            font-size: 20px;
             font-weight: bold;
         }
         p{
-            font-size: 12px;
+            font-size: 16px;
+        }
+        .card-btn{
+            border: 2px solid $ms_secondary_color;
+            color: $ms_secondary_color;
+            &:hover{
+                background-color: $ms_secondary_color;
+                color: white;
+            }
         }
     }
     .badge {
@@ -257,9 +279,32 @@ export default {
         }
     }
 }
-
+.modal {
+    .card-img-top {
+        aspect-ratio: 3/2;
+        object-fit: contain;
+    }
+}
 .inTheBasket {
     border-bottom: 5px solid $ms_secondary_color !important;
 }
+
+@media only screen and (width>= 768px) {
+    .card{
+        .card-img-top{
+            height: 60%;
+        }
+    .card-body{
+
+            h5{
+                font-size: 16px;
+            }
+            p{
+                font-size: 12px;
+            }
+        }   
+    }
+}
+
 
 </style>

@@ -102,6 +102,11 @@ export default {
                     Totale: € {{ getTotalPrice() }}
                 </div>
             </div>
+
+            <router-link :to="{ name: 'restaurant' }" class="btn btn-primary back-button text-dark border-0 mb-3 me-3">
+                <i class="fa-solid fa-arrow-left"></i>
+                Torna al carrello
+            </router-link>
         </div>
     </div>
     <!-- /Order-summary -->
@@ -119,4 +124,13 @@ export default {
         max-height: 20rem;
     }
 }
+
+.back-button {
+    background-color: $ms_primary_color_light;
+
+    &:hover {
+        background-color: $ms_primary_color_ultralight;
+    }
+}
+
 </style>

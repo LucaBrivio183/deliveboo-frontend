@@ -19,11 +19,11 @@ export default {
 </script>
 
 <template>
-    <div class="d-flex justify-content-center h-100" :class="{ 'clicked': store.selectedTypologies.includes(typology.id) }" id="typology-card">
+    <div class="h-100" :class="{ 'clicked': store.selectedTypologies.includes(typology.id) }" id="typology-card">
         <input class="d-none" type="checkbox" :value="typology.id" :id="typology.name"
             v-model="store.selectedTypologies">
-        <label class="d-flex w-100 flex-column align-items-center p-2" :for="typology.name" :name="typology.name" >
-            <img class="img-fluid rounded" src="https://picsum.photos/100/50" :alt="typology.name">
+        <label class="h-100 w-100 p-2" :for="typology.name" :name="typology.name" >
+            <img class="w-100 h-70 rounded" :src="typology.image" :alt="typology.name">
             <small>{{ typology.name }}</small>
         </label>
     </div>
@@ -44,23 +44,36 @@ export default {
     label {
         cursor: pointer;
         img{
-            aspect-ratio: 16/9;
-            object-fit: contain;
-            display: block;
+            object-fit: cover;
+            aspect-ratio: 3/2;
         }
         small {
-            display: block;
             font-size: .75rem;
+            text-align: center;
         }
     }
 }
 .clicked{
-    border: 2px solid $ms_secondary_color !important; // background and dark text
+    border: 2px solid $ms_primary_color !important; // background and dark text
 }
 
-@media (min-width: 576px) {
-    small {
-        font-size: .75rem;
+@media only screen and (width>= 576px) {
+    #typology-card {
+        label {
+            small {
+                font-size: .875rem;
+            }
+        }
+    }
+}
+
+@media only screen and (width>= 768px) {
+    #typology-card {
+        label {
+            small {
+                font-size: 1rem;
+            }
+        }
     }
 }
 </style>
