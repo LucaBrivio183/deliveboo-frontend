@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-    <header :class="!['payment'].includes($route.name) ? 'header-sticky' : ''">
+    <header :id="!['payment'].includes($route.name) ? 'header-sticky' : ''">
         <!-- nav -->
         <nav id="nav" class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
@@ -29,8 +29,8 @@ export default {
                             <!-- home -->
                             <router-link :to="{ name: 'home' }" class="nav-link d-flex">
                                 <div class="home-img-container position-relative">
-                                    <img class="img-home logo-green position-absolute" src="/images/logo-green.png" alt="logo">
-                                    <img class="img-home logo-azure position-absolute" src="/images/logo-azure.png" alt="logo">
+                                    <img id="img-home" class="logo-green position-absolute" src="/images/logo-green.png" alt="logo">
+                                    <img id="img-home-azure" class="logo-azure position-absolute" src="/images/logo-azure.png" alt="logo">
                                 </div>
                                 Home
                             </router-link>
@@ -63,7 +63,11 @@ header {
         border-bottom: 2px solid $ms_primary_background;
         color: $ms_secondary_color;
 
-        .img-home {
+        #img-home {
+            max-height: 1.75rem;
+        }
+
+        #img-home-azure {
             max-height: 1.75rem;
         }
 
@@ -73,7 +77,7 @@ header {
     }
 }
 
-.header-sticky {
+#header-sticky {
     position: sticky;
     top: 0;
     right: 0;
