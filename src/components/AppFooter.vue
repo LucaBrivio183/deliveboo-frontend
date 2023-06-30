@@ -14,7 +14,7 @@ export default {
 <template>
     <footer class="mt-3">
         <!-- nav up -->
-        <div id="nav" class="p-3 navbar navbar-expand-md navbar-light shadow-sm bg-dark">
+        <div v-if="!['payment'].includes($route.name)" id="nav" class="p-3 navbar navbar-expand-md navbar-light shadow-sm bg-dark">
             <div class="container">
                 <div class="row gy-5">
                     <div class="col-lg-4">
