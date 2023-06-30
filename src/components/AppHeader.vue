@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-    <header>
+    <header :class="!['payment'].includes($route.name) ? 'header-sticky' : ''">
         <!-- nav -->
         <nav id="nav" class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
@@ -37,7 +37,7 @@ export default {
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul v-if="!['payment'].includes($route.name)" class="navbar-nav ml-auto">
                         <!-- authentication -->
                         <li class="nav-item">
                             <a href="http://127.0.0.1:8000/" class="nav-link">
@@ -57,11 +57,6 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 header {
-    position: sticky;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 99;
 
     #nav {
         background-color: $ms_secondary_color_light;
@@ -76,6 +71,14 @@ header {
             color: $ms_primary_background;
         }
     }
+}
+
+.header-sticky {
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 99;
 }
 
 .home-img-container {

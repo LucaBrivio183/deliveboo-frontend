@@ -28,15 +28,13 @@ export default {
 
 <template>
 
-  <AppHeader />
+  <AppHeader :key="$route.fullPath" />
   <PageLoader v-if="store.loading"/>
   <router-view :key="$route.fullPath" ></router-view>
-  <AppFooter />
+  <AppFooter :key="$route.fullPath" />
 </template>
 
 <style lang="scss" scoped>
 @use './assets/scss/main.scss' as *;
-
-
 
 </style>
