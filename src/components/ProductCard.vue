@@ -136,10 +136,14 @@ export default {
             return activeRestaurantName;
         },
         stringifyRestaurantName() {
-            let oldRestaurant = this.getActiveRestaurantName();
-            oldRestaurant = oldRestaurant.split(' ');
-            oldRestaurant = oldRestaurant.join('-');
-            return oldRestaurant;
+            if(this.getActiveRestaurantName()) {
+                let oldRestaurant = this.getActiveRestaurantName();
+                oldRestaurant = oldRestaurant.split(' ');
+                oldRestaurant = oldRestaurant.join('-');
+                return oldRestaurant;
+            }
+            
+            return '';
         }
     },
     computed: {
