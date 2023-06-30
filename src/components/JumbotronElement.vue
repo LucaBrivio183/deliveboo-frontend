@@ -28,7 +28,7 @@ export default {
                     class="navbar-brand d-flex align-items-center my-4 me-5">
                     <!-- title -->
                     <div class="me-3 mb-5">
-                        <h1>DeliveBoo</h1>
+                        <h1>Flamin<mark>Goo</mark></h1>
                     </div>
                     <!-- logo image -->
                     <!--<LogoElement class="logo" /> /////////////// sistemare -->
@@ -42,7 +42,7 @@ export default {
 
             <!-- search 
             <div id="search-container" class="w-25 align-self-center">
-                 search input 
+                search input 
                 <div class="search rounded bg-dark">
                     <form class="form-inline d-flex rounded">
                         <input class="form-control mr-sm-2" type="search" placeholder="Trova i ristoranti">
@@ -50,7 +50,7 @@ export default {
                             placeholder="Trova i ristoranti">Cerca</button>
                     </form>
                 </div>
-                 /search input
+                /search input
             </div>-->
             <!-- /search -->
         </div>
@@ -77,6 +77,12 @@ export default {
     h1 {
         color: $ms_secondary_color;
         font-weight: bolder;
+        margin: 0;
+        padding: 0;
+        mark{
+            color: $ms_primary_color;
+            background: none;
+        }
     }
 
     #logo {

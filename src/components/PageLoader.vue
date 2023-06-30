@@ -28,6 +28,7 @@ export default {
 
 <style lang="scss" scoped>
 @use '../assets/scss/main.scss' as *;
+@use '../assets/scss/_partials/_variables.scss' as *;
 
 .page-loader {
     position: fixed;
