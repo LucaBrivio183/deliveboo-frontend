@@ -285,6 +285,7 @@ export default {
             </div>
             <!-- /Buttons -->
 
+            <!-- Offcanvas -->
             <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header">
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
@@ -294,8 +295,8 @@ export default {
                     <CartSummaryElement />
                 </div>
             </div>
+            <!-- /Offcanvas -->
         </div>
-
 
     </div>
 </template>

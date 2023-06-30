@@ -209,6 +209,9 @@ export default {
 
 #cart-button {
     background-color: $ms_primary_color;
+    position: sticky;
+    top: 6.25rem;
+    right: 0;
 
     .cart-logo {
         max-width: 20px;

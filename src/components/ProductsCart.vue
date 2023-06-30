@@ -14,6 +14,7 @@ export default {
             deliveryCost: this.restaurant.delivery_cost,
             finalPrice: 0,
             totalPrice: 0,
+            isDisabled: true,
         }
     },
     methods: {
@@ -135,13 +136,17 @@ export default {
         getActiveRestaurantMinPurchase() {
             let activeRestaurantMinPurchase = localStorage.getItem('activeRestaurantMinPurchase');
             return activeRestaurantMinPurchase;
+        },
+        missingAmount() {
+            const missingAmount = this.getActiveRestaurantMinPurchase() - this.getTotalPrice() + Number(this.getActiveRestaurantDeliverycost());
+            return missingAmount;
         }
     },
     computed: {
         getProduct(index) {
             console.log(JSON.parse(localStorage.getItem(this.store.indexes[index])));
             return JSON.parse(localStorage.getItem(this.store.indexes[index]));
-        },
+        }
     },
     created() {
         // this.getProducts();
@@ -161,9 +166,10 @@ export default {
             </div>
         </div>
 
-        <div v-if="store.indexes.length !== 0" class="restaurant-cart rounded px-3 px-lg-4 d-flex justify-content-between align-items-center">
+        <div v-if="store.indexes.length !== 0"
+            class="restaurant-cart rounded px-3 px-lg-4 d-flex justify-content-between align-items-center">
             <div class="py-3 fw-bold rounded">Ristorante {{ getActiveRestaurantName() }}</div>
-            <div  @click="deleteCart()"><i class="fa-regular fa-circle-xmark delete-button"></i></div>
+            <div @click="deleteCart()"><i class="fa-regular fa-circle-xmark delete-button"></i></div>
         </div>
 
         <div class="overflow-y-scroll items">
@@ -196,7 +202,6 @@ export default {
                         </div>
                     </div>
 
-                    <!-- <div>{{ store.cartProducts[index].quantity }}</div> -->
                     <!-- product price -->
                     <div>€ {{ Number(getProductPrice(index)).toFixed(2) }}</div>
                 </div>
@@ -204,29 +209,25 @@ export default {
             </div>
         </div>
 
-        <!--
-            <div v-if="!getActiveRestaurantDeliverycost()" class="bg-light p-3 m-2">
-                Consegna: € {{ restaurant.delivery_cost }}
-            </div>
-        -->
-        <div  v-if="store.indexes.length !== 0">
+        <div v-if="store.indexes.length !== 0">
             <!-- delivery cost -->
             <div class="bg-light p-3 m-2">
                 Consegna: € {{ getActiveRestaurantDeliverycost() }}
             </div>
 
             <!-- final price -->
-            <div class="bg-light p-3 m-2 fw-bold">
-                Totale: € {{ getTotalPrice() }}
+            <div class="bg-light p-3 m-2">
+                <div class="fw-bold">Totale: € {{ getTotalPrice() }}</div>
+                <small v-if="missingAmount() > 0">Mancano ancora € {{ missingAmount() }} per raggiungere la spesa minima</small>
             </div>
             <!-- order -->
             <div class="text-center m-2">
-                <router-link :to="{ name: 'payment' }" v-if="getTotalPrice() - getActiveRestaurantDeliverycost() >= getActiveRestaurantMinPurchase()" class="btn order-button">
+                <router-link
+                    :to="getTotalPrice() - getActiveRestaurantDeliverycost() >= getActiveRestaurantMinPurchase() ? { name: 'payment' } : ''"
+                    class="btn order-button"
+                    :class="getTotalPrice() - getActiveRestaurantDeliverycost() >= getActiveRestaurantMinPurchase() ? '' : 'disabled'">
                     Ordina!
                 </router-link>
-                <div v-else class="btn bg-light border-secondary text-secondary">
-                    Ordina!
-                </div>
             </div>
         </div>
         <!-- empty cart -->
@@ -263,6 +264,10 @@ export default {
         background-color: $ms_secondary_color_light;
     }
 
+    .disabled {
+        opacity: 0.4;
+    }
+
     .quantity-button {
         color: $ms_secondary_color_medium;
     }
@@ -279,5 +284,4 @@ export default {
             color: $ms_secondary_color;
         }
     }
-}
-</style>
+}</style>
