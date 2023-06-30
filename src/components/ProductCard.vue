@@ -134,6 +134,12 @@ export default {
         getActiveRestaurantName(){	
             let activeRestaurantName = localStorage.getItem('activeRestaurantName');
             return activeRestaurantName;
+        },
+        stringifyRestaurantName() {
+            let oldRestaurant = this.getActiveRestaurantName();
+            oldRestaurant = oldRestaurant.split(' ');
+            oldRestaurant = oldRestaurant.join('-');
+            return oldRestaurant;
         }
     },
     computed: {
@@ -209,13 +215,13 @@ export default {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Creare un nuovo carrello?</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Vuoi davvero creare un nuovo carrello?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
-                    <div>Questa azione svuoterà il carrello per <b>{{ getActiveRestaurantName() }}</b> e ne creerà uno nuovo per <b>{{ restaurant.name }}</b></div>
-                    <div class="btn btn-secondary" aria-label="Close" data-bs-dismiss="modal">Cancella</div>
-                    <div class="btn btn-danger" @click=newCart()  data-bs-dismiss="modal">Nuovo carrello</div>
+                    <div>Questa azione svuoterà il carrello del ristorante <b data-bs-dismiss="modal"><router-link :to="{ path: `/restaurant/${stringifyRestaurantName()}` }">{{ getActiveRestaurantName() }}</router-link></b> e ne creerà uno nuovo per il ristorante <b>{{ restaurant.name }}.</b></div>
+                    <div class="btn btn-secondary" aria-label="Close" data-bs-dismiss="modal">Indietro</div>
+                    <div class="btn btn-danger" @click=newCart()  data-bs-dismiss="modal">Svuota il carrello</div>
                 </div>
             </div>
         </div>
