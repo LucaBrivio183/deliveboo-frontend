@@ -49,6 +49,8 @@ export default {
 @use '../assets/scss/_partials/_variables' as *;
 section {
     background-color: $ms_secondary_color_light;
+    border-bottom: 2px solid $ms_primary_background;
+    border-top: 2px solid $ms_primary_background;
     .container-fluid{
         .row{
             overflow-y: scroll;

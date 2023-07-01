@@ -6,10 +6,12 @@ import store from './store';
 //components
 import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
+import PageLoader from './components/PageLoader.vue';
 
 export default {
   name: 'App',
   components: {
+    PageLoader,
     AppHeader,
     AppFooter,
   },
@@ -18,21 +20,21 @@ export default {
       store
     }
   },
-  created() {
-
+  mounted() {
+    store.loading = false;
   }
 }
 </script>
 
 <template>
-  <AppHeader v-if="!['payment'].includes($route.name)" />
+
+  <AppHeader :key="$route.fullPath" />
+  <PageLoader v-if="store.loading"/>
   <router-view :key="$route.fullPath" ></router-view>
-  <AppFooter v-if="!['payment'].includes($route.name)" />
+  <AppFooter :key="$route.fullPath" />
 </template>
 
 <style lang="scss" scoped>
 @use './assets/scss/main.scss' as *;
-
-
 
 </style>

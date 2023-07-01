@@ -196,12 +196,20 @@ export default {
 
 <template>
     <div class="container py-1 my-4">
-        <div class="row mt-3 align-items-start justify-content-center">
+        <div class="row mt-3 mb-5 justify-content-center align-items-start">
 
-            <CartSummaryElement  class="d-none d-lg-block" />
+            <CartSummaryElement class="d-none d-lg-block" />
+
+            <!-- Buttons -->
+            <div class="d-lg-none d-flex justify-content-center">
+                <button class="summary-button btn btn-primary mb-3 me-3 border-0 text-dark" type="button"
+                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Riepilogo
+                    ordine</button>
+            </div>
+            <!-- /Buttons -->
 
             <!-- Payment -->
-            <div class="col-10 col-md-8 col-lg-6 p-4 border order-1 order-md-0">
+            <div class="col-11 col-lg-8 p-4 border">
                 <form>
                     <div class="fieldset">
                         <legend>Informazioni di pagamento</legend>
@@ -276,16 +284,9 @@ export default {
             </div>
             <!-- /Payment -->
 
-            <!-- Buttons -->
-            <div class="col d-flex flex-md-column my-md-0 mb-2 justify-content-center order-0 order-md-0">
-
-                <button class="summary-button btn btn-primary d-lg-none mb-3 me-3 border-0 text-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight">Riepilogo ordine</button>
-            </div>
-            <!-- /Buttons -->
-
             <!-- Offcanvas -->
-            <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="offcanvasRight"
+                aria-labelledby="offcanvasRightLabel">
                 <div class="offcanvas-header">
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
