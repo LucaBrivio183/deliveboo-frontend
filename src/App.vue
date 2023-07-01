@@ -27,9 +27,7 @@ export default {
 </script>
 
 <template>
-
   <AppHeader :key="$route.fullPath" />
-  <PageLoader v-if="store.loading"/>
   <router-view :key="$route.fullPath" ></router-view>
   <AppFooter :key="$route.fullPath" />
 </template>

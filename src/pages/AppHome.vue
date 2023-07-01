@@ -7,14 +7,16 @@ import store from '../store';
 import RestaurantCard from '../components/RestaurantCard.vue';
 import TypologiesList from '../components/TypologiesList.vue';
 import JumbotronElement from '../components/JumbotronElement.vue';
+import PageLoader from '../components/PageLoader.vue';
 
 export default {
     name: 'App',
     components: {
         RestaurantCard,
         TypologiesList,
-        JumbotronElement
-    },
+        JumbotronElement,
+        PageLoader,
+        },
     data() {
         return {
             store,
@@ -48,7 +50,8 @@ export default {
         <JumbotronElement />
         <!-- Typologies List -->
         <TypologiesList @getRestaurants="getRestaurants"/>
-        <div class="container">
+        <PageLoader v-if="store.loading"/>
+        <div v-else class="container">
             <h1 class="my-3">Consegna nella zona:</h1>
             <div v-if="this.store.restaurants.length > 0" v-for="restaurant in store.restaurants" class="p-3">
                 <!-- Restaurant Card -->

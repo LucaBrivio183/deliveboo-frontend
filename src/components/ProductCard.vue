@@ -288,7 +288,7 @@ export default {
     }
 }
 .inTheBasket {
-    border-bottom: 5px solid $ms_secondary_color !important;
+    border-bottom: 7px solid $ms_secondary_color !important;
 }
 
 @media only screen and (width>= 768px) {

@@ -31,17 +31,14 @@ export default {
 @use '../assets/scss/_partials/_variables.scss' as *;
 
 .page-loader {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    z-index: 999;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    padding-top: 1.25rem;
     background-color: white;
-
+    .loader {
+        height: 300px;
+    }   
 }
 
 </style>
