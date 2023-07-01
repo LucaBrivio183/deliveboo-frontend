@@ -15,7 +15,6 @@ export default {
             restaurant: null,
             products: [],
             indexes: JSON.parse(localStorage.getItem('indexes')),
-            potatoes: 3,
         }
     },
     methods: {

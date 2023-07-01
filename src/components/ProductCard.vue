@@ -42,6 +42,8 @@ export default {
                     this.store.indexes = JSON.parse(localStorage.getItem('indexes'));
                 }
 
+                localStorage.setItem('slug', this.restaurant.slug);
+
                 // If indexes already contains this.product.id, don't push it
                 if(!this.store.indexes.includes(this.product.id)) {
                     this.store.indexes.push(this.product.id);

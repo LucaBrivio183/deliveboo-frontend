@@ -1,12 +1,31 @@
 <script>
 // logo element
 import LogoElement from './LogoElement.vue';
+import store from '../store';
 
 export default {
     name: 'AppHeader',
     components: {
         LogoElement,
-    }
+    },
+    data() {
+        return {
+            store,
+            restaurants: [],
+            restaurant: [],
+        }
+    },
+    methods: {
+        getOrdersNumber() {
+            // if (JSON.parse(localStorage.getItem('indexes')) != null) {
+            //     this.store.indexes = JSON.parse(localStorage.getItem('indexes'));
+            // }
+            return this.store.indexes.length;
+        },
+        getRestaurantSlug() {
+            return localStorage.getItem('slug');
+        }
+    },
 }
 </script>
 
@@ -33,7 +52,17 @@ export default {
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
+                    <ul class="navbar-nav ml-auto align-items-center">
+                        <li class="me-4" v-if="this.store.indexes.length !== 0">
+                            <router-link :to="{ name: 'restaurant', params: { slug: getRestaurantSlug() } }" >
+                                <div class="cart-header-image">
+                                    <img src="/images/cart.png" alt="cart" class="cart-header-logo h-100">
+                                    <div class="orders-number">
+                                        {{ getOrdersNumber() }}
+                                    </div>
+                                </div>
+                            </router-link>
+                        </li>
                         <!-- authentication -->
                         <li class="nav-item">
                             <a href="http://127.0.0.1:8000/" class="nav-link">
@@ -65,6 +94,30 @@ header {
 
         a:hover {
             color: $ms_primary_background;
+        }
+
+        .cart-header-image {
+            height: 1.875rem;
+            position: relative;
+
+            .cart-header-logo {
+                padding-bottom: .125rem;
+                color: $ms-secondary-color;
+            }
+
+            .orders-number {
+                position: absolute;
+                top: -0.5rem;
+                right: -0.9375rem;
+                color: #fff;
+                background-color: $ms-primary-color;
+                border-radius: 50%;
+                height: 13px;
+                width: 13px;
+                text-align: center;
+                line-height: 15px;
+                font-size: .625rem;
+            }
         }
     }
 }
