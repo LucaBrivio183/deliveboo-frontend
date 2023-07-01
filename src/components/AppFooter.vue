@@ -26,9 +26,9 @@ export default {
                     </div>
                     <div class="col-lg-6 ms-auto">
                         <h6 class="mb-4">CONTATTACI</h6>
-                        <p class="mb-1 text-light">P:(03) 9283 4726</p>
-                        <p class="mb-1 text-light">E:enquiries@mill.co</p>
-                        <p class="mb-0 text-light">A: 14 Paramore Street Mornington Peninsula Victoria 3552</p>
+                        <p class="mb-1 text-light"><i class="fa-solid fa-phone"></i> : (03) 9283 4726</p>
+                        <p class="mb-1 text-light"><i class="fa-solid fa-envelope"></i> : enquiries@mill.co</p>
+                        <p class="mb-0 text-light"><i class="fa-solid fa-location-dot"></i> : 14 Paramore Street Mornington Peninsula Victoria 3552</p>
                     </div>
                 </div>
             </div>

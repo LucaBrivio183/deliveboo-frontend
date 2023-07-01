@@ -24,7 +24,7 @@ export default {
                         <i class="fa-solid fa-location-dot d-none d-sm-block"></i>
                         <span class="info-text d-none d-sm-block">Indirizzo: {{ restaurant.address}}</span>
                         <i class="fa-solid fa-clock"></i>
-                        <span class="info-text">Orari di consegna: {{ restaurant.business_times }}</span>
+                        <span class="info-text">Chiude alle: {{ restaurant.business_times }}</span>
                     </div>
                     <div class="d-flex align-items-center gap-2">
                         <i class="fa-solid fa-money-bill-wave"></i>
