@@ -183,7 +183,7 @@ export default {
             class="restaurant-cart rounded px-3 px-lg-4 d-flex justify-content-between align-items-center">
             <div class="py-3 fw-bold rounded">Ristorante {{ getActiveRestaurantName() }}</div>
 
-            <div @click="deleteCart()"><i class="fa-regular fa-circle-xmark delete-button"></i></div>
+            <div  @click="deleteCart()"><i class="fa-regular fa-trash-can trash delete-button"></i></div>
 
         </div>
 
