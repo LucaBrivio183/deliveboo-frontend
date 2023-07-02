@@ -139,10 +139,6 @@ export default {
         getProductQuantity(index) {
             return JSON.parse(localStorage.getItem(this.store.indexes[index])).quantity;
         },
-        getTotalPrice() {
-            const totalPrice = localStorage.getItem('totalPrice');
-            return (Number(totalPrice).toFixed(2));
-        },
         getActiveRestaurantName() {
             let activeRestaurantName = localStorage.getItem('activeRestaurantName');
             return activeRestaurantName;
@@ -151,6 +147,10 @@ export default {
             let activeRestaurantDeliverycost = localStorage.getItem('activeRestaurantDeliverycost');
             return activeRestaurantDeliverycost;
         },
+        getTotalPrice() {
+            const finPrice = localStorage.getItem('finalPrice');
+            return (Number(finPrice) + Number(this.getActiveRestaurantDeliverycost())).toFixed(2);
+        }
     },
     mounted() {
         console.log(this.store.indexes);
@@ -330,9 +330,4 @@ export default {
     max-height: 2.5rem;
 }
 
-.order-summary {
-    position: sticky;
-    top: 0;
-    left: 0;
-}
 </style>

@@ -30,7 +30,7 @@ export default {
 </script>
 
 <template>
-    <header :id="!['payment'].includes($route.name) ? 'header-sticky' : ''">
+    <header>
         <!-- nav -->
         <nav id="nav" class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
@@ -56,7 +56,7 @@ export default {
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
-                    <ul v-if="!['payment'].includes($route.name)" class="navbar-nav ml-auto align-items-center">
+                    <ul v-if="!['payment'].includes($route.name)" class="navbar-nav ml-auto align-items-start align-items-md-center">
                         <li class="me-4" v-if="this.store.indexes.length !== 0">
                             <router-link :to="{ name: 'restaurant', params: { slug: getRestaurantSlug() } }" >
                                 <div class="cart-header-image">
@@ -86,6 +86,12 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 header {
+
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 99;
 
     #nav {
         background-color: $ms_secondary_color_light;
@@ -128,14 +134,6 @@ header {
             }
         }
     }
-}
-
-#header-sticky {
-    position: sticky;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 99;
 }
 
 .home-img-container {

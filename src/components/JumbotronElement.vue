@@ -24,35 +24,19 @@ export default {
                 <!-- /content -->
 
                 <!-- logo -->
-                <router-link id="title-logo" :to="{ name: 'home' }"
+                <div id="title-logo"
                     class="navbar-brand d-flex align-items-center my-4 me-5">
                     <!-- title -->
                     <div class="me-3 mb-5">
-                        <h1>Flamin<mark>Goo</mark></h1>
+                        <h1 class="m-0 p-0">Flamin<mark>Goo</mark></h1>
                     </div>
-                    <!-- logo image -->
-                    <!--<LogoElement class="logo" /> /////////////// sistemare -->
                     <!-- logo image -->
                     <div id="logo" class="logo_deliveboo d-flex align-items-center me-lg-5">
                         <img src="/images/logo-green.png" alt="logo">
                     </div>
-                </router-link>
+                </div>
                 <!-- /logo -->
             </div>
-
-            <!-- search 
-            <div id="search-container" class="w-25 align-self-center">
-                search input 
-                <div class="search rounded bg-dark">
-                    <form class="form-inline d-flex rounded">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Trova i ristoranti">
-                        <button class="btn text-light my-2 my-sm-0" type="button"
-                            placeholder="Trova i ristoranti">Cerca</button>
-                    </form>
-                </div>
-                /search input
-            </div>-->
-            <!-- /search -->
         </div>
     </div>
     <!-- /jumbotron -->
@@ -63,8 +47,9 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 .jumbotron {
-    background-image: url("/images/header-background-green.png");
-    background-size: contain;
+    background-image: url("/images/jumbotron-background.svg");
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     background-color: $ms_primary_color_light;
 
@@ -77,8 +62,7 @@ export default {
     h1 {
         color: $ms_secondary_color;
         font-weight: bolder;
-        margin: 0;
-        padding: 0;
+
         mark{
             color: $ms_primary_color;
             background: none;
@@ -89,11 +73,7 @@ export default {
         img {
             max-height: 18.125rem;
         }
-
-        /*
-        :deep(img) {
-            height: 15.625rem;
-        }*/
     }
 }
+
 </style>
