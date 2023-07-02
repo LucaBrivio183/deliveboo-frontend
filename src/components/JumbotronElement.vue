@@ -47,8 +47,9 @@ export default {
 @use '../assets/scss/_partials/variables' as *;
 
 .jumbotron {
-    background-image: url("/images/header-background-green.png");
+    background-image: url("/images/jumbotron-background.svg");
     background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
     background-color: $ms_primary_color_light;
 
@@ -63,7 +64,7 @@ export default {
         font-weight: bolder;
 
         mark{
-            color: $ms_secondary_color;
+            color: $ms_primary_color;
             background: none;
         }
     }
@@ -75,13 +76,4 @@ export default {
     }
 }
 
-@media screen and (width>= 992px) {
-    .jumbotron {
-        h1 {
-            mark {
-                color: $ms_primary_color;
-            }
-        }
-    }
-}
 </style>

@@ -330,9 +330,4 @@ export default {
     max-height: 2.5rem;
 }
 
-.order-summary {
-    position: sticky;
-    top: 0;
-    left: 0;
-}
 </style>
