@@ -120,6 +120,8 @@ export default {
                 this.finalPrice = this.finalPrice + Number(product.price);
             }
 
+            localStorage.setItem('finalPrice', this.finalPrice);
+
             this.totalPrice = this.finalPrice + Number(this.deliveryCost);
             localStorage.setItem("totalPrice", this.totalPrice);
 
@@ -137,8 +139,19 @@ export default {
             let activeRestaurantMinPurchase = localStorage.getItem('activeRestaurantMinPurchase');
             return activeRestaurantMinPurchase;
         },
+        checkMinPurchase() {
+            if(this.getTotalPrice() - Number(this.getActiveRestaurantDeliverycost()) >= this.getActiveRestaurantMinPurchase()) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+        newTotalPrice (){
+            const finPrice = localStorage.getItem('finalPrice');
+            return (Number(finPrice) + Number(this.getActiveRestaurantDeliverycost())).toFixed(2);
+        },
         missingAmount() {
-            const missingAmount = this.getActiveRestaurantMinPurchase() - this.getTotalPrice() + Number(this.getActiveRestaurantDeliverycost());
+            const missingAmount = this.getActiveRestaurantMinPurchase() - this.newTotalPrice() + Number(this.getActiveRestaurantDeliverycost());
             return Number(missingAmount).toFixed(2);
         }
     },
@@ -219,15 +232,15 @@ export default {
 
             <!-- final price -->
             <div class="bg-light p-3 m-2">
-                <div class="fw-bold">Totale: € {{ getTotalPrice() }}</div>
+                <div class="fw-bold">Totale: € {{ newTotalPrice() }}</div>
                 <small v-if="missingAmount() > 0">Mancano ancora € {{ missingAmount() }} per raggiungere la spesa minima</small>
             </div>
             <!-- order -->
             <div class="text-center m-2">
                 <router-link
-                    :to="getTotalPrice() - getActiveRestaurantDeliverycost() >= getActiveRestaurantMinPurchase() ? { name: 'payment' } : ''"
+                    :to="checkMinPurchase() ? { name: 'payment' } : ''"
                     class="btn order-button"
-                    :class="getTotalPrice() - getActiveRestaurantDeliverycost() >= getActiveRestaurantMinPurchase() ? '' : 'disabled'">
+                    :class="checkMinPurchase() ? '' : 'disabled'">
                     Ordina!
                 </router-link>
             </div>

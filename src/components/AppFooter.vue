@@ -15,7 +15,7 @@ export default {
     <footer class="mt-3">
         <!-- nav up -->
         
-        <div v-if="!['payment'].includes($route.name)" id="nav" class="p-3 navbar navbar-expand-md navbar-light shadow-sm bg-dark">
+        <div class="p-3 navbar navbar-expand-md navbar-light shadow-sm bg-dark">
             <div class="container px-5">
                 <div class="row gy-5">
                     <div class="col-lg-4">
@@ -57,13 +57,10 @@ export default {
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- authentication -->
+                    <ul class="navbar-nav ml-auto d-flex align-items-center">
                         <li class="nav-item">
-                            <router-link :to="{ name: 'home' }" class="navbar-brand d-flex align-items-center">
                                 <!-- logo -->
                                 <LogoElement />
-                            </router-link>
                         </li>
                     </ul>
                 </div>

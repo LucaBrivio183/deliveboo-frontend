@@ -30,7 +30,7 @@ export default {
 </script>
 
 <template>
-    <header :id="!['payment'].includes($route.name) ? 'header-sticky' : ''">
+    <header>
         <!-- nav -->
         <nav id="nav" class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
@@ -87,6 +87,12 @@ export default {
 
 header {
 
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 99;
+
     #nav {
         background-color: $ms_secondary_color_light;
         border-bottom: 2px solid $ms_primary_background;
@@ -128,14 +134,6 @@ header {
             }
         }
     }
-}
-
-#header-sticky {
-    position: sticky;
-    top: 0;
-    right: 0;
-    left: 0;
-    z-index: 99;
 }
 
 .home-img-container {

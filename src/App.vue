@@ -29,7 +29,7 @@ export default {
 <template>
   <AppHeader :key="$route.fullPath" />
   <router-view :key="$route.fullPath" ></router-view>
-  <AppFooter :key="$route.fullPath" />
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped>

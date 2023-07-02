@@ -43,8 +43,8 @@ export default {
             return JSON.parse(localStorage.getItem(this.store.indexes[index])).quantity;
         },
         getTotalPrice() {
-            const totalPrice = localStorage.getItem('totalPrice');
-            return (Number(totalPrice).toFixed(2));
+            const finPrice = localStorage.getItem('finalPrice');
+            return (Number(finPrice) + Number(this.getActiveRestaurantDeliverycost())).toFixed(2);
         },
         getActiveRestaurantName() {
             let activeRestaurantName = localStorage.getItem('activeRestaurantName');
