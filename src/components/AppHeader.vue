@@ -56,7 +56,7 @@ export default {
                         </li>
                     </ul>
                     <!-- Right Side Of Navbar -->
-                    <ul v-if="!['payment'].includes($route.name)" class="navbar-nav ml-auto align-items-center">
+                    <ul v-if="!['payment'].includes($route.name)" class="navbar-nav ml-auto align-items-start align-items-md-center">
                         <li class="me-4" v-if="this.store.indexes.length !== 0">
                             <router-link :to="{ name: 'restaurant', params: { slug: getRestaurantSlug() } }" >
                                 <div class="cart-header-image">
